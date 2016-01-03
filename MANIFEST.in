@@ -1,0 +1,10 @@
+include LICENSE
+include README.rst
+
+recursive-include socialprofile/locale *
+recursive-include socialprofile/static *
+recursive-include socialprofile/templates *
+recursive-include socialprofile/templatetags *
+recursive-include socialprofile/migrations *
+
+recursive-include docs *

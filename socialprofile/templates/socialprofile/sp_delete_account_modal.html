@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+{% block page_role %}data-role="dialog"{% endblock %}
+{% block content %}
+<div class="container" id="layout">
+   <!-- Docs nav ================================================== -->
+   <div class="row">
+        <div class="col-lg-9 col-sm-9" id="article">
+			<section title="profile" data-role="content">
+				<h1>{% trans 'Really Delete?' %}</h1>
+				<div data-role="content" data-theme="c" title="{% trans 'Really Delete?' %}">
+					<p>
+						<a href="{% url 'sp_profile_edit_page' %}" data-role="button"><button class="ui-button-success">{% trans "Keep Account" %}</button></a>
+					<br>
+					<form action="{% url "sp_delete_page" %}" method="post" data-ajax="false">
+						{% csrf_token %}
+						<button class="ui-button-danger">{% trans 'Delete Account & All Data' %}</button>
+					</form>
+				</div>
+			</section>
+		</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+	<script src="{% static 'assets/js/demo.js'%}" type="text/javascript"></script>
+{% endblock %}
