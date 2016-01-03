@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+{% load socialprofile_tags %}
+
+{% block headtitle %}{% trans "Profile for " %}{{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container" id="layout">
+   <!-- Docs nav ================================================== -->
+   <div class="row">
+        <div class="col-lg-9 col-sm-9" id="article">
+			<section title="profile" data-role="content">
+				<h1 class="sp-profile-name">{{ user_form.first_name.value|default:"&nbsp;" }} {{ user_form.last_name.value|default:"&nbsp;" }}</h1>
+				<p>
+					<a href="{% url 'sp_delete_page' %}" data-role="button" data-theme="e"><button class="ui-button-danger">{% trans "Delete Account" %}</button></a>
+					<a href="{% url 'sp_profile_view_page' %}?returnTo={{ sp_form.returnTo.value }}" data-role="button"><button class="ui-button-warning">{% trans "Cancel" %}</button></a>
+					<a href="#" data-role="button" onclick="$('#sp-profile-form').submit();"><button class="ui-button-success">{% trans "Done" %}</button></a>
+				</p>
+				{% if user.social_profile.image_url %}
+					<p><img src="{{ user.social_profile.image_url }}"></p>
+				{% endif %}				
+				</section>
+				<form action="{% url "sp_profile_edit_page" %}" method="post" id="sp-profile-form" data-ajax="false">
+					{% csrf_token %}
+					<ul>
+						{{ user_form.as_ul }}
+					</ul>
+					<ul>
+						{{ sp_form.as_ul }}
+					</ul>
+					
+					{% csrf_token %}
+					{% for field in user_form %}
+						{% if field.label == 'Image banner' or field.label == 'Cropping banner' or field.label == 'Image' or field.label == 'Cropping' %}
+							</br>
+							<div class="fieldWrapper">
+								{{ field.errors }}
+								<p>{{ field }}<p>
+							</div>
+						{% else %}
+							<div class="fieldWrapper">
+								{{ field.errors }}
+								<p>{{ field.label_tag }} {{ field }}<p>
+							</div>
+						{% endif %}
+					{% endfor %}
+					{% for field in user_form %}
+						{% if field.label == 'Image banner' or field.label == 'Cropping banner' or field.label == 'Image' or field.label == 'Cropping' %}
+							</br>
+							<div class="fieldWrapper">
+								{{ field.errors }}
+								<p>{{ field }}<p>
+							</div>
+						{% else %}
+							<div class="fieldWrapper">
+								{{ field.errors }}
+								<p>{{ field.label_tag }} {{ field }}<p>
+							</div>
+						{% endif %}
+					{% endfor %}
+					
+					
+				</form>
+				<h3 style="margin-left:10px;">{% trans "Social Connections" %}</h3>
+				<ul>
+				{% if user.social_auth.all.count == 1 %}
+					{% with only_connection=user.social_auth.all|first %}
+						<p style="margin-left:20px;"><em>{{ only_connection.provider|social_provider_name }}
+							{% trans "is your only means of authentication, it cannot be removed." %}</em></p>
+					{% endwith %}
+					<li><a href="{% url "sp_select_page" %}" data-theme="a" data-rel="dialog"
+						   data-role="button">{% trans "Add Social Connection" %}</a></li>
+				{% else %}
+						{% for user_social_auth in user.social_auth.all %}
+							<a href="{% url "social:disconnect" user_social_auth.provider %}"
+							   data-role="button">{% trans "Disconnect" %} {{ user_social_auth.provider|social_provider_name }}</a>
+						{% endfor %}
+						<li><a href="{% url "sp_select_page" %}" data-theme="a" data-rel="dialog"
+							   data-role="button">{% trans "Add Social Connection" %}</a></li>
+				{% endif %}
+				</ul>
+			</section>
+		</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+	<script src="{% static 'assets/js/demo.js'%}" type="text/javascript"></script>
+{% endblock %}
