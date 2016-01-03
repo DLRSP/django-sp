@@ -1,0 +1,88 @@
+{% load i18n staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{% trans 'Social Profile Connections'%}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="{% trans 'Enable Social Profile connections with OAuth'%}">
+		<meta name="author" content="Davide La Rosa">
+
+		<!-- Le styles -->
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<style>
+		  h1 { padding: 0 30px; }
+		  .col-md-2 { width: 18.6667%; }
+		  .buttons { display: block; table-layout: fixed; border-radius: 7px; border: 1px solid #ccc;
+					 margin: 20px; background: #eee; padding: 30px; }
+		  .buttons > div .btn { margin: 5px 10px; }
+		  .buttons > div:not(:first-child) { margin-top: 10px; border-top: 1px solid #ccc;
+											 padding-top: 10px; text-align: center; }
+		  .user-details { text-align: center; font-size: 16px; font-weight: bold; }
+		  .disconnect-form { padding: 0; margin: 0px 10px; }
+		  .disconnect-form > a { display: block; margin: 5px 0 !important; }
+		</style>
+	</head>
+
+	<body>
+		{% block content %}
+
+		{% endblock %}
+
+		{% if plus_id %}
+		<script src="https://apis.google.com/js/api:client.js"></script>
+		<script type="text/javascript">
+			gapi.load('auth2', function () {
+			  var auth2;
+
+			  auth2 = gapi.auth2.init({
+				client_id: "{{ plus_id }}",
+				scope: "{{ plus_scope }}"
+			  });
+
+			  auth2.then(function () {
+				var button = document.getElementById("google-plus-button");
+				console.log("User is signed-in in Google+ platform?", auth2.isSignedIn.get() ? "Yes" : "No");
+
+				if (button) {
+				  auth2.attachClickHandler(button, {}, function (googleUser) {
+					var authResponse = googleUser.getAuthResponse();
+					var $form;
+					var $input;
+
+					$form = $("<form>");
+					$form.attr("action", "{% url "social:complete" backend="google-plus" %}");
+					$form.attr("method", "post");
+					$input = $("<input>");
+					$input.attr("name", "access_token");
+					$input.attr("value", authResponse.access_token);
+					$form.append($input);
+					$form.append("{% csrf_token %}");
+					$(document.body).append($form);
+					$form.submit();
+				  });
+				} else if (auth2.isSignedIn.get()) {
+				  $('#logout').on('click', function (event) {
+					event.preventDefault();
+
+					auth2.signOut().then(function () {
+					  console.log("Logged out from Google+ platform");
+					  document.location = $(event.target).attr('href');
+					});
+				  });
+				}
+			  });
+			});
+		</script>
+		{% endif %}
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="https://login.persona.org/include.js" type="text/javascript"></script>
+
+		{% block javascript %}
+		{% endblock javascript %}
+	</body>
+</html>
