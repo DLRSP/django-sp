@@ -19,8 +19,8 @@ setup(
     install_requires=['pytest-runner',
                       'django>=1.8',
                       'python-social-auth==0.2.1',		#<-- Need By Auth Process
-                      'django-errros',
-	],
+                      'django-errors',
+                      ],
     tests_require=['runtests.py'],
     classifiers=[
         'Development Status :: 1 - Beta',
