@@ -1,10 +1,12 @@
 include LICENSE
 include README.rst
+include README.md
+
+recursive-include docs *
+recursive-include tests *
 
 recursive-include socialprofile/locale *
 recursive-include socialprofile/static *
 recursive-include socialprofile/templates *
 recursive-include socialprofile/templatetags *
 recursive-include socialprofile/migrations *
-
-recursive-include docs *

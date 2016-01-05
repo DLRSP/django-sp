@@ -5,14 +5,13 @@ readme = open('README.md').read()
 from django_errors import __version__ as version
 
 setup(
-    name="django-socialprofile",
+    name="django-sp",
     version=version,
-    url='https://github.com/DLRSP/django-socialprofile',
+    url='https://github.com/DLRSP/django-sp',
     license='MIT',
     description="Django Custom Social Profile Auth/User",
-    author='Davide La Rosa',
-    author_email='davide.larosa.coins@gmail.com',
-
+    author='DLRSP',
+    author_email='dlrsp.py@gmail.com',
     packages=['socialprofile', ],
     long_description=readme,
     include_package_data=True,
@@ -20,6 +19,7 @@ setup(
     install_requires=['pytest-runner',
                       'django>=1.8',
                       'python-social-auth==0.2.1',		#<-- Need By Auth Process
+                      'django-errros',
 	],
     tests_require=['runtests.py'],
     classifiers=[
@@ -29,6 +29,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Topic :: Internet :: WWW/HTTP :: BTC :: BitCoin :: 500 :: 400 :: errors',
+        'Topic :: Internet :: WWW/HTTP ',
     ]
 )
