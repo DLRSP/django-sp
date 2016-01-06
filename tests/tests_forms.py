@@ -2,30 +2,30 @@
 
 # pylint: disable=R0904, C0103
 
-from django.test import TestCase
+#from django.test import TestCase
 
-from django.core.exceptions import ObjectDoesNotExist
-from socialprofile.models import SocialProfile
-from social.apps.django_app.default.models import UserSocialAuth
-from socialprofile.forms import SocialProfileForm
-from django.forms.models import model_to_dict
-import logging
+#from django.core.exceptions import ObjectDoesNotExist
+#from socialprofile.models import SocialProfile
+#from social.apps.django_app.default.models import UserSocialAuth
+#from socialprofile.forms import SocialProfileForm
+#from django.forms.models import model_to_dict
+#import logging
 
-LOGGER = logging.getLogger(name='socialprofile.test_forms')
+#LOGGER = logging.getLogger(name='socialprofile.test_forms')
 
 
-class SocialProfileFormTestCase(TestCase):
-    """Test Case for Social Profile Forms"""
+#class SocialProfileFormTestCase(TestCase):
+    #"""Test Case for Social Profile Forms"""
 
-    def setUp(self):
-        """Set up common assets for tests"""
-        LOGGER.debug("SocialProfileForm Tests setUp")
-        self.user1 = SocialProfile.objects.create_user('user1', 'user1@user1.com', 'user1password')
-        self.user1.gender = 'other'
-        self.user1.url = 'http://test.com'
-        self.user1.description = 'Test User 1'
-        self.user1.image_url = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm'
-        self.user1.save()
+    #def setUp(self):
+        #"""Set up common assets for tests"""
+        #LOGGER.debug("SocialProfileForm Tests setUp")
+        #self.user1 = SocialProfile.objects.create_user('user1', 'user1@user1.com', 'user1password')
+        #self.user1.gender = 'other'
+        #self.user1.url = 'http://test.com'
+        #self.user1.description = 'Test User 1'
+        #self.user1.image_url = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm'
+        #self.user1.save()
         # self.sa1 = UserSocialAuth.objects.create(user=self.user1, provider='google-oauth2', uid='user1@user1.com')
 
     #def test_socialprofile_form_view(self):
