@@ -39,46 +39,46 @@ class SocialProfileTestCase(TestCase):
         LOGGER.debug("SocialProfile Tests tearDown")
         self.user1.delete()
 
-    def test_redirect_urls(self):
-        """Test that redirects kicking in when trying to go to secure page."""
-        LOGGER.debug("SocialProfile Test Redirect URLs")
-        response = self.client.get('/secure/', follow=True)
-        self.assertRedirects(response, "http://testserver/sp/select/?next=/secure/")
+    #def test_redirect_urls(self):
+        #"""Test that redirects kicking in when trying to go to secure page."""
+        #LOGGER.debug("SocialProfile Test Redirect URLs")
+        #response = self.client.get('/secure/', follow=True)
+        #self.assertRedirects(response, "http://testserver/sp/select/?next=/secure/")
 
-    def test_view_profile(self):
-        """Test to see if profile for user1 can be viewed anon and logged in"""
-        LOGGER.debug("Test GET /sp/view/user1/ for anon user")
-        anon_view_response = self.client.get('/sp/view/user1/')
-        self.assertContains(anon_view_response, "Test User 1")
+    #def test_view_profile(self):
+        #"""Test to see if profile for user1 can be viewed anon and logged in"""
+        #LOGGER.debug("Test GET /sp/view/user1/ for anon user")
+        #anon_view_response = self.client.get('/sp/view/user1/')
+        #self.assertContains(anon_view_response, "Test User 1")
 
-        LOGGER.debug("Test GET /sp/ for anon user")
-        anon_view_generic_response = self.client.get('/sp/')
-        self.assertEqual(404, anon_view_generic_response.status_code)
+        #LOGGER.debug("Test GET /sp/ for anon user")
+        #anon_view_generic_response = self.client.get('/sp/')
+        #self.assertEqual(404, anon_view_generic_response.status_code)
 
-        LOGGER.debug("Test GET /sp/view/ for anon user")
-        anon_view_generic_response_2 = self.client.get('/sp/view/')
-        self.assertEqual(404, anon_view_generic_response_2.status_code)
+        #LOGGER.debug("Test GET /sp/view/ for anon user")
+        #anon_view_generic_response_2 = self.client.get('/sp/view/')
+        #self.assertEqual(404, anon_view_generic_response_2.status_code)
 
-        LOGGER.debug("Test GET /sp/view/user1/ for logged in user")
-        self.client.login(username='user1', password='user1password')
-        logged_in_view_response = self.client.get('/sp/view/user1/')
-        self.assertContains(logged_in_view_response, "Test User 1")
+        #LOGGER.debug("Test GET /sp/view/user1/ for logged in user")
+        #self.client.login(username='user1', password='user1password')
+        #logged_in_view_response = self.client.get('/sp/view/user1/')
+        #self.assertContains(logged_in_view_response, "Test User 1")
 
-        LOGGER.debug("Test GET /sp/ for logged in user")
-        logged_in_view_generic_response = self.client.get('/sp/')
-        self.assertContains(logged_in_view_generic_response, "Test User 1")
+        #LOGGER.debug("Test GET /sp/ for logged in user")
+        #logged_in_view_generic_response = self.client.get('/sp/')
+        #self.assertContains(logged_in_view_generic_response, "Test User 1")
 
-        LOGGER.debug("Test GET /sp/view/ for logged in user")
-        logged_in_view_generic_response_2 = self.client.get('/sp/view/')
-        self.assertEqual(404, logged_in_view_generic_response_2.status_code)
+        #LOGGER.debug("Test GET /sp/view/ for logged in user")
+        #logged_in_view_generic_response_2 = self.client.get('/sp/view/')
+        #self.assertEqual(404, logged_in_view_generic_response_2.status_code)
 
-        LOGGER.debug("Test GET /sp/view/ for logged in user")
-        logged_in_view_generic_response_2 = self.client.get('/sp/view/')
-        self.assertEqual(404, logged_in_view_generic_response_2.status_code)
+        #LOGGER.debug("Test GET /sp/view/ for logged in user")
+        #logged_in_view_generic_response_2 = self.client.get('/sp/view/')
+        #self.assertEqual(404, logged_in_view_generic_response_2.status_code)
 
-        LOGGER.debug("Test POST to /sp/view/ for logged in user")
-        logged_in_view_post_response = self.client.post('/sp/', {'user': 1}, follow=True)
-        self.assertEqual(405, logged_in_view_post_response.status_code)  # HTTP POST Not Allowed
+        #LOGGER.debug("Test POST to /sp/view/ for logged in user")
+        #logged_in_view_post_response = self.client.post('/sp/', {'user': 1}, follow=True)
+        #self.assertEqual(405, logged_in_view_post_response.status_code)  # HTTP POST Not Allowed
 
     #def test_socialprofile_permalink(self):
         #"""Test the permalink method of SocialProfile"""
