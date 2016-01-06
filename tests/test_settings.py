@@ -1,3 +1,5 @@
+SITE_ID = 1
+
 # Social Profile
 ### Custom Social Profile User
 AUTH_USER_MODEL = "socialprofile.SocialProfile"
@@ -134,6 +136,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     'django_errors',
     'social.apps.django_app.default',
