@@ -54,7 +54,7 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     if request.user.is_authenticated():
-		return context()
+         return context()
     return redirect('sp_select_page')
 
 @psa('social:complete')
@@ -111,13 +111,13 @@ class SocialProfileView(TemplateView):
         LOGGER.debug("socialprofile.views.SocialProfileView.get_context_data")
         username = self.kwargs.get('username')
         if username:
-            try :
-				user = get_object_or_404(SocialProfile, username=username)
-            except Exception as e: 
-				try :
-					user = get_object_or_404(SocialProfile, pk=username)
-				except Exception as e: 
-					user = self.request.user
+          try:
+             ser = get_object_or_404(SocialProfile, username=username)
+          except Exception as e: 
+             try:
+                user = get_object_or_404(SocialProfile, pk=username)
+             except Exception as e: 
+                user = self.request.user
         elif self.request.user.is_authenticated():
             user = self.request.user
         else:
@@ -151,13 +151,13 @@ class SocialProfileEditView(SocialProfileView):
         # if user_form.is_valid() & sp_form.is_valid():
         if sp_form.is_valid():
             try:
-				# user_form.save()
-				sp_form.save()
-				messages.add_message(self.request, messages.INFO, _('Your profile has been updated.'))
-				return HttpResponseRedirect(sp_form.cleaned_data.get('returnTo', DEFAULT_RETURNTO_PATH))
+               # user_form.save()
+               sp_form.save()
+               messages.add_message(self.request, messages.INFO, _('Your profile has been updated.'))
+               return HttpResponseRedirect(sp_form.cleaned_data.get('returnTo', DEFAULT_RETURNTO_PATH))
             except Exception as e:
-				messages.add_message(self.request, messages.INFO, _('ERROR: Your profile has NOT been updated! ['+str(e)+']'))
-				return self.render_to_response({'sp_form': sp_form})
+               messages.add_message(self.request, messages.INFO, _('ERROR: Your profile has NOT been updated! ['+str(e)+']'))
+               eturn self.render_to_response({'sp_form': sp_form})
         else:
             messages.add_message(self.request, messages.INFO, _('Your profile has NOT been updated.'))
             return self.render_to_response({'sp_form': sp_form})
