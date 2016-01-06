@@ -126,7 +126,7 @@ class SocialProfileTestCase(TestCase):
         }
         logged_in_edit_response_2 = self.client.post('/sp/edit/', post_data, follow=True)
         self.assertContains(logged_in_edit_response_2, "updated")
-        user = User.objects.get(username='user2')
+        user = SocialProfile.objects.get(username='user2')
         self.assertEqual('user2', str(user.social_profile))
 
         LOGGER.debug("Test Invalid Form Error")
