@@ -18,3 +18,4 @@ Report Issues with [***waffle.io***](https://waffle.io/DLRSP/django-sp/join)
 	$ python manage.py runserver
 
 Now you browser the app @ http://127.0.0.1:8000
+
