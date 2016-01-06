@@ -30,7 +30,7 @@ before_install:
 install:
   - python setup.py install
 script:
-  - git clone https://github.com/DLRSP/example -b django-sp 
-  - coverage run example/manage.py test --exe --all-modules
+  - git clone https://github.com/DLRSP/example -b django-sp
+  - coverage run example/manage.py jenkins --enable-coverage -v 2
 after_success:
   - codecov
