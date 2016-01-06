@@ -2,7 +2,7 @@ from setuptools import setup
 
 readme = open('README.md').read()
 
-from django_errors import __version__ as version
+from socialprofile import __version__ as version
 
 setup(
     name="django-sp",
