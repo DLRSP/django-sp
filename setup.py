@@ -16,7 +16,8 @@ setup(
     long_description=readme,
     include_package_data=True,
     zip_safe=False,
-    install_requires=['pytest-runner',
+    install_requires=['django_nose',
+                      'pytest-runner',
                       'django>=1.8',
                       'python-social-auth==0.2.1',		#<-- Need By Auth Process
                       'django-errors',
