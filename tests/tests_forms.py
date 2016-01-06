@@ -28,42 +28,44 @@ class SocialProfileFormTestCase(TestCase):
         self.user1.save()
         # self.sa1 = UserSocialAuth.objects.create(user=self.user1, provider='google-oauth2', uid='user1@user1.com')
 
-    def test_socialprofile_form_view(self):
-        """Test editing user profile data through form in isolation"""
-        LOGGER.debug("Test socialprofile edit form")
-        form = SocialProfileForm(instance=self.user1)
-        form_html = form.as_p()
-        LOGGER.debug(form_html)
-        self.assertInHTML('<option value="other" selected="selected">Other</option>', form_html)
-        self.assertInHTML('<input id="id_returnTo" name="returnTo" type="hidden" value="/" />', form_html)
-        self.assertInHTML('<textarea cols="40" id="id_description" name="description" rows="10">Test User 1</textarea>', form_html)
-        self.assertInHTML('<input id="id_image_url" maxlength="500" name="image_url" type="url" value="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm" />', form_html)
-        self.assertInHTML('<input id="id_manually_edited" name="manually_edited" type="hidden" value="True" />', form_html)
-        self.assertInHTML('<input id="id_url" maxlength="500" name="url" type="url" value="http://test.com" />', form_html)
+    #def test_socialprofile_form_view(self):
+        #"""Test editing user profile data through form in isolation"""
+        #LOGGER.debug("Test socialprofile edit form")
+        #form = SocialProfileForm(instance=self.user1)
+        #form_html = form.as_p()
+        #LOGGER.debug(form_html)
+        #self.assertInHTML('<option value="other" selected="selected">Other</option>', form_html)
+        #self.assertInHTML('<input id="id_returnTo" name="returnTo" type="hidden" value="/" />', form_html)
+        #self.assertInHTML('<textarea cols="40" id="id_description" name="description" rows="10">Test User 1</textarea>', form_html)
+        #self.assertInHTML('<input id="id_image_url" maxlength="500" name="image_url" type="url" value="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm" />', form_html)
+        #self.assertInHTML('<input id="id_manually_edited" name="manually_edited" type="hidden" value="True" />', form_html)
+        #self.assertInHTML('<input id="id_url" maxlength="500" name="url" type="url" value="http://test.com" />', form_html)
 
-    def test_socialprofile_form_update(self):
-        LOGGER.debug("Test socialprofile edit form")
-        data = model_to_dict(self.user1)
-        data['description'] = 'new description'
-        data['gender'] = 'female'
-        data['url'] = 'http://new.url'
-        data['image_url'] = 'http://new.image.url'
-        form = SocialProfileForm(data=data, instance=self.user1)
-        self.assertTrue(form.is_valid())
-        form.save()
-        self.assertEquals(self.user1.description, 'new description')
-        self.assertEquals(self.user1.url, 'http://new.url/')
-        self.assertEquals(self.user1.gender, 'female')
-        self.assertEquals(self.user1.image_url, 'http://new.image.url/')
+    #def test_socialprofile_form_update(self):
+        #"""Test Form Update"""
+        #LOGGER.debug("Test socialprofile edit form")
+        #data = model_to_dict(self.user1)
+        #data['description'] = 'new description'
+        #data['gender'] = 'female'
+        #data['url'] = 'http://new.url'
+        #data['image_url'] = 'http://new.image.url'
+        #form = SocialProfileForm(data=data, instance=self.user1)
+        #self.assertTrue(form.is_valid())
+        #form.save()
+        #self.assertEquals(self.user1.description, 'new description')
+        #self.assertEquals(self.user1.url, 'http://new.url/')
+        #self.assertEquals(self.user1.gender, 'female')
+        #self.assertEquals(self.user1.image_url, 'http://new.image.url/')
 
-    def test_socialprofile_form_clean_desc(self):
-        LOGGER.debug("Test socialprofile form clean desc")
-        data = model_to_dict(self.user1)
-        data['description'] = '<a href="http://bad.url">Bad Link</a>'
-        form = SocialProfileForm(data=data, instance=self.user1)
-        self.assertTrue(form.is_valid())
-        form.save()
-        self.assertEquals(self.user1.description, 'Bad Link')
+    #def test_socialprofile_form_clean_desc(self):
+        #"""Test Form Clean"""
+        #LOGGER.debug("Test socialprofile form clean desc")
+        #data = model_to_dict(self.user1)
+        #data['description'] = '<a href="http://bad.url">Bad Link</a>'
+        #form = SocialProfileForm(data=data, instance=self.user1)
+        #self.assertTrue(form.is_valid())
+        #form.save()
+        #self.assertEquals(self.user1.description, 'Bad Link')
 
 
 # class UserFormTestCase(TestCase):
