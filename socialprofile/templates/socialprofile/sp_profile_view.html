@@ -11,29 +11,29 @@
         <div class="col-lg-9 col-sm-9" id="article">
 			<section title="profile" data-role="content">
 				<section title="{% trans 'Picture' %}" class="sp-profile-img">
-					<h1 class="sp-profile-name">{{ sp_form.first_name.value|default:"&nbsp;" }} {{ sp_form.last_name.value|default:"&nbsp;" }}</h1>
-					{% if request.user.username == sp_form.username.value %}
+					<h1 class="sp-profile-name">{{ user.first_name.value|default:"&nbsp;" }} {{ user.last_name.value|default:"&nbsp;" }}</h1>
+					{% if request.user.username == user.username.value %}
 						<p>
-							<a href="{% url 'sp_profile_edit_page' %}?returnTo={{ sp_form.returnTo.value }}" data-role="button" data-mini="true" data-ajax="false"><button class="ui-button-info">{% trans "Edit Profile" %}</button></a>
+							<a href="{% url 'sp_profile_edit_page' %}?returnTo={{ user.returnTo.value }}" data-role="button" data-mini="true" data-ajax="false"><button class="ui-button-info">{% trans "Edit Profile" %}</button></a>
 						</p>
 					{% endif %}
 					<p>
-						<img src="{{ sp_form.image_url.value|default:'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm' }}">
+						<img src="{{ user.image_url.value|default:'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm' }}">
 					</p>
 				</section>
 				<ul class="sp-profile-block" data-role="listview" data-inset="true" data-theme="b">
-					<li>{{ sp_form.username.label_tag }}{{ sp_form.username.value|default:"&nbsp;" }}</li>
+					<li>{{ user.username.label_tag }}{{ user.username.value|default:"&nbsp;" }}</li>
 
-					<li>{{ sp_form.email.label_tag }}{{ sp_form.email.value|default:"&nbsp;" }}</li>
+					<li>{{ user.email.label_tag }}{{ user.email.value|default:"&nbsp;" }}</li>
 
-					<li>{{ sp_form.gender.label_tag }}{{ sp_form.gender.value|title|default:"&nbsp;" }}</li>
+					<li>{{ user.gender.label_tag }}{{ user.gender.value|title|default:"&nbsp;" }}</li>
 
-					<li>{{ sp_form.url.label_tag }}&nbsp;
-						<div>{{ sp_form.url.value|urlize }}</div>
+					<li>{{ user.url.label_tag }}&nbsp;
+						<div>{{ user.url.value|urlize }}</div>
 					</li>
 
-					<li>{{ sp_form.description.label_tag }}{{ sp_form.description.value|default:"&nbsp;" }}</li>
-					{% if request.user.username == sp_form.username.value %}
+					<li>{{ user.description.label_tag }}{{ user.description.value|default:"&nbsp;" }}</li>
+					{% if request.user.username == user.username.value %}
 						<li><label>{% trans "Authentication" %}</label>
 							{% for user_social_auth in user.social_auth.all %}
 								{{ user_social_auth.provider|social_provider_name }}{% if not forloop.last %},&nbsp;{% endif %}
