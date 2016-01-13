@@ -108,30 +108,20 @@ class SocialProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         """Load up the default data to show in the display form."""
-        LOGGER.debug("socialprofile.views.SocialProfileView.get_context_data")
         username = self.kwargs.get('username')
         if username:
-          try:
-             ser = get_object_or_404(SocialProfile, username=username)
-          except Exception as e: 
-             try:
-                user = get_object_or_404(SocialProfile, pk=username)
-             except Exception as e: 
-                user = self.request.user
+			try:
+				user = get_object_or_404(SocialProfile, username=username)
+			except Exception as e: 
+				try:
+					user = get_object_or_404(SocialProfile, pk=username)
+				except Exception as e: 
+					user = self.request.user
         elif self.request.user.is_authenticated():
             user = self.request.user
         else:
             raise Http404  # Case where user gets to this view anonymously for non-existent user
-
-        return_to = self.request.GET.get('returnTo', DEFAULT_RETURNTO_PATH)
-
-        sp_form = SocialProfileForm(instance=user)
-        # user_form = UserForm(instance=user)
-
-        sp_form.initial['returnTo'] = return_to
-
-        return {'sp_form': sp_form}
-
+        return {'user': user}
 
 class SocialProfileEditView(SocialProfileView):
     """
@@ -146,7 +136,9 @@ class SocialProfileEditView(SocialProfileView):
 
     def post(self, request, *args, **kwargs):
         # user_form = UserForm(request.POST, instance=request.user)
+        return_to = self.request.GET.get('returnTo', DEFAULT_RETURNTO_PATH)
         sp_form = SocialProfileForm(request.POST, instance=request.user)
+        sp_form.initial['returnTo'] = return_to
 
         # if user_form.is_valid() & sp_form.is_valid():
         if sp_form.is_valid():
@@ -157,7 +149,7 @@ class SocialProfileEditView(SocialProfileView):
                return HttpResponseRedirect(sp_form.cleaned_data.get('returnTo', DEFAULT_RETURNTO_PATH))
             except Exception as e:
                messages.add_message(self.request, messages.INFO, _('ERROR: Your profile has NOT been updated! ['+str(e)+']'))
-               eturn self.render_to_response({'sp_form': sp_form})
+               return self.render_to_response({'sp_form': sp_form})
         else:
             messages.add_message(self.request, messages.INFO, _('Your profile has NOT been updated.'))
             return self.render_to_response({'sp_form': sp_form})
