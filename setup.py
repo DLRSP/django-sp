@@ -20,6 +20,7 @@ setup(
                       'django>=1.8',
                       'python-social-auth',      #<-- Need By Auth Process
                       'django-errors',
+                      'django-image-cropping',
                       ],
     tests_require=['runtests.py'],
     classifiers=[
