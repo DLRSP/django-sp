@@ -1,6 +1,6 @@
-# django-sp [![PyPi license](https://img.shields.io/pypi/l/django-sp.svg)](https://pypi.python.org/pypi/django_errors)
+# django-sp [![PyPi license](https://img.shields.io/pypi/l/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
 
-## Pypi [![PyPi status](https://img.shields.io/pypi/status/django-sp.svg)](https://pypi.python.org/pypi/django_errors) [![PyPi version](https://img.shields.io/pypi/v/django-sp.svg)](https://pypi.python.org/pypi/django_errors) [![PyPi python version](https://img.shields.io/pypi/pyversions/django-sp.svg)](https://pypi.python.org/pypi/django_errors) [![PyPi downloads](https://img.shields.io/pypi/dm/django-sp.svg)](https://pypi.python.org/pypi/django_errors) [![PyPi downloads](https://img.shields.io/pypi/dw/django-sp.svg)](https://pypi.python.org/pypi/django_errors) [![PyPi downloads](https://img.shields.io/pypi/dd/django-sp.svg)](https://pypi.python.org/pypi/django_errors)
+## Pypi [![PyPi status](https://img.shields.io/pypi/status/django-sp.svg)](https://pypi.python.org/pypi/django_ps) [![PyPi version](https://img.shields.io/pypi/v/django-sp.svg)](https://pypi.python.org/pypi/django_sp) [![PyPi python version](https://img.shields.io/pypi/pyversions/django-sp.svg)](https://pypi.python.org/pypi/django_sp) [![PyPi downloads](https://img.shields.io/pypi/dm/django-sp.svg)](https://pypi.python.org/pypi/django_sp) [![PyPi downloads](https://img.shields.io/pypi/dw/django-sp.svg)](https://pypi.python.org/pypi/django_sp) [![PyPi downloads](https://img.shields.io/pypi/dd/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
 
 	$ pip install django-sp
 
