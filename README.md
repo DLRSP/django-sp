@@ -14,6 +14,7 @@
 
 ## Run Example Project
 
+	$ git clone https://github.com/DLRSP/example -b django-sp
 	$ cd example
 	$ python manage.py runserver
 
