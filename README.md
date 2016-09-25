@@ -14,6 +14,7 @@ Report Issues with [***waffle.io***](https://waffle.io/DLRSP/django-sp/join)
 
 ## Run Example Project
 
+	$ git clone https://github.com/DLRSP/example -b django-sp
 	$ cd example
 	$ python manage.py runserver
 
