@@ -3,11 +3,13 @@ language: python
 matrix:
   allow_failures:
     - os: osx
+    - env: '3.4'
 os:
   - linux
 #  - osx
 env:
-  - DJANGO_VERSION<1.9
+  - DJANGO_VERSION=1.8.14
+  - DJANGO_VERSION=1.9
 python:
   - '2.7'
   - '3.4'
