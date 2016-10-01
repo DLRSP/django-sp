@@ -55,7 +55,7 @@ class SocialProfile(AbstractUser):
 	
 	# Add for Staff Infos
     order = IntegerRangeField(default=1, min_value=1, max_value=100,blank=True, verbose_name=_("Order"))
-    visible = models.BooleanField(default=False, verbose_name=_("Visible in the Public Pages"))
+    visible = models.BooleanField(default=False, blank=True, verbose_name=_("Visible in the Public Pages"))
     title = models.CharField(max_length=500,blank=True)
     role = models.CharField(max_length=500,blank=True)
     function_01 = models.CharField(max_length=200,blank=True)
