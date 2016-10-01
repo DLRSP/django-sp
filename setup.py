@@ -17,7 +17,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['django-jenkins',
-                      'django>1.9',
+                      'django<1.9',
                       'python-social-auth',      #<-- Need By Auth Process
                       'django-errors',
                       'easy_thumbnails',		 #<-- Need By Imge Cropping
