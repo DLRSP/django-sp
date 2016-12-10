@@ -25,7 +25,7 @@ setup(
                       ],
     tests_require=['runtests.py'],
     classifiers=[
-        'Development Status :: 5 - Beta',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
