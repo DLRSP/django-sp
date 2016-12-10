@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 (b'cropping_free', image_cropping.fields.ImageRatioField('image', '300x300', hide_image_field=False, size_warning=True, allow_fullsize=False, free_crop=True, adapt_rotation=False, help_text=None, verbose_name='cropping free')),
                 ('description', models.TextField(help_text='Tell us about yourself!', verbose_name='Description', blank=True)),
                 ('manually_edited', models.BooleanField(default=False, verbose_name='Manually Edited')),
-                ('order', socialprofile.models.IntegerRangeField(default=1, verbose_name='Order', blank=True)),
+                ('sort', socialprofile.models.IntegerRangeField(default=1, verbose_name='Order', blank=True)),
                 ('visible', models.BooleanField(default=False, verbose_name='Visible in the Public Pages')),
                 ('title', models.CharField(max_length=500, blank=True)),
                 ('role', models.CharField(max_length=500, blank=True)),

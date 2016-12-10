@@ -54,7 +54,7 @@ class SocialProfile(AbstractUser):
     manually_edited = models.BooleanField(default=False, verbose_name=_("Manually Edited"))
 	
 	# Add for Staff Infos
-    order = IntegerRangeField(default=1, min_value=1, max_value=100,blank=True, verbose_name=_("Order"))
+    sort = IntegerRangeField(default=1, min_value=1, max_value=100,blank=True, verbose_name=_("Sort Order"))
     visible = models.BooleanField(default=False, blank=True, verbose_name=_("Visible in the Public Pages"))
     title = models.CharField(max_length=500,blank=True)
     role = models.CharField(max_length=500,blank=True)
