@@ -24,7 +24,7 @@ class SocialProfileForm(forms.ModelForm):
         """Configuration for the ModelForm"""
         model = SocialProfile
         fields = ['username', 'first_name', 'last_name', 'email', 'gender', 'url', 'image_url','cropping','cropping_free', 'description',
-				  'order','title',
+				  'sort','title',
 				  'function_01','function_02','function_03','function_04','function_05','function_06','function_07','function_08','function_09','function_10']
 		# Don't let through for security reasons, user should be based on logged in user only
 
