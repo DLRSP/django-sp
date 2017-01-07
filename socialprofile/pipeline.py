@@ -1,8 +1,8 @@
 """Python Social Auth Pipeline Extensions"""
 
 from social_core.backends.google import GoogleOAuth2
-from social_core.backends.twitter import TwitterOAuth
-from social_core.backends.facebook import Facebook2OAuth2
+from social_core.backends.twitter import TwitterOAuth2
+from social_core.backends.facebook import FacebookOAuth2
 
 
 def socialprofile_extra_values(backend, details, response, uid, user, *args, **kwargs):
