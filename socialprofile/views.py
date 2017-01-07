@@ -20,9 +20,9 @@ from decorators import render_to
 from models import SocialProfile
 from forms import SocialProfileForm
 
-from social.backends.google import GooglePlusAuth
-from social.backends.utils import load_backends
-from social.apps.django_app.utils import psa
+from social_core.backends.google import GooglePlusAuth
+from social_core.backends.utils import load_backends
+from social_django.utils import load_strategy, load_backend, psa, setting, BackendWrapper, strategy
 
 import logging
 
