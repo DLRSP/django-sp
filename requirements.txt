@@ -3,9 +3,18 @@
 # django==1.8.7
 django<1.9
 
-coverage						#<-- Need By django-jenkins
-coveralls						#<-- Need By django-jenkins
+# Authentication Core
+social-auth-app-django
+
+# Backends Dependecies
+pyjwkest			#<-- Need By google-openidconnect
+
+# Images supports
+easy_thumbnails			#<-- Need By django-image-cropping
+django-image-cropping
+
+# Development and Test
+coverage			#<-- Need By django-jenkins
+coveralls			#<-- Need By django-jenkins
 django-jenkins
 
-easy_thumbnails					#<-- Need By django-image-cropping
-django-image-cropping
