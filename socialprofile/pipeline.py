@@ -1,7 +1,7 @@
 """Python Social Auth Pipeline Extensions"""
 
 from social_core.backends.google import GoogleOAuth2
-from social_core.backends.twitter import TwitterOAuth2
+from social_core.backends.twitter import TwitterOAuth
 from social_core.backends.facebook import FacebookOAuth2
 
 
