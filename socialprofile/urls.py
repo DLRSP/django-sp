@@ -34,6 +34,6 @@ urlpatterns = [
 	url(r'^logout/$', 'django.contrib.auth.views.logout', kwargs={'next_page': "sp_select_page"}, name="sp_logout_page"),
 	
 	# Social Auth
-	url(r'', include('social.apps.django_app.urls', namespace='social')),
+	url(r'', include('social_django.urls', namespace='social')),
 	
 ]
