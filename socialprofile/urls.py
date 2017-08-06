@@ -8,6 +8,7 @@
 from django.conf.urls import patterns, url, include
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import logout
 
 from . import views
 
@@ -31,7 +32,7 @@ urlpatterns = [
 	url(r'^delete/$', login_required(views.DeleteSocialProfileView.as_view()), name="sp_delete_page"),
 
 	# Logout Page
-	url(r'^logout/$', 'django.contrib.auth.views.logout', kwargs={'next_page': "sp_select_page"}, name="sp_logout_page"),
+	url(r'^logout/$', logout, kwargs={'next_page': "sp_select_page"}, name="sp_logout_page"),
 	
 	# Social Auth
 	url(r'', include('social_django.urls', namespace='social')),
