@@ -10,12 +10,12 @@ os:
   - linux
 #  - osx
 env:
-  - DJANGO_VERSION=1.8.17
   - DJANGO_VERSION=1.9
-  - DJANGO_VERSION=1.10
+  - DJANGO_VERSION=1.11
+  - DJANGO_VERSION=2.2.6
 python:
   - '2.7'
-  - '3.4'
+  - '3.6'
   - pypy
 deploy:
   provider: pypi
