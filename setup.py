@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 readme = open('README.md').read()
 
@@ -12,16 +12,24 @@ setup(
     description="Django Custom Social Profile Auth/User",
     author='DLRSP',
     author_email='dlrsp.py@gmail.com',
-    packages=['socialprofile', ],
+    packages=find_packages(),
     long_description=readme,
     include_package_data=True,
     zip_safe=False,
     install_requires=['django-jenkins',
-                      'django<1.9',
-                      'python-social-auth',      #<-- Need By Auth Process
+                      'django<2.3',
                       'django-errors',
+                      'python-social-auth',      #<-- Need By Auth Process: OAuth2 Social
+                      'social-auth-app-django',  #<-- Need By Auth Process: OAuth2 Social
+                      'django-otp',	 			 #<-- Need By Auth Process: One-Time-Password
+                      'django-two-factor-auth',	 #<-- Need By Auth Process: One-Time-Password
+                      'django-oauth-toolkit',	 #<-- Need By Auth Process: OAuth2 Token
+                      'djangorestframework-jwt', #<-- Need By Auth Process: Token
+                      'djangorestframework',	 #<-- Need By Rest API
                       'easy_thumbnails',		 #<-- Need By Imge Cropping
                       'django-image-cropping',
+                      'django-user-sessions',	 #<-- Need By Monitor
+                      'django-axes',			 #<-- Need By Monitor
                       ],
     tests_require=['runtests.py'],
     classifiers=[
