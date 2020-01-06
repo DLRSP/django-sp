@@ -9,6 +9,7 @@ social-auth-app-django
 
 # Backends Dependecies
 pyjwkest			#<-- Need By google-openidconnect
+Markdown==2.6.11
 
 # Images supports
 easy_thumbnails			#<-- Need By django-image-cropping
