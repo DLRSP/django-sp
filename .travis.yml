@@ -25,9 +25,10 @@ deploy:
 before_install:
   - pip install -r requirements.txt
 install:
+  - git clone --depth=50 --branch=django-sp https://github.com/DLRSP/example.git DLRSP/example
   - python setup.py install
 script:
-  - git clone https://github.com/DLRSP/example -b django-sp
-  - example/manage.py jenkins --enable-coverage -v 2
+  - coverage run DLRSP/example/manage.py test --exe --all-modules
+  - DLRSP/example/manage.py jenkins --enable-coverage -v 2
 after_success:
   - codecov
