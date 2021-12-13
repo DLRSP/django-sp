@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.core import mail, management
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import connection
 from django.forms.fields import Field
 from django.http import HttpRequest
@@ -19,7 +19,7 @@ from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 from mock import patch
 
-from .forms import EmailUserChangeForm, EmailUserCreationForm
+from socialprofile.forms import EmailUserChangeForm, EmailUserCreationForm
 
 try:
     from django.contrib.auth.middleware import SessionAuthenticationMiddleware
