@@ -12,7 +12,7 @@ Release logic:
 """
 import django
 
-__version__ = "0.17.0-dev"
+__version__ = "0.5.1-dev"
 __license__ = "MIT"
 __title__ = "django-errors"
 
@@ -27,8 +27,6 @@ HTTP_HEADER_ENCODING = "iso-8859-1"
 
 # Default datetime input and output formats
 ISO_8601 = "iso-8601"
-
-__version__ = "0.5"
 
 if django.VERSION < (3, 2):
     default_app_config = "socialprofile.apps.SocialProfileConfig"
