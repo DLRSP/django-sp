@@ -1,0 +1,48 @@
+# Framework
+django
+
+# Error Wrapper
+django-errors
+
+# Authentication Core
+python-social-auth
+social-auth-app-django
+django-oauth-toolkit
+
+# Two-Factor
+django-two-factor-auth
+
+# One-Time-Password
+django-otp
+
+# Backends Dependecies
+pyjwkest			#<-- Need By google-openidconnect
+#Markdown==2.6.11
+Markdown
+
+# Images supports
+easy_thumbnails			#<-- Need By django-image-cropping
+django-image-cropping
+
+# Rest API
+djangorestframework
+# djangorestframework-jwt
+
+# Form
+django-crispy-forms
+
+corsheaders
+
+# Monitor
+django-user-sessions
+django-axes
+
+# Development and Test
+docutils			#<-- Need By restructuredtext
+coverage			#<-- Need By django-jenkins
+coveralls			#<-- Need By django-jenkins
+django-jenkins
+coverage
+pytest
+pytest-django
+pytest-randomly

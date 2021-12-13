@@ -1,27 +1,29 @@
-sudo: false
 language: python
-matrix:
+jobs:
   allow_failures:
     - os: osx
-    - env: DJANGO_VERSION=3.0.2
+    - env: DJANGO_VERSION=3.2
 os:
   - linux
   - osx
+dist: xenial
 env:
-  - DJANGO_VERSION=2.2.9
-  - DJANGO_VERSION=3.0.2
+  - DJANGO_VERSION=2.2
+  - DJANGO_VERSION=3.2
 python:
-  - '3.6'
   - '3.7'
   - '3.8'
+  - '3.9'
 deploy:
   provider: pypi
-  user: KingDade
+  username: __token__
   password:
-    secure: FrqlGhvfkX+OyC7a+OoOFk2pkuXCYpHusz6XMR8BDKQskajGepV3iQ2Xaa8y6hJGW2flqSKa0wr9U6JwmgVvhuX3wuoycbED4eWqPe/l5a6C+6h7Rw29IUWEL2zZjRBWoJooA+AB1FY3N/TcNRC/1NutUKOGkb3b6wNi4sDFIGai9jKpDCNgEkbWeXAv390g3E76OtV1WjH/fwXYtliaTQX0FHq5+j6//ZTAdEKFs1NxLJnR0VPMJ/hDiASOkfImkp1RuBn8SwUzgoyNKbzlwaGEYdq/6tCgnQIAMllPo7dwJAnLTWZWD/Jk5bd9ufezc1QgDAgNHE11jWHWvEUrKbpEV+h4fSk61voud6OfRqJ3GqCDSPrt2w48gmEjrgXBOEAFUwIKUcCwmQHr0Kd+7FXok4K3GKzrh/VqYjXoEz9R1mQHrISMF2i8vQpCJw7ZPbo7LXEu+ZwrFw7adIvelXU+Qdrq1aknDPTcncbO/i/SrNF9/LTX5U/iF78As36iytRBsjuRM7IY2VVJQpqWYU800BrQ+1otlw0GdoK488AN6ICQ7ngEjCo9uBxLnGnbdTFE8/fZViRtYhxPfYs2ETDKjvkA22VhKADK4kcWjsnKyA9hZPeOXUpcj4IiV/ozmvQn2ujflF6rJakdz+ujn6GjvdxYtsQ+E3WDvGnzSis=
+    secure: pypi-AgEIcHlwaS5vcmcCJGUyZTE2ODY0LTFlZDAtNGJjNy1hZTgyLTI4ZTUwMWE3NjAwZQACOnsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJkamFuZ28tc3AiXX0sICJ2ZXJzaW9uIjogMX0AAAYgTT9lUx3E5KAlYzDGf-QiWUZy8aENJmURa-HSgsRYdrg
   on:
     tags: true
     repo: DLRSP/django-sp
+  skip_cleanup: true
+  skip_existing: true
 before_install:
   - pip install -r requirements.txt
 install:
