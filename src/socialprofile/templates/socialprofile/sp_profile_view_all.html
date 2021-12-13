@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n static socialprofile_tags %}
+
+{% block headtitle %}{% trans "All Profiles" %}{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'socialprofile/css/card.css' %}">
+{% endblock %}
+
+{% block content %}
+
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<div class="container">
+			<div class="row">
+				{% for user in users %}
+				<div class="col-md-4">
+					<div class="card user-card">
+						<div class="card-header">
+							<h5>Profile</h5>
+						</div>
+						<div class="card-block">
+							<div class="user-image">
+<!--								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">-->
+								<img src="{{ user.image_url|default:'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm' }}" class="img-radius" alt="User-Profile-Image">
+							</div>
+							<h6 class="f-w-600 m-t-25 m-b-10">{{ user.username }}</h6>
+							<p class="text-muted">Active | {{ user.gender }} | Born 23.05.1992</p>
+							<hr>
+							<p class="text-muted m-t-15">Activity Level: 87%</p>
+							<ul class="list-unstyled activity-leval">
+								<li class="active"></li>
+								<li class="active"></li>
+								<li class="active"></li>
+								<li></li>
+								<li></li>
+							</ul>
+							<div class="{% if user.is_superuser %}bg-c-yellow {% elif user.is_staff %}bg-c-green {% else %}bg-c-blue{% endif %} counter-block m-t-10 p-20">
+								<div class="row">
+									<div class="col-4">
+										<i class="fa fa-comment"></i>
+										<p>1256</p>
+									</div>
+									<div class="col-4">
+										<i class="fa fa-user"></i>
+										<p>8562</p>
+									</div>
+									<div class="col-4">
+										<i class="fa fa-suitcase"></i>
+										<p>189</p>
+									</div>
+								</div>
+							</div>
+							<p class="m-t-15 text-muted">{% if user.description %}{{ user.description }}{% endif %}</p>
+							<hr>
+							<div class="row justify-content-center user-social-link">
+								<div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
+								<div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
+								<div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+{% endblock %}

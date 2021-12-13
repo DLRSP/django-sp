@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n static socialprofile_tags %}
+
+{% block headtitle %}{% trans "Congratulations" %} {{ user.username }}!{% endblock %}
+
+{% block content %}
+<div class="user-details">
+	<h1>{% trans "Congratulations" %} {{ user.username }}!</h1>
+</div>
+{% endblock %}

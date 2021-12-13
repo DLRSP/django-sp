@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+{% load socialprofile_tags %}
+
+{% block headtitle %}{% trans "Profile for " %}{{ user.username }}{% endblock %}
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+<div class="buttons">
+	{% if user.is_authenticated %}
+		<div class="user-details">
+		  You are logged in as <code>{{ user.username }}</code> with email<code>{{ user.email }}</code>!
+		</div>
+		<div class="user-details">
+			<img src="{{ user.image_url.value|default:'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm' }}">
+			<i>{{ user.first_name }} {{ user.last_name }}</i>
+		</div>
+		
+		{% if request.user.username == user.username.value %}
+			<div class="user-details">
+				<a class="btn btn-primary" href="{% url 'sp_profile_edit_page' %}" id="logout"><i class="fa fa-sign-out"></i>{% trans 'Edit' %}</a>
+				
+				<a href="{% url 'sp_profile_edit_page' %}?returnTo={{ user.returnTo.value }}" data-role="button" data-mini="true" data-ajax="false">
+				<button class="ui-button-info">{% trans "Edit Profile" %}</button></a>			
+				
+				<a class="btn btn-primary" href="{% url 'sp_profile_edit_page' %}?returnTo={{ user.returnTo.value }}" ><i class="fa fa-edit"></i>{% trans 'Edit' %}</a>
+
+			</div>
+		{% endif %}
+
+	{% else %}
+		<div class="user-details">
+		  You are not logged in!
+		</div>
+		
+		<div class="user-details">
+			<a class="btn btn-primary" href="{% url 'sp_select_page' %}" id="logout"><i class="fa fa-sign-out"></i>{% trans 'Login' %}</a>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}
