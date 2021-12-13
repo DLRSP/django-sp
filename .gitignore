@@ -1,7 +1,11 @@
 #################
+## PyCharm
+#################
+.idea
+
+#################
 ## Eclipse
 #################
-
 *.pydevproject
 .project
 .metadata
@@ -124,6 +128,8 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+# Utility Script
+exec_*.bat
 
 #############
 ## Python
@@ -134,7 +140,7 @@ Desktop.ini
 # Packages
 *.egg
 *.egg-info
-# dist
+dist
 build
 eggs
 parts
@@ -158,3 +164,8 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+#############
+## Gh-Pages
+#############
+site

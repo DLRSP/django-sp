@@ -19,4 +19,3 @@
 	$ python manage.py runserver
 
 
-
