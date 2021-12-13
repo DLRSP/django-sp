@@ -1,43 +1,48 @@
-from setuptools import setup, find_packages
+import os
+from distutils.cmd import Command
+from distutils.command.build import build as _build
 
-readme = open('README.md').read()
+from setuptools.command.install_lib import install_lib as _install_lib
 
-from socialprofile import __version__ as version
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+
+class CompileTranslations(Command):
+    description = "compile message catalogs to MO files via django compilemessages"
+    user_options = []  # type: list
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        curdir = os.getcwd()
+        os.chdir(os.path.realpath(os.path.join("src", "socialprofile")))
+        from django.core.management import call_command
+
+        call_command("compilemessages")
+        os.chdir(curdir)
+
+
+class Build(_build):
+    sub_commands = [("compile_translations", None)] + _build.sub_commands
+
+
+class InstallLib(_install_lib):
+    def run(self):
+        self.run_command("compile_translations")
+        _install_lib.run(self)
+
 
 setup(
-    name="django-sp",
-    version=version,
-    url='https://github.com/DLRSP/django-sp',
-    license='MIT',
-    description="Django Custom Social Profile Auth/User",
-    author='DLRSP',
-    author_email='dlrsp.py@gmail.com',
-    packages=find_packages(),
-    long_description=readme,
-    include_package_data=True,
-    zip_safe=False,
-    install_requires=['django-jenkins',
-                      'django<2.3',
-                      'django-errors',
-                      'python-social-auth',      #<-- Need By Auth Process: OAuth2 Social
-                      'social-auth-app-django',  #<-- Need By Auth Process: OAuth2 Social
-                      'django-otp',	 			 #<-- Need By Auth Process: One-Time-Password
-                      'django-two-factor-auth',	 #<-- Need By Auth Process: One-Time-Password
-                      'django-oauth-toolkit',	 #<-- Need By Auth Process: OAuth2 Token
-                      'djangorestframework-jwt', #<-- Need By Auth Process: Token
-                      'djangorestframework',	 #<-- Need By Rest API
-                      'easy_thumbnails',		 #<-- Need By Imge Cropping
-                      'django-image-cropping',
-                      'django-user-sessions',	 #<-- Need By Monitor
-                      'django-axes',			 #<-- Need By Monitor
-                      ],
-    tests_require=['runtests.py'],
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Framework :: Django',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-    ]
+    cmdclass={
+        "build": Build,
+        "install_lib": InstallLib,
+        "compile_translations": CompileTranslations,
+    },
 )
