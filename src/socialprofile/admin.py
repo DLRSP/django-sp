@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from image_cropping.admin import ImageCroppingMixin
 from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
 from social_django.models import Association, Nonce, UserSocialAuth
+
 from socialprofile.models import SocialProfile
 
 
