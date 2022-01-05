@@ -1,20 +1,21 @@
 """Django forms for the socialprofile application"""
 import logging
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Layout, Row, Submit
 from crispy_forms.bootstrap import (
-    Field,
-    InlineRadios,
     Accordion,
     AccordionGroup,
+    Field,
+    InlineRadios,
     PrependedText,
 )
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Layout, Row, Submit
 from django import forms
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_countries.widgets import CountrySelectWidget
+
 from .models import SocialProfile
 
 # pylint: disable=E1120,W0212
@@ -39,7 +40,7 @@ class SocialProfileForm(forms.ModelForm):
         required=False,
     )
 
-    class Meta(object):
+    class Meta:
         """Configuration for the ModelForm"""
 
         model = SocialProfile
