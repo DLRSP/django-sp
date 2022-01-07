@@ -280,7 +280,7 @@ class SocialProfileEditView(UpdateView):
                 sp_form.save()
 
                 if custom_alerts:
-                    sweetify.toast( self.request, _("Your profile has been updated."), icon="success", timer=3000,)
+                    sweetify.toast(self.request, _("Your profile has been updated."), icon="success", timer=3000)
                 else:
                     messages.add_message(
                         self.request,
@@ -329,10 +329,21 @@ class SocialProfileEditView(UpdateView):
             if custom_alerts:
                 sweetify.toast(
                     self.request,
-                    _("Your profile has NOT been updated!"),
+                    _(f"Your profile has NOT been updated!"),
                     icon="error",
                     timer=3000,
                 )
+                # multi = []
+                # for x, err_msg in enumerate(sp_form.errors):
+                #     multi.append({f"err_mess_{x}": dict(title='Error', icon='warning', text=err_msg, toast=True, timer=3000, timerProgressBar='true')})
+                #     # sweetify.toast(
+                #     #     self.request,
+                #     #     err_msg,
+                #     #     icon="warning",
+                #     #     timer=3000,
+                #     # )
+                # if multi:
+                #     sweetify.multiple(request, *multi[0])
             else:
                 messages.add_message(
                     self.request, messages.INFO, _("Your profile has NOT been updated!")

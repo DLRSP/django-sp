@@ -1,4 +1,5 @@
-$(function () {
+$(document).ready(function() {
+    'use strict';
     // Adjusting the session's iframe sizes
     var iframe = document.getElementById("iframe_session");
     if (iframe){
@@ -9,82 +10,50 @@ $(function () {
         }
     }
 
-    // Show messages inside bootstrap alerts
-//    $("#success-alert").fadeTo(3500, 500).slideUp(500, function() {
-//        $("#success-alert").slideUp(500);
+//    // Fire alert for disconnectForm
+//	$('#disconnectForm').on('click',function(e){
+//        var form = $(this).parents('form');
+//        console.log(form)
+//        var provider = $(this).val();
+//        Swal.fire({
+//            title: django.gettext('Disconnect account from '+provider+'. '+'Are you sure?'),
+//            icon: 'warning',
+//            showCancelButton: true,
+//            cancelButtonText: django.gettext('No, cancel!'),
+//            cancelButtonColor: '#d33',
+//            confirmButtonText: django.gettext('Yes, disconnect me!'),
+//            confirmButtonColor: '#3085d6',
+//        }).then((result) => {
+//            if (result.value) {
+//                form.submit();
+//                let timerInterval
+//                Swal.fire({
+//                  title:  django.gettext('Disconnected!'),
+//                  icon: 'success',
+//                  title: django.gettext('Your user has been disconnected!'),
+//                  html: django.gettext('Redirect in <b></b> milliseconds.'),
+//                  timer: 2000,
+//                  timerProgressBar: true,
+//                  didOpen: () => {
+//                    Swal.showLoading()
+//                    const b = Swal.getHtmlContainer().querySelector('b')
+//                    timerInterval = setInterval(() => {
+//                      b.textContent = Swal.getTimerLeft()
+//                    }, 100)
+//                  },
+//                  willClose: () => {
+//                    clearInterval(timerInterval)
+//                  }
+//                }).then((result) => {
+//                  if (result.dismiss === Swal.DismissReason.timer) {
+//                    console.log('Closed by the timer')
+//                  }
+//                })
+//            }
+//        });
 //    });
-    $("#error-alert").fadeTo(3500, 500).slideUp(500, function() {
-        $("#error-alert").slideUp(500);
-    });
 
-    $("#success-alert").on('load', function(e){
-        var html = $(this).val();
-        Swal.fire({
-              title:  django.gettext('Deleted!'),
-              icon: 'success',
-              title: django.gettext('Your user has been updated!'),
-              html: django.gettext('Redirect in <b></b> milliseconds.'),
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('Closed by the timer')
-              }
-            })
-    });
-
-	$('#disconnectForm').on('click',function(e){
-        var form = $(this).parents('form');
-        console.log(form)
-        var provider = $(this).val();
-        Swal.fire({
-            title: django.gettext('Disconnect account from '+provider+'. '+'Are you sure?'),
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonText: django.gettext('No, cancel!'),
-            cancelButtonColor: '#d33',
-            confirmButtonText: django.gettext('Yes, disconnect me!'),
-            confirmButtonColor: '#3085d6',
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-                let timerInterval
-                Swal.fire({
-                  title:  django.gettext('Disconnected!'),
-                  icon: 'success',
-                  title: django.gettext('Your user has been disconnected!'),
-                  html: django.gettext('Redirect in <b></b> milliseconds.'),
-                  timer: 2000,
-                  timerProgressBar: true,
-                  didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                  },
-                  willClose: () => {
-                    clearInterval(timerInterval)
-                  }
-                }).then((result) => {
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('Closed by the timer')
-                  }
-                })
-            }
-        });
-    });
-
+    // Fire alert for deleteForm
     $('#deleteForm').on('click',function(e){
         e.preventDefault();
         var form = $(this).parents('form');
