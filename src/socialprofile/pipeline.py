@@ -70,9 +70,6 @@ def google_extra_values(backend, details, response, uid, user, *args, **kwargs):
         gender = response.get("gender")
         if gender:
             user.gender = gender
-        image_url = response.get("picture")
-        if image_url:
-            user.image_url = image_url
         country = response.get("locale")
         if country:
             user.country = country
@@ -87,8 +84,9 @@ def google_extra_values(backend, details, response, uid, user, *args, **kwargs):
     user.google_circledByCount = response.get("circledByCount", 0)
     user.google_language = response.get("language", "")
     user.google_kind = response.get("kind", "")
+    user.google_avatar = response.get("picture", "")
 
-    user.edited_by_provider = True
+    user.edited_by_google = True
     user.save()
     return user
 
@@ -111,7 +109,8 @@ def facebook_extra_values(backend, details, response, uid, user, *args, **kwargs
     if profile_url:
         user.facebook_url = profile_url
     if response.get("picture", False):
-        user.image_url = response.get("picture").get("data").get("url", "")
+        user.facebook_avatar = response.get("picture").get("data").get("url", "")
+    user.edited_by_facebook = True
     user.save()
     return user
 
@@ -128,9 +127,6 @@ def twitter_extra_values(backend, details, response, uid, user, *args, **kwargs)
         user.first_name = first_name
         user.save()
 
-        image_url = response.get("profile_image_url_https")
-        if image_url:
-            user.image_url = image_url
         description = response.get("description")
         if description:
             user.description = description
@@ -143,7 +139,8 @@ def twitter_extra_values(backend, details, response, uid, user, *args, **kwargs)
         user.twitter_url = profile_url
     user.twitter_language = response.get("lang", "")
     user.twitter_verified = response.get("verified", False)
-    user.edited_by_provider = True
+    user.twitter_avatar = response.get("profile_image_url_https", "")
+    user.edited_by_twitter = True
 
     user.save()
     return user

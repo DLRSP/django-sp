@@ -1,6 +1,6 @@
 from functools import wraps
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 
@@ -11,7 +11,7 @@ def render_to(tpl):
         def wrapper(request, *args, **kwargs):
             out = func(request, *args, **kwargs)
             if isinstance(out, dict):
-                out = render_to_response(tpl, out, RequestContext(request))
+                out = render(tpl, out, RequestContext(request))
             return out
 
         return wrapper

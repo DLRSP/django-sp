@@ -36,6 +36,16 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         ),
         (_("Common Info"), {"fields": ("country", "gender", "url", "image_url")}),
         (
+            _("Avatar"),
+            {
+                "fields": (
+                    "image",
+                    "cropping",
+                    "cropping_free",
+                )
+            }
+        ),
+        (
             _("Staff"),
             {
                 "fields": (
@@ -56,7 +66,18 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                 )
             },
         ),
-        (_("Providers"), {"fields": ("edited_by_user", "edited_by_provider")}),
+        (
+            _("Providers"),
+            {
+                "fields": (
+                    "edited_by_user",
+                    "edited_by_google",
+                    "edited_by_twitter",
+                    "edited_by_facebook",
+                    "edited_by_instagram",
+                )
+            }
+        ),
         (
             "Google",
             {
@@ -68,6 +89,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "google_language",
                     "google_kind",
                     "google_verified",
+                    "google_avatar",
                 )
             },
         ),
@@ -79,11 +101,30 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "twitter_url",
                     "twitter_language",
                     "twitter_verified",
+                    "twitter_avatar",
                 )
             },
         ),
-        ("Facebook", {"fields": ("facebook_username", "facebook_url")}),
-        ("Instagram", {"fields": ("instagram_username", "instagram_url")}),
+        (
+            "Facebook",
+            {
+                "fields": (
+                    "facebook_username",
+                    "facebook_url",
+                    "facebook_avatar",
+                )
+            }
+        ),
+        (
+            "Instagram",
+            {
+                "fields": (
+                    "instagram_username",
+                    "instagram_url",
+                    "instagram_avatar",
+                )
+            }
+        ),
     )
     add_fieldsets = (
         (
@@ -99,14 +140,29 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "last_login",
         "date_joined",
         "edited_by_user",
-        "edited_by_provider",
+        "edited_by_google",
+        "edited_by_twitter",
+        "edited_by_facebook",
+        "edited_by_instagram",
+        "google_username",
         "google_isPlusUser",
+        "google_url",
         "google_circledByCount",
         "google_language",
         "google_kind",
         "google_verified",
+        "google_avatar",
+        "twitter_username",
+        "twitter_url",
         "twitter_language",
         "twitter_verified",
+        "twitter_avatar",
+        "facebook_username",
+        "facebook_url",
+        "facebook_avatar",
+        "instagram_username",
+        "instagram_url",
+        "instagram_avatar",
     ]
     # form = UserChangeForm
     # add_form = UserCreationForm
@@ -118,7 +174,10 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "last_name",
         "is_active",
         "edited_by_user",
-        "edited_by_provider",
+        "edited_by_google",
+        "edited_by_twitter",
+        "edited_by_facebook",
+        "edited_by_instagram",
         "visible",
         "date_joined",
         "last_login",

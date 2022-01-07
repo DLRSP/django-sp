@@ -4,6 +4,7 @@ python-social-auth
 social-auth-app-django
 django-oauth-toolkit
 phonenumbers
+django-phonenumber-field
 django-two-factor-auth
 django-otp
 django-countries

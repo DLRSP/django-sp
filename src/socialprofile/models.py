@@ -17,6 +17,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from image_cropping.fields import ImageCropField, ImageRatioField
 from django_countries.fields import CountryField
+# Older Django <3.0 (also deprecated in 2.0):
+# from django.contrib.staticfiles.templatetags.staticfiles import static
+# Django 3.0+
+from django.templatetags.static import static
 
 LOGGER = logging.getLogger(name="socialprofile.models")
 
@@ -104,6 +108,23 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         ("male", _("Male")),
         ("female", _("Female")),
         ("unknown", _("Unknown")),
+    )
+
+    AVATAR_CHOICES = (
+        ("socials", _("Socials")),
+        ("predef", _("Predefined")),
+        ("custom", _("Custom")),
+    )
+
+    AVATAR_IMG_CHOICES = (
+        ("avatar1.png", _("Male 1")),
+        ("avatar2.png", _("Male 2")),
+        ("avatar3.png", _("Female 1")),
+        ("avatar4.png", _("Male 3")),
+        ("avatar5.png", _("Male 4")),
+        ("avatar6.png", _("Male 5")),
+        ("avatar7.png", _("Male 6")),
+        ("avatar8.png", _("Female 2")),
     )
 
     BOOLEAN_YN = (
@@ -198,9 +219,26 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Avatar Picture"), max_length=500, null=True, blank=True
     )
 
+    image_avatar = models.CharField(
+        verbose_name=_("Avatar Picture"),
+        max_length=100,
+        null=False,
+        blank=True,
+        default="socials",
+        choices=AVATAR_CHOICES,
+    )
+    image_avatar_predef = models.CharField(
+        verbose_name=_("Predef Avatar Picture"),
+        max_length=100,
+        null=False,
+        blank=True,
+        default="avatar1.png",
+        choices=AVATAR_IMG_CHOICES,
+    )
     # Add Images
+    # image = models.ImageField(upload_to="user/", null=True, blank=True)
     image = ImageCropField(upload_to="user/", null=True, blank=True)
-    cropping = ImageRatioField("image", "120x100", allow_fullsize=True)
+    cropping = ImageRatioField("image", "120x100", allow_fullsize=False, size_warning=True)
     cropping_free = ImageRatioField(
         "image", "300x300", free_crop=True, size_warning=True
     )
@@ -209,9 +247,6 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         help_text=_("Tell us about yourself!"),
         null=True,
         blank=True,
-    )
-    edited_by_user = models.NullBooleanField(
-        verbose_name=_("User edited"), default=False, null=False, blank=False
     )
 
     # Add Contact info
@@ -275,12 +310,20 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     function_09 = models.CharField(max_length=200, null=True, blank=True)
     function_10 = models.CharField(max_length=200, null=True, blank=True)
 
-    # Add Info retrieved by Providers
-    edited_by_provider = models.NullBooleanField(
-        verbose_name=_("Provider edited"),
-        default=False,
-        null=False,
-        blank=False,
+    edited_by_user = models.NullBooleanField(
+        verbose_name=_("User edited"), default=False, null=False, blank=False
+    )
+    edited_by_google = models.NullBooleanField(
+        verbose_name=_("Google edited"), default=False, null=False, blank=True
+    )
+    edited_by_twitter = models.NullBooleanField(
+        verbose_name=_("Twitter edited"), default=False, null=False, blank=True
+    )
+    edited_by_facebook = models.NullBooleanField(
+        verbose_name=_("Facebook edited"), default=False, null=False, blank=True
+    )
+    edited_by_instagram = models.NullBooleanField(
+        verbose_name=_("Instagram edited"), default=False, null=False, blank=True
     )
 
     # Add Info retrieved by Google
@@ -308,6 +351,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     google_verified = models.NullBooleanField(
         verbose_name=_("Google Verified"), default=False, null=True, blank=True
     )
+    google_avatar = models.URLField(
+        verbose_name=_("Google Avatar"), max_length=500, null=True, blank=True
+    )
 
     # Add Info retrieved by Twitter
     twitter_username = models.CharField(
@@ -322,12 +368,14 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     twitter_verified = models.NullBooleanField(
         verbose_name=_("Twitter Verified"), default=False, null=True, blank=True
     )
-
     twitter_url = models.URLField(
         verbose_name=_("Twitter Profile"),
         max_length=500,
         null=True,
         blank=True,
+    )
+    twitter_avatar = models.URLField(
+        verbose_name=_("Twitter Avatar"), max_length=500, null=True, blank=True
     )
 
     facebook_username = models.CharField(
@@ -342,6 +390,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         null=True,
         blank=True,
     )
+    facebook_avatar = models.URLField(
+        verbose_name=_("Facebook Avatar"), max_length=500, null=True, blank=True
+    )
 
     instagram_username = models.CharField(
         _("Instagram Username"),
@@ -354,6 +405,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         max_length=500,
         null=True,
         blank=True,
+    )
+    instagram_avatar = models.URLField(
+        verbose_name=_("Instagram Avatar"), max_length=500, null=True, blank=True
     )
 
     objects = SocialProfileManager()
@@ -401,6 +455,31 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         """
         return self.first_name
+
+    def get_avatar_img(self):
+        """
+        Returns the short name for the user.
+        """
+        if self.image_avatar:
+            return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+
+        if self.image_avatar == "socials":
+            if self.google_avatar:
+                return self.google_avatar
+            elif self.twitter_avatar:
+                return self.twitter_avatar
+            elif self.facebook_avatar:
+                return self.facebook_avatar
+            elif self.instagram_avatar:
+                return self.instagram_avatar
+            else:
+                return static(f"{self.image}")
+
+        elif self.image_avatar == "predef":
+            return static(f"socialprofile/img/avatar/{self.image_avatar_predef}")
+
+        else:
+            return static(f"{self.image}")
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this User."""
