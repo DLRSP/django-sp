@@ -1,4 +1,5 @@
-$(function () {
+$(document).ready(function() {
+    'use strict';
 
     Swal.fire({
       title: 'Login!',
