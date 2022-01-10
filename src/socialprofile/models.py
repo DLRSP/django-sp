@@ -172,14 +172,14 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name=_("Email Address"), max_length=254, null=False, blank=False
     )
-    is_staff = models.NullBooleanField(
+    is_staff = models.BooleanField(
         verbose_name=_("Staff"),
         default=False,
         null=True,
         blank=True,
         help_text=_("Designates whether the user can log into this admin site."),
     )
-    is_active = models.NullBooleanField(
+    is_active = models.BooleanField(
         verbose_name=_("Active"),
         default=True,
         null=True,
@@ -310,19 +310,19 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     function_09 = models.CharField(max_length=200, null=True, blank=True)
     function_10 = models.CharField(max_length=200, null=True, blank=True)
 
-    edited_by_user = models.NullBooleanField(
+    edited_by_user = models.BooleanField(
         verbose_name=_("User edited"), default=False, null=False, blank=False
     )
-    edited_by_google = models.NullBooleanField(
+    edited_by_google = models.BooleanField(
         verbose_name=_("Google edited"), default=False, null=False, blank=True
     )
-    edited_by_twitter = models.NullBooleanField(
+    edited_by_twitter = models.BooleanField(
         verbose_name=_("Twitter edited"), default=False, null=False, blank=True
     )
-    edited_by_facebook = models.NullBooleanField(
+    edited_by_facebook = models.BooleanField(
         verbose_name=_("Facebook edited"), default=False, null=False, blank=True
     )
-    edited_by_instagram = models.NullBooleanField(
+    edited_by_instagram = models.BooleanField(
         verbose_name=_("Instagram edited"), default=False, null=False, blank=True
     )
 
@@ -333,7 +333,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         # unique=True,
         blank=True,
     )
-    google_isPlusUser = models.NullBooleanField(
+    google_isPlusUser = models.BooleanField(
         verbose_name=_("Google Plus"), default=False, null=True, blank=True
     )
     google_url = models.URLField(
@@ -348,7 +348,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     google_kind = models.CharField(
         verbose_name=_("Google Kind"), max_length=15, null=True, blank=True
     )
-    google_verified = models.NullBooleanField(
+    google_verified = models.BooleanField(
         verbose_name=_("Google Verified"), default=False, null=True, blank=True
     )
     google_avatar = models.URLField(
@@ -365,7 +365,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     twitter_language = models.CharField(
         verbose_name=_("Twitter Language"), max_length=10, null=True, blank=True
     )
-    twitter_verified = models.NullBooleanField(
+    twitter_verified = models.BooleanField(
         verbose_name=_("Twitter Verified"), default=False, null=True, blank=True
     )
     twitter_url = models.URLField(
