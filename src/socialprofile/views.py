@@ -4,6 +4,7 @@
 import json
 import logging
 
+import sweetify
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME, login
@@ -20,7 +21,7 @@ from django.http import (
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, TemplateView, UpdateView, DetailView
+from django.views.generic import DeleteView, DetailView, TemplateView, UpdateView
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 from rest_framework import permissions, viewsets
@@ -28,8 +29,6 @@ from social_core.backends.google import GooglePlusAuth
 from social_core.backends.oauth import BaseOAuth1, BaseOAuth2
 from social_core.backends.utils import load_backends
 from social_django.utils import load_backend, psa
-
-import sweetify
 
 from .decorators import render_to
 from .forms import SocialProfileForm
@@ -126,7 +125,7 @@ class SelectAuthView(TemplateView):
 
         next_url = self.request.GET.get(REDIRECT_FIELD_NAME, DEFAULT_RETURNTO_PATH)
 
-        context = super(SelectAuthView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["next_param"] = REDIRECT_FIELD_NAME
         context["next_url"] = next_url
         # context["plus_id"] = getattr(settings, "SOCIAL_AUTH_GOOGLE_PLUS_KEY", None)
@@ -202,7 +201,7 @@ class SocialProfileViewAll(TemplateView):
             ),
         ):
             return redirect("sp_profile_view")
-        return super(SocialProfileViewAll, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Load up the default data to show in the display form."""
@@ -280,7 +279,12 @@ class SocialProfileEditView(UpdateView):
                 sp_form.save()
 
                 if custom_alerts:
-                    sweetify.toast(self.request, _("Your profile has been updated."), icon="success", timer=3000)
+                    sweetify.toast(
+                        self.request,
+                        _("Your profile has been updated."),
+                        icon="success",
+                        timer=3000,
+                    )
                 else:
                     messages.add_message(
                         self.request,
