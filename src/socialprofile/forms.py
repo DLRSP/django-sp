@@ -1,24 +1,26 @@
 """Django forms for the socialprofile application"""
 import logging
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Layout, Row, Submit
 from crispy_forms.bootstrap import (
-    Field,
-    InlineRadios,
     Accordion,
     AccordionGroup,
-    PrependedText,
-    TabHolder, Tab,
+    Field,
     FieldWithButtons,
+    InlineRadios,
+    PrependedText,
     StrictButton,
+    Tab,
+    TabHolder,
 )
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Layout, Row, Submit
 from django import forms
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_countries.widgets import CountrySelectWidget
 from image_cropping import ImageCropWidget
+
 from .models import SocialProfile
 
 # pylint: disable=E1120,W0212
@@ -27,7 +29,7 @@ LOGGER = logging.getLogger(name="socialprofile.forms")
 
 
 class CustomImageField(Field):
-    template = 'socialprofile/image_thumbnail.html'
+    template = "socialprofile/image_thumbnail.html"
 
 
 class SocialProfileForm(forms.ModelForm):
@@ -47,7 +49,7 @@ class SocialProfileForm(forms.ModelForm):
         required=False,
     )
 
-    class Meta(object):
+    class Meta:
         """Configuration for the ModelForm"""
 
         model = SocialProfile
