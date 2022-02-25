@@ -15,6 +15,7 @@ django-image-cropping
 djangorestframework
 django-crispy-forms
 django-cors-headers
+geopip2
 django-user-sessions
 django-axes
 sweetify
