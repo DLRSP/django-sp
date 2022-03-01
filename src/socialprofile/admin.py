@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from image_cropping.admin import ImageCroppingMixin
 from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
 from social_django.models import Association, Nonce, UserSocialAuth
+
 from socialprofile.models import SocialProfile
 
 
@@ -43,7 +44,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "cropping",
                     "cropping_free",
                 )
-            }
+            },
         ),
         (
             _("Staff"),
@@ -76,7 +77,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "edited_by_facebook",
                     "edited_by_instagram",
                 )
-            }
+            },
         ),
         (
             "Google",
@@ -113,7 +114,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "facebook_url",
                     "facebook_avatar",
                 )
-            }
+            },
         ),
         (
             "Instagram",
@@ -123,7 +124,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "instagram_url",
                     "instagram_avatar",
                 )
-            }
+            },
         ),
     )
     add_fieldsets = (

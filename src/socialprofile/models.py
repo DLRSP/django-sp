@@ -1,26 +1,30 @@
-# -*- coding: utf-8 -*-
 """
 Alternative implementation of Django's authentication User model, which allows to authenticate against the OAuth.
 This alternative implementation is activated by setting ``AUTH_USER_MODEL = 'socialprofile.SocialProfile'`` in
 settings.py, otherwise the default Django or another implementation is used.
 """
 import logging
+
 from django.conf import settings
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
-from django.urls import reverse
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
-from image_cropping.fields import ImageCropField, ImageRatioField
-from django_countries.fields import CountryField
+
 # Older Django <3.0 (also deprecated in 2.0):
 # from django.contrib.staticfiles.templatetags.staticfiles import static
 # Django 3.0+
 from django.templatetags.static import static
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
+from image_cropping.fields import ImageCropField, ImageRatioField
 
 LOGGER = logging.getLogger(name="socialprofile.models")
 
@@ -35,7 +39,7 @@ class IntegerRangeField(models.IntegerField):
     def formfield(self, **kwargs):
         defaults = {"min_value": self.min_value, "max_value": self.max_value}
         defaults.update(kwargs)
-        return super(IntegerRangeField, self).formfield(**defaults)
+        return super().formfield(**defaults)
 
 
 class SocialProfileManager(BaseUserManager):
@@ -238,7 +242,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     # Add Images
     # image = models.ImageField(upload_to="user/", null=True, blank=True)
     image = ImageCropField(upload_to="user/", null=True, blank=True)
-    cropping = ImageRatioField("image", "120x100", allow_fullsize=False, size_warning=True)
+    cropping = ImageRatioField(
+        "image", "120x100", allow_fullsize=False, size_warning=True
+    )
     cropping_free = ImageRatioField(
         "image", "300x300", free_crop=True, size_warning=True
     )
@@ -412,7 +418,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
 
     objects = SocialProfileManager()
 
-    class Meta(object):
+    class Meta:
         verbose_name = _("Social Profile")
         verbose_name_plural = _("Social Profiles")
         ordering = ["username"]
@@ -461,7 +467,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         """
         if self.image_avatar:
-            return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+            return (
+                "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+            )
 
         if self.image_avatar == "socials":
             if self.google_avatar:
