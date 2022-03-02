@@ -2,25 +2,26 @@
 
 # pylint: disable=R0904, C0103
 
-from django.test import TestCase
+import logging
 
 from django.core.exceptions import ObjectDoesNotExist
-from socialprofile.models import SocialProfile
-from social.apps.django_app.default.models import UserSocialAuth
-from socialprofile.forms import SocialProfileForm
 from django.forms.models import model_to_dict
+from django.test import TestCase
+from social.apps.django_app.default.models import UserSocialAuth
+from social.backends.google import GoogleOAuth2
+from social.backends.twitter import TwitterOAuth
+
+from socialprofile.forms import SocialProfileForm
+from socialprofile.models import SocialProfile
 from socialprofile.pipeline import (
     facebook_extra_values,
     google_extra_values,
     socialprofile_extra_values,
     twitter_extra_values,
 )
-from social.backends.google import GoogleOAuth2
-from social.backends.twitter import TwitterOAuth
 
 # from social.backends.facebook import Facebook2OAuth2
 
-import logging
 
 LOGGER = logging.getLogger(name="socialprofile.test_forms")
 
@@ -56,10 +57,10 @@ class SocialProfilePipelineTestCase(TestCase):
         }
 
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
-        self.assertEquals(self.user1.description, "User Description")
-        self.assertEquals(self.user1.gender, "other")
-        self.assertEquals(self.user1.image_url, "http://image.url")
-        self.assertEquals(self.user1.url, "http://test.com")
+        self.assertEqual(self.user1.description, "User Description")
+        self.assertEqual(self.user1.gender, "other")
+        self.assertEqual(self.user1.image_url, "http://image.url")
+        self.assertEqual(self.user1.url, "http://test.com")
 
     # def test_socialprofile_pipeline_facebook(self):
     #     """Test editing executing pipeline methods in isolation for facebook"""
@@ -93,7 +94,7 @@ class SocialProfilePipelineTestCase(TestCase):
         }
 
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
-        self.assertEquals(self.user1.description, "User Description")
-        self.assertEquals(self.user1.gender, "other")
-        self.assertEquals(self.user1.image_url, "http://image.url")
-        self.assertEquals(self.user1.url, "http://test.com")
+        self.assertEqual(self.user1.description, "User Description")
+        self.assertEqual(self.user1.gender, "other")
+        self.assertEqual(self.user1.image_url, "http://image.url")
+        self.assertEqual(self.user1.url, "http://test.com")
