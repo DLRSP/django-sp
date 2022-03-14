@@ -10,7 +10,7 @@
 			<div class="user-details">
 			  {% trans 'You are logged in as' %} <code>{{ user.username }}</code>!
 			</div>
-			
+
 			<div class="user-details">
 				<a class="btn btn-primary" href="{% url 'sp_logout_page' %}" id="logout"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a>
 			</div>
@@ -84,4 +84,3 @@
       });
     </script>
 {% endblock %}
-
