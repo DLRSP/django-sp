@@ -59,6 +59,11 @@
 			</div>
 		{% else %}
 			<p>
+				{% trans "Third-party identity providers enable you to rely on a trusted external service to authenticate your identity!" %}
+				</br>
+				{% trans "We will never know and store your password anywhere!" %}
+			</p>
+			<p>
 				<a href="{% url 'social:begin' 'facebook' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Facebook"><img src="{% static 'images/social-icon/social-icon1.png' %}" alt="social media" /></button></a>
 				<a href="{% url 'social:begin' 'twitter' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Twitter"><img src="{% static 'images/social-icon/social-icon2.png' %}" alt="social media" /></button></a>
 				<a href="{% url 'social:begin' 'google-oauth2' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Google"><img src="{% static 'images/social-icon/social-icon3.png' %}" alt="social media" /></button></a>

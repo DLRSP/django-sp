@@ -1,8 +1,9 @@
 """Python Social Auth Pipeline Extensions"""
 
-from social_core.backends.facebook import FacebookOAuth2 as FacebookOAuth2
-from social_core.backends.google import GoogleOAuth2 as GoogleOAuth2
-from social_core.backends.twitter import TwitterOAuth as TwitterOAuth
+from social_core.backends.facebook import FacebookOAuth2
+from social_core.backends.google import GoogleOAuth2
+from social_core.backends.twitter import TwitterOAuth
+from social_core.backends.live import LiveOAuth2
 from requests import request
 
 
@@ -37,6 +38,13 @@ def socialprofile_extra_values(backend, details, response, uid, user, *args, **k
     if type(backend) is FacebookOAuth2:
         return {
             "user": facebook_extra_values(
+                backend, details, response, uid, user, *args, **kwargs
+            )
+        }
+
+    if type(backend) is LiveOAuth2:
+        return {
+            "user": live_extra_values(
                 backend, details, response, uid, user, *args, **kwargs
             )
         }
@@ -142,5 +150,29 @@ def twitter_extra_values(backend, details, response, uid, user, *args, **kwargs)
     user.twitter_avatar = response.get("profile_image_url_https", "")
     user.edited_by_twitter = True
 
+    user.save()
+    return user
+
+
+def live_extra_values(backend, details, response, uid, user, *args, **kwargs):
+    """Populates a UserProfile Object when a new User is created via Live Auth"""
+    if not user.edited_by_user:
+        user.last_name = response.get("last_name", "")
+        user.first_name = response.get("first_name", "")
+        user.save()
+
+        gender = response.get("gender")
+        if gender:
+            user.gender = gender
+
+    username_live = response.get("username")
+    if username_live:
+        user.username_live = username_live
+    profile_url = response.get("link")
+    if profile_url:
+        user.live_url = profile_url
+    user.live_language = response.get("locale", "")
+
+    user.edited_by_live = True
     user.save()
     return user
