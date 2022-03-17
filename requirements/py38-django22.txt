@@ -221,9 +221,9 @@ django-image-cropping==1.6.1 \
     --hash=sha256:bc5e34c3cbc28a79034a8ce20921e83b399ede087c99e3a1c699652b4214dc01 \
     --hash=sha256:da5c1c8cf0d83017a6e53d24eefd0e98cfcb84a61adb0154295827c88a37eb2a
     # via -r requirements.in
-django-ipware==4.0.0 \
-    --hash=sha256:116bd0d7940f09bf7ffd465943992e23d87e772a9d6c0d3a57b74040589a383b \
-    --hash=sha256:1294f916f3b3475e40e1b0ec1bd320aa2397978eae672721c81cbc2ed517e9ee
+django-ipware==4.0.2 \
+    --hash=sha256:602a58325a4808bd19197fef2676a0b2da2df40d0ecf21be414b2ff48c72ad05 \
+    --hash=sha256:878dbb06a87e25550798e9ef3204ed70a200dd8b15e47dcef848cf08244f04c9
     # via django-axes
 django-jenkins==0.110.0 \
     --hash=sha256:2dda72ffc85311612cadf400b90900be4972867e074daf1f1602c607a9899ba8 \
