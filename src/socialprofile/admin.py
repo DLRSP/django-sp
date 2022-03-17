@@ -33,6 +33,9 @@ from user_sessions.models import Session
 
 from socialprofile.models import SocialProfile
 
+# from rest_framework.authtoken.admin import TokenAdmin
+# from rest_framework.authtoken.models import Token, TokenProxy
+
 
 @admin.register(SocialProfile)
 class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
@@ -255,13 +258,14 @@ class ModelAdminAuditFieldsMixin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
+# social_django
 class ProxyUserSocialAuth(UserSocialAuth):
     """Create UserSocialAuth proxy model for OAuth social_django"""
 
     class Meta:
         proxy = True
-        verbose_name = "OAuth: " + str(UserSocialAuth._meta.verbose_name)
-        verbose_name_plural = "OAuth: " + str(UserSocialAuth._meta.verbose_name_plural)
+        verbose_name = f"OAuth: {UserSocialAuth._meta.verbose_name}"
+        verbose_name_plural = f"OAuth: {UserSocialAuth._meta.verbose_name_plural}"
 
 
 class ProxyNonce(Nonce):
@@ -269,8 +273,8 @@ class ProxyNonce(Nonce):
 
     class Meta:
         proxy = True
-        verbose_name = "OAuth: " + str(Nonce._meta.verbose_name)
-        verbose_name_plural = "OAuth: " + str(Nonce._meta.verbose_name_plural)
+        verbose_name = f"OAuth: {Nonce._meta.verbose_name}"
+        verbose_name_plural = f"OAuth: {Nonce._meta.verbose_name_plural}"
 
 
 class ProxyAssociation(Association):
@@ -278,8 +282,8 @@ class ProxyAssociation(Association):
 
     class Meta:
         proxy = True
-        verbose_name = "OAuth: " + str(Association._meta.verbose_name)
-        verbose_name_plural = "OAuth: " + str(Association._meta.verbose_name_plural)
+        verbose_name = f"OAuth: {Association._meta.verbose_name}"
+        verbose_name_plural = f"OAuth: {Association._meta.verbose_name_plural}"
 
 
 admin.site.unregister(UserSocialAuth)
@@ -290,14 +294,28 @@ admin.site.register(ProxyNonce, NonceOption)
 admin.site.register(ProxyAssociation, AssociationOption)
 
 
+# rest_framework
+# class ProxyTokenAdmin(TokenProxy):
+#     """Create TokenProxy proxy model for rest_framework"""
+#
+#     class Meta:
+#         proxy = True
+#         verbose_name = f"Rest Framework: {TokenProxy._meta.verbose_name}"
+#         verbose_name_plural = f"Rest Framework: {TokenProxy._meta.verbose_name_plural}"
+#
+#
+# admin.site.unregister(TokenProxy)
+# admin.site.register(TokenProxy, ProxyTokenAdmin)
+
+
 # django_otp + two_factor
 class ProxyPhoneDevice(PhoneDevice):
     """Create PhoneDevice proxy model for OAuth two_factor"""
 
     class Meta:
         proxy = True
-        verbose_name = "Otp: " + str(PhoneDevice._meta.verbose_name)
-        verbose_name_plural = "Otp: " + str(PhoneDevice._meta.verbose_name_plural)
+        verbose_name = f"Otp: {PhoneDevice._meta.verbose_name}"
+        verbose_name_plural = f"Otp: {PhoneDevice._meta.verbose_name_plural}"
 
 
 class ProxyStaticDevice(StaticDevice):
@@ -305,8 +323,8 @@ class ProxyStaticDevice(StaticDevice):
 
     class Meta:
         proxy = True
-        verbose_name = "Otp: " + str(StaticDevice._meta.verbose_name)
-        verbose_name_plural = "Otp: " + str(StaticDevice._meta.verbose_name_plural)
+        verbose_name = f"Otp: {StaticDevice._meta.verbose_name}"
+        verbose_name_plural = f"Otp: {StaticDevice._meta.verbose_name_plural}"
 
 
 class ProxyTOTPDevice(TOTPDevice):
@@ -314,8 +332,8 @@ class ProxyTOTPDevice(TOTPDevice):
 
     class Meta:
         proxy = True
-        verbose_name = "Otp: " + str(TOTPDevice._meta.verbose_name)
-        verbose_name_plural = "Otp: " + str(TOTPDevice._meta.verbose_name_plural)
+        verbose_name = f"Otp: {TOTPDevice._meta.verbose_name}"
+        verbose_name_plural = f"Otp: {TOTPDevice._meta.verbose_name_plural}"
 
 
 admin.site.unregister(PhoneDevice)
@@ -332,8 +350,8 @@ class ProxySession(Session):
 
     class Meta:
         proxy = True
-        verbose_name = "Monitor: " + str(Session._meta.verbose_name)
-        verbose_name_plural = "Monitor: " + str(Session._meta.verbose_name_plural)
+        verbose_name = f"Monitor: {Session._meta.verbose_name}"
+        verbose_name_plural = f"Monitor: {Session._meta.verbose_name_plural}"
 
 
 admin.site.unregister(Session)
@@ -346,8 +364,8 @@ class ProxyAccessAttempt(AccessAttempt):
 
     class Meta:
         proxy = True
-        verbose_name = "Monitor: " + str(AccessAttempt._meta.verbose_name)
-        verbose_name_plural = "Monitor: " + str(AccessAttempt._meta.verbose_name_plural)
+        verbose_name = f"Monitor: {AccessAttempt._meta.verbose_name}"
+        verbose_name_plural = f"Monitor: {AccessAttempt._meta.verbose_name_plural}"
 
 
 class ProxyAccessLog(AccessLog):
@@ -355,8 +373,8 @@ class ProxyAccessLog(AccessLog):
 
     class Meta:
         proxy = True
-        verbose_name = "Monitor: " + str(AccessLog._meta.verbose_name)
-        verbose_name_plural = "Monitor: " + str(AccessLog._meta.verbose_name_plural)
+        verbose_name = f"Monitor: {AccessLog._meta.verbose_name}"
+        verbose_name_plural = f"Monitor: {AccessLog._meta.verbose_name_plural}"
 
 
 admin.site.unregister(AccessAttempt)
@@ -377,8 +395,8 @@ class ProxyApplication(Application):
 
     class Meta:
         proxy = True
-        verbose_name = "Token: " + str(Application._meta.verbose_name)
-        verbose_name_plural = "Token: " + str(Application._meta.verbose_name_plural)
+        verbose_name = f"Token: {Application._meta.verbose_name}"
+        verbose_name_plural = f"Token: {Application._meta.verbose_name_plural}"
 
 
 class ProxyGrant(Grant):
@@ -386,8 +404,8 @@ class ProxyGrant(Grant):
 
     class Meta:
         proxy = True
-        verbose_name = "Token: " + str(Grant._meta.verbose_name)
-        verbose_name_plural = "Token: " + str(Grant._meta.verbose_name_plural)
+        verbose_name = f"Token: {Grant._meta.verbose_name}"
+        verbose_name_plural = f"Token: {Grant._meta.verbose_name_plural}"
 
 
 class ProxyAccessToken(AccessToken):
@@ -395,8 +413,8 @@ class ProxyAccessToken(AccessToken):
 
     class Meta:
         proxy = True
-        verbose_name = "Token: " + str(AccessToken._meta.verbose_name)
-        verbose_name_plural = "Token: " + str(AccessToken._meta.verbose_name_plural)
+        verbose_name = f"Token: {AccessToken._meta.verbose_name}"
+        verbose_name_plural = f"Token: {AccessToken._meta.verbose_name_plural}"
 
 
 class ProxyRefreshToken(RefreshToken):
