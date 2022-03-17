@@ -126,6 +126,17 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                 )
             },
         ),
+        (
+            "Live",
+            {
+                "fields": (
+                    "live_username",
+                    "live_url",
+                    "live_language",
+                    "live_avatar",
+                )
+            },
+        ),
     )
     add_fieldsets = (
         (
@@ -164,6 +175,9 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "instagram_username",
         "instagram_url",
         "instagram_avatar",
+        "live_username",
+        "live_url",
+        "live_avatar",
     ]
     # form = UserChangeForm
     # add_form = UserCreationForm

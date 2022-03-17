@@ -6,9 +6,7 @@
 
 ## GitHub ![GitHub release](https://img.shields.io/github/tag/DLRSP/django-sp.svg) ![GitHub release](https://img.shields.io/github/release/DLRSP/django-sp.svg)
 
-## Test [![codecov.io](https://codecov.io/github/DLRSP/django-sp/coverage.svg?branch=master)](https://codecov.io/github/DLRSP/django-sp?branch=master) [![travis-ci.org](https://travis-ci.org/DLRSP/django-sp.svg?branch=master)](https://travis-ci.org/DLRSP/django-sp) [![circleci.com](https://circleci.com/gh/DLRSP/django-sp.svg?style=shield&circle-token=b2c2b63556f8dfc17f9058adfbaae1fd16b3bc01)](https://circleci.com/gh/DLRSP/django-sp)
-
-## Features [![Ready](https://badge.waffle.io/DLRSP/django-sp.png?label=Ready)](https://waffle.io/DLRSP/django-sp)
+## Test [![codecov.io](https://codecov.io/github/DLRSP/django-sp/coverage.svg?branch=master)](https://codecov.io/github/DLRSP/django-sp?branch=master)
 
 Report Issues with [***waffle.io***](https://waffle.io/DLRSP/django-sp/join)
 
