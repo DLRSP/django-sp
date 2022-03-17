@@ -5,10 +5,10 @@
 
 # pylint: disable=W0401, W0614, E1120
 
-from django.urls import path, re_path
 from django.conf.urls import include
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.urls import path, re_path
 from django.views.decorators.cache import never_cache
 
 # from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token

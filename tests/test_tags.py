@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.template import Template, Context
+from django.template import Context, Template
 from django.test import TestCase
 from django.utils import translation
 from social_core.backends.utils import load_backends

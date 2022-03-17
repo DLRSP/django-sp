@@ -15,7 +15,7 @@
 			<img src="{{ user.image_url.value|default:'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm' }}">
 			<i>{{ user.first_name }} {{ user.last_name }}</i>
 		</div>
-		
+
 		{% if request.user.username == user.username %}
 			<div class="user-details">
 				<a class="btn btn-primary" href="{% url 'sp_profile_edit_page' user.id %}" id="edit"><i class="fa fa-edit"></i>{% trans 'Edit' %}</a>
@@ -27,7 +27,7 @@
 		<div class="user-details">
 		  {% trans 'You are not logged in!' %}
 		</div>
-		
+
 		<div class="user-details">
 			<a class="btn btn-primary" href="{% url 'sp_select_page' %}" id="login"><i class="fa fa-sign-in"></i>{% trans 'Login' %}</a>
 		</div>
