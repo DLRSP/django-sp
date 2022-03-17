@@ -525,6 +525,52 @@ class SocialProfile(AbstractSocialProfile):
         swappable = "AUTH_USER_MODEL"
 
 
+class AuditModelMixin(models.Model):
+    """
+    Mixin that provides fields created and modified at and by fields
+    """
+
+    created = models.DateTimeField(_("Created"), auto_now_add=True)
+    created_by = models.ForeignKey(
+        SocialProfile,
+        verbose_name=_("Created By"),
+        on_delete=models.CASCADE,
+        related_name="%(class)s_created_by",
+    )
+    modified = models.DateTimeField(_("Modified"), blank=True, null=True)
+    modified_by = models.ForeignKey(
+        SocialProfile,
+        blank=True,
+        null=True,
+        verbose_name=_("Modified By"),
+        on_delete=models.CASCADE,
+        related_name="%(class)s_modified_by",
+    )
+
+    class Meta:
+        abstract = True
+
+
+class PublishModelMixin(models.Model):
+    """
+    Mixin that provides fields publish at and by fields
+    """
+
+    publish = models.DateTimeField(_("Published"), blank=True, null=True)
+    publish_by = models.ForeignKey(
+        SocialProfile,
+        blank=True,
+        null=True,
+        verbose_name=_("Published By"),
+        on_delete=models.CASCADE,
+        related_name="%(class)s_publish_by",
+    )
+    published = models.BooleanField(_("Publish"), default=False)
+
+    class Meta:
+        abstract = True
+
+
 # def __str__(self):
 #     return "{}".format(self.group.name)
 #

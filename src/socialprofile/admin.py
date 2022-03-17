@@ -4,6 +4,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from image_cropping.admin import ImageCroppingMixin
 from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
@@ -177,6 +178,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "instagram_avatar",
         "live_username",
         "live_url",
+        "live_language",
         "live_avatar",
     ]
     # form = UserChangeForm
@@ -204,6 +206,32 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "date_joined",
         "email",
     )
+
+
+class ModelAdminPublishFieldsMixin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change) -> None:
+        """Update publish fields from request object before save."""
+        current_now = timezone.now()
+        if obj.published and not obj.publish:
+            obj.publish = current_now
+            obj.publish_by = request.user
+        if not obj.published and obj.publish:
+            obj.publish = None
+            obj.publish_by = None
+        super().save_model(request, obj, form, change)
+
+
+class ModelAdminAuditFieldsMixin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change) -> None:
+        """Update audit fields from request object before save."""
+        current_now = timezone.now()
+        if not change:
+            obj.created = current_now
+            obj.created_by = request.user
+        else:
+            obj.modified = current_now
+            obj.modified_by = request.user
+        super().save_model(request, obj, form, change)
 
 
 class ProxyUserSocialAuth(UserSocialAuth):
