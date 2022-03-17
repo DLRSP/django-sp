@@ -158,9 +158,9 @@ cryptography==36.0.0 \
     # via
     #   jwcrypto
     #   social-auth-core
-cssselect2==0.4.1 \
-    --hash=sha256:2f4a9f20965367bae459e3bb42561f7927e0cfe5b7ea1692757cf67ef5d7dace \
-    --hash=sha256:93fbb9af860e95dd40bf18c3b2b6ed99189a07c0f29ba76f9c5be71344664ec8
+cssselect2==0.5.0 \
+    --hash=sha256:8d4690bce5f25013262997e64cef3e7bade877d3ef126f9cc624e5b1f294d934 \
+    --hash=sha256:d98a7bbdd8ebc46093279195d669a3359bd5a23f90c19e82c19d9eeef333e617
     # via svglib
 defusedxml==0.7.1 \
     --hash=sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69 \
