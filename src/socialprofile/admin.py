@@ -288,7 +288,7 @@ from axes.models import AccessAttempt, AccessLog
 
 
 class ProxyAccessAttempt(AccessAttempt):
-    """Create AccessAttempt proxy model for user_session"""
+    """Create AccessAttempt proxy model for axes"""
 
     class Meta:
         proxy = True
@@ -297,7 +297,7 @@ class ProxyAccessAttempt(AccessAttempt):
 
 
 class ProxyAccessLog(AccessLog):
-    """Create Axes proxy model for user_session"""
+    """Create Axes proxy model for axes"""
 
     class Meta:
         proxy = True
@@ -314,6 +314,7 @@ from oauth2_provider.admin import (
     AccessTokenAdmin,
     ApplicationAdmin,
     GrantAdmin,
+    IDTokenAdmin,
     RefreshTokenAdmin,
 )
 from oauth2_provider.models import (
@@ -321,16 +322,18 @@ from oauth2_provider.models import (
     get_application_model,
     get_grant_model,
     get_refresh_token_model,
+    get_id_token_model,
 )
 
 Application = get_application_model()
 Grant = get_grant_model()
 AccessToken = get_access_token_model()
 RefreshToken = get_refresh_token_model()
+IDToken = get_id_token_model()
 
 
 class ProxyApplication(Application):
-    """Create Application proxy model for user_session"""
+    """Create Application proxy model for oauth2_provider"""
 
     class Meta:
         proxy = True
@@ -339,7 +342,7 @@ class ProxyApplication(Application):
 
 
 class ProxyGrant(Grant):
-    """Create Grant proxy model for user_session"""
+    """Create Grant proxy model for oauth2_provider"""
 
     class Meta:
         proxy = True
@@ -348,7 +351,7 @@ class ProxyGrant(Grant):
 
 
 class ProxyAccessToken(AccessToken):
-    """Create AccessToken proxy model for user_session"""
+    """Create AccessToken proxy model for oauth2_provider"""
 
     class Meta:
         proxy = True
@@ -357,7 +360,7 @@ class ProxyAccessToken(AccessToken):
 
 
 class ProxyRefreshToken(RefreshToken):
-    """Create RefreshToken proxy model for user_session"""
+    """Create RefreshToken proxy model for oauth2_provider"""
 
     class Meta:
         proxy = True
@@ -365,13 +368,22 @@ class ProxyRefreshToken(RefreshToken):
         verbose_name_plural = f"Token: {RefreshToken._meta.verbose_name_plural}"
 
 
-admin.site.unregister(
-    Application,
-)
+class ProxyIDToken(IDToken):
+    """Create IDToken proxy model for oauth2_provider"""
+
+    class Meta:
+        proxy = True
+        verbose_name = f"Token: {IDToken._meta.verbose_name}"
+        verbose_name_plural = f"Token: {IDToken._meta.verbose_name_plural}"
+
+
+admin.site.unregister(Application)
 admin.site.unregister(Grant)
 admin.site.unregister(AccessToken)
 admin.site.unregister(RefreshToken)
+admin.site.unregister(IDToken)
 admin.site.register(ProxyApplication, ApplicationAdmin)
 admin.site.register(ProxyGrant, GrantAdmin)
 admin.site.register(ProxyAccessToken, AccessTokenAdmin)
 admin.site.register(ProxyRefreshToken, RefreshTokenAdmin)
+admin.site.register(ProxyIDToken, IDTokenAdmin)

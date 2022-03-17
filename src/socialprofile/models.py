@@ -6,8 +6,7 @@ settings.py, otherwise the default Django or another implementation is used.
 """
 import logging
 from django.conf import settings
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
@@ -15,12 +14,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from image_cropping.fields import ImageCropField, ImageRatioField
-from django_countries.fields import CountryField
-# Older Django <3.0 (also deprecated in 2.0):
-# from django.contrib.staticfiles.templatetags.staticfiles import static
-# Django 3.0+
 from django.templatetags.static import static
+from django_countries.fields import CountryField
+from image_cropping.fields import ImageCropField, ImageRatioField
 
 LOGGER = logging.getLogger(name="socialprofile.models")
 
@@ -410,6 +406,29 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Instagram Avatar"), max_length=500, null=True, blank=True
     )
 
+    # Add Info retrieved by Live
+    live_username = models.CharField(
+        _("Live Username"),
+        max_length=30,
+        # unique=True,
+        blank=True,
+    )
+    live_language = models.CharField(
+        verbose_name=_("Live Language"), max_length=10, null=True, blank=True
+    )
+    live_verified = models.BooleanField(
+        verbose_name=_("Live Verified"), default=False, null=True, blank=True
+    )
+    live_url = models.URLField(
+        verbose_name=_("Live Profile"),
+        max_length=500,
+        null=True,
+        blank=True,
+    )
+    live_avatar = models.URLField(
+        verbose_name=_("Live Avatar"), max_length=500, null=True, blank=True
+    )
+
     objects = SocialProfileManager()
 
     class Meta(object):
@@ -472,6 +491,8 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
                 return self.facebook_avatar
             elif self.instagram_avatar:
                 return self.instagram_avatar
+            elif self.live_avatar:
+                return self.live_avatar
             else:
                 return static(f"{self.image}")
 

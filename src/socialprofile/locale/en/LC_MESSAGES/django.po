@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-15 12:26-0600\n"
+"POT-Creation-Date: 2022-03-17 10:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,161 +17,575 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:57
-msgid "Your new username is not available!"
+#: .\admin.py:20
+msgid "Personal info"
 msgstr ""
 
-#: models.py:23
-msgid "male"
+#: .\admin.py:22
+msgid "Permissions"
 msgstr ""
 
-#: models.py:23
+#: .\admin.py:34
+msgid "Important dates"
+msgstr ""
+
+#: .\admin.py:37
+msgid "Common Info"
+msgstr ""
+
+#: .\admin.py:39
+msgid "Avatar"
+msgstr ""
+
+#: .\admin.py:49 .\models.py:172
+msgid "Staff"
+msgstr ""
+
+#: .\admin.py:70
+msgid "Providers"
+msgstr ""
+
+#: .\forms.py:45 .\models.py:189
+msgid "Date of Birth"
+msgstr ""
+
+#: .\forms.py:136
+msgid "Contact"
+msgstr ""
+
+#: .\forms.py:162 .\models.py:110
+msgid "Socials"
+msgstr ""
+
+#: .\forms.py:183 .\models.py:201
+msgid "Address"
+msgstr ""
+
+#: .\forms.py:200
+msgid "Info"
+msgstr ""
+
+#: .\forms.py:207
+msgid "Security"
+msgstr ""
+
+#: .\forms.py:215
+msgid "Save"
+msgstr ""
+
+#: .\models.py:58
+msgid "The given email must be set"
+msgstr ""
+
+#: .\models.py:104
 msgid "Male"
 msgstr ""
 
-#: models.py:24
-msgid "female"
-msgstr ""
-
-#: models.py:24
+#: .\models.py:105
 msgid "Female"
 msgstr ""
 
-#: models.py:25
-msgid "other"
+#: .\models.py:106
+msgid "Unknown"
 msgstr ""
 
-#: models.py:25
-msgid "Other"
+#: .\models.py:111
+msgid "Predefined"
 msgstr ""
 
-#: models.py:28 models.py:35
-msgid "Social Profile"
+#: .\models.py:112
+msgid "Custom"
 msgstr ""
 
-#: models.py:29
+#: .\models.py:116
+msgid "Male 1"
+msgstr ""
+
+#: .\models.py:117
+msgid "Male 2"
+msgstr ""
+
+#: .\models.py:118
+msgid "Female 1"
+msgstr ""
+
+#: .\models.py:119
+msgid "Male 3"
+msgstr ""
+
+#: .\models.py:120
+msgid "Male 4"
+msgstr ""
+
+#: .\models.py:121
+msgid "Male 5"
+msgstr ""
+
+#: .\models.py:122
+msgid "Male 6"
+msgstr ""
+
+#: .\models.py:123
+msgid "Female 2"
+msgstr ""
+
+#: .\models.py:127
+msgid "Yes"
+msgstr ""
+
+#: .\models.py:128
+msgid "No"
+msgstr ""
+
+#: .\models.py:135
+msgid "Username"
+msgstr ""
+
+#: .\models.py:140
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only"
+msgstr ""
+
+#: .\models.py:146
+msgid ""
+"Enter a valid username. This value may contain 30 characters or fewer. Only "
+"letters, numbers and @/./+/-/_ characters"
+msgstr ""
+
+#: .\models.py:153
+msgid "A user with that username already exists."
+msgstr ""
+
+#: .\models.py:157
+msgid "First Name"
+msgstr ""
+
+#: .\models.py:159
+msgid "Last Name"
+msgstr ""
+
+#: .\models.py:161
 msgid "Gender"
 msgstr ""
 
-#: models.py:30
+#: .\models.py:169
+msgid "Email Address"
+msgstr ""
+
+#: .\models.py:176
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: .\models.py:179
+msgid "Active"
+msgstr ""
+
+#: .\models.py:184
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: .\models.py:191
+msgid "Date Joined"
+msgstr ""
+
+#: .\models.py:192
+msgid "Date Updated"
+msgstr ""
+
+#: .\models.py:195
+msgid "Country"
+msgstr ""
+
+#: .\models.py:198
+msgid "City"
+msgstr ""
+
+#: .\models.py:204
+msgid "Postal Code"
+msgstr ""
+
+#: .\models.py:208
 msgid "Homepage"
 msgstr ""
 
-#: models.py:30
+#: .\models.py:209
 msgid "Where can we find out more about you?"
 msgstr ""
 
-#: models.py:31
+#: .\models.py:215 .\models.py:219
 msgid "Avatar Picture"
 msgstr ""
 
-#: models.py:32
+#: .\models.py:227
+msgid "Predef Avatar Picture"
+msgstr ""
+
+#: .\models.py:242
 msgid "Description"
 msgstr ""
 
-#: models.py:32
+#: .\models.py:243
 msgid "Tell us about yourself!"
 msgstr ""
 
-#: models.py:36
+#: .\models.py:253
+msgid ""
+"Phone number must be entered in the format: '+999999999'. Up to 15 digits "
+"allowed."
+msgstr ""
+
+#: .\models.py:257
+msgid "Phone Number"
+msgstr ""
+
+#: .\models.py:266
+msgid "Sort order"
+msgstr ""
+
+#: .\models.py:274
+msgid "Public"
+msgstr ""
+
+#: .\models.py:280
+msgid ""
+"Designates whether this user should be visible by all. Select 'no' this make "
+"your account private!"
+msgstr ""
+
+#: .\models.py:286
+msgid "Company"
+msgstr ""
+
+#: .\models.py:289
+msgid "Title"
+msgstr ""
+
+#: .\models.py:290
+msgid "Member"
+msgstr ""
+
+#: .\models.py:296
+msgid "Role"
+msgstr ""
+
+#: .\models.py:310
+msgid "User edited"
+msgstr ""
+
+#: .\models.py:313
+msgid "Google edited"
+msgstr ""
+
+#: .\models.py:316
+msgid "Twitter edited"
+msgstr ""
+
+#: .\models.py:319
+msgid "Facebook edited"
+msgstr ""
+
+#: .\models.py:322
+msgid "Instagram edited"
+msgstr ""
+
+#: .\models.py:327
+msgid "Google Username"
+msgstr ""
+
+#: .\models.py:333
+msgid "Google Plus"
+msgstr ""
+
+#: .\models.py:336
+msgid "Google Plus Page"
+msgstr ""
+
+#: .\models.py:339
+msgid "Google Circle byCount"
+msgstr ""
+
+#: .\models.py:342
+msgid "Google Language"
+msgstr ""
+
+#: .\models.py:345
+msgid "Google Kind"
+msgstr ""
+
+#: .\models.py:348
+msgid "Google Verified"
+msgstr ""
+
+#: .\models.py:351
+msgid "Google Avatar"
+msgstr ""
+
+#: .\models.py:356
+msgid "Twitter Username"
+msgstr ""
+
+#: .\models.py:362
+msgid "Twitter Language"
+msgstr ""
+
+#: .\models.py:365
+msgid "Twitter Verified"
+msgstr ""
+
+#: .\models.py:368
+msgid "Twitter Profile"
+msgstr ""
+
+#: .\models.py:374
+msgid "Twitter Avatar"
+msgstr ""
+
+#: .\models.py:378
+msgid "Facebook Username"
+msgstr ""
+
+#: .\models.py:384
+msgid "Facebook Profile"
+msgstr ""
+
+#: .\models.py:390
+msgid "Facebook Avatar"
+msgstr ""
+
+#: .\models.py:394
+msgid "Instagram Username"
+msgstr ""
+
+#: .\models.py:400
+msgid "Instagram Profile"
+msgstr ""
+
+#: .\models.py:406
+msgid "Instagram Avatar"
+msgstr ""
+
+#: .\models.py:411
+msgid "Live Username"
+msgstr ""
+
+#: .\models.py:417
+msgid "Live Language"
+msgstr ""
+
+#: .\models.py:420
+msgid "Live Verified"
+msgstr ""
+
+#: .\models.py:423
+msgid "Live Profile"
+msgstr ""
+
+#: .\models.py:429
+msgid "Live Avatar"
+msgstr ""
+
+#: .\models.py:435
+msgid "Social Profile"
+msgstr ""
+
+#: .\models.py:436
 msgid "Social Profiles"
 msgstr ""
 
-#: views.py:111
-msgid "Your profile has been updated."
+#: .\templates\base.html:6
+msgid "Social Profile Connections"
 msgstr ""
 
-#: views.py:116
-msgid "Your profile has NOT been updated."
+#: .\templates\base.html:8
+msgid "Enable Social Profile connections with OAuth"
 msgstr ""
 
-#: templates/socialprofile/sp_account_select.html:7
-#: templates/socialprofile/sp_account_select.html:9
+#: .\templates\socialprofile\sp_account_select.html:7
 msgid "Sign In"
 msgstr ""
 
-#: templates/socialprofile/sp_account_select.html:12
-#: templatetags/socialprofile_tags.py:14
-msgid "Google"
+#: .\templates\socialprofile\sp_account_select.html:11
+#: .\templates\socialprofile\sp_profile_view.html:11
+msgid "You are logged in as"
 msgstr ""
 
-#: templates/socialprofile/sp_account_select.html:15
-#: templatetags/socialprofile_tags.py:17
-msgid "Twitter"
+#: .\templates\socialprofile\sp_account_select.html:15
+#: .\templates\socialprofile\sp_profile_view.html:12
+msgid "Logout"
 msgstr ""
 
-#: templates/socialprofile/sp_account_select.html:18
-#: templatetags/socialprofile_tags.py:20
-msgid "Facebook"
-msgstr ""
-
-#: templates/socialprofile/sp_delete_account_modal.html:7
-#: templates/socialprofile/sp_delete_account_modal.html:9
-msgid "Really Delete?"
-msgstr ""
-
-#: templates/socialprofile/sp_delete_account_modal.html:10
-msgid "Keep Account"
-msgstr ""
-
-#: templates/socialprofile/sp_delete_account_modal.html:15
-msgid "Delete Account & All Data"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:5
-#: templates/socialprofile/sp_profile_view.html:5
-msgid "Profile for "
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:10
-msgid "Cancel"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:12
-#: templates/socialprofile/sp_profile_view.html:12
-msgid "Profile"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:13
-msgid "Done"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:28
-msgid "Social Connections"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:32
+#: .\templates\socialprofile\sp_account_select.html:30
+#: .\templates\socialprofile\sp_profile_edit.html:66
 msgid "is your only means of authentication, it cannot be removed."
 msgstr ""
 
-#: templates/socialprofile/sp_profile_edit.html:38
-msgid "Disconnect"
-msgstr ""
-
-#: templates/socialprofile/sp_profile_edit.html:41
+#: .\templates\socialprofile\sp_account_select.html:33
+#: .\templates\socialprofile\sp_account_select.html:40
+#: .\templates\socialprofile\sp_profile_edit.html:69
+#: .\templates\socialprofile\sp_profile_edit.html:76
 msgid "Add Social Connection"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_edit.html:49
-msgid "Delete Account"
+#: .\templates\socialprofile\sp_account_select.html:37
+#: .\templates\socialprofile\sp_profile_edit.html:73
+msgid "Disconnect"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_view.html:10
-msgid "Back"
+#: .\templates\socialprofile\sp_account_select.html:62
+msgid ""
+"Third-party identity providers enable you to rely on a trusted external "
+"service to authenticate your identity!"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_view.html:15
+#: .\templates\socialprofile\sp_account_select.html:64
+msgid "We will never know and store your password anywhere!"
+msgstr ""
+
+#: .\templates\socialprofile\sp_account_select.html:67
+#: .\templates\socialprofile\sp_account_select.html:68
+#: .\templates\socialprofile\sp_account_select.html:69
+#: .\templates\socialprofile\sp_account_select.html:70
+#: .\templates\socialprofile\sp_account_select.html:71
+#: .\templates\socialprofile\sp_account_select.html:72
+msgid "Sign In with"
+msgstr ""
+
+#: .\templates\socialprofile\sp_delete_account_modal.html:12
+#: .\templates\socialprofile\sp_delete_account_modal.html:13
+msgid "Really Delete?"
+msgstr ""
+
+#: .\templates\socialprofile\sp_delete_account_modal.html:15
+msgid "Keep the account"
+msgstr ""
+
+#: .\templates\socialprofile\sp_delete_account_modal.html:19
+msgid "Delete account and all data"
+msgstr ""
+
+#: .\templates\socialprofile\sp_new_association.html:4
+#: .\templates\socialprofile\sp_new_association.html:8
+msgid "Congratulations"
+msgstr ""
+
+#: .\templates\socialprofile\sp_new_profile.html:4
+#: .\templates\socialprofile\sp_new_profile.html:8
+msgid "Welcome"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_edit.html:4
+msgid "Profile for"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_edit.html:7
+#: .\templates\socialprofile\sp_profile_inactive.html:20
+#: .\templates\socialprofile\sp_profile_inactive.html:25
+#: .\templates\socialprofile\sp_profile_view.html:21
 msgid "Edit"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_view.html:24
-msgid "Picture"
+#: .\templates\socialprofile\sp_profile_edit.html:12
+msgid "Delete Account"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_view.html:42
-msgid "Authentication"
+#: .\templates\socialprofile\sp_profile_edit.html:13
+msgid "Cancel"
 msgstr ""
 
-#: templates/socialprofile/sp_profile_view.html:46
-msgid "No Social Authentications."
+#: .\templates\socialprofile\sp_profile_edit.html:14
+msgid "Done"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_edit.html:61
+msgid "Social Connections"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_inactive.html:4
+#: .\templates\socialprofile\sp_profile_view.html:4
+msgid "Profile for "
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_inactive.html:23
+msgid "Edit Profile"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_inactive.html:36
+#: .\templates\socialprofile\sp_profile_view.html:32
+msgid "Login"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_view.html:11
+msgid "with email"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_view.html:22
+#: .\templates\user_sessions\session_list.html:8
+msgid "Active Sessions"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_view.html:28
+msgid "You are not logged in!"
+msgstr ""
+
+#: .\templates\socialprofile\sp_profile_view_all.html:4
+msgid "All Profiles"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:5
+msgid "<em>unknown on unknown</em>"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:6
+msgid "<em>unknown</em>"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:13
+msgid "Location"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:14
+msgid "Device"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:15
+msgid "Last Activity"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:16
+#: .\templates\user_sessions\session_list.html:34
+#: .\templates\user_sessions\session_list.html:36
+msgid "End Session"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:25
+#, python-format
+msgid "%(time)s ago (this session)"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:27
+#, python-format
+msgid "%(time)s ago"
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:47
+msgid ""
+"You can also end all other sessions but the current.\n"
+"        This will log you out on all other devices."
+msgstr ""
+
+#: .\templates\user_sessions\session_list.html:49
+msgid "End All Other Sessions"
+msgstr ""
+
+#: .\views.py:107
+msgid "Wrong backend type"
+msgstr ""
+
+#: .\views.py:283 .\views.py:288
+msgid "Your profile has been updated."
+msgstr ""
+
+#: .\views.py:332 .\views.py:349
+msgid "Your profile has NOT been updated!"
 msgstr ""
