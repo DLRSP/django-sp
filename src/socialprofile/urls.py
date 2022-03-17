@@ -2,11 +2,7 @@
     Master URL Pattern List for the application.  Most of the patterns here should be top-level
     pass-offs to sub-modules, who will have their own urls.py defining actions within.
 """
-
-# pylint: disable=W0401, W0614, E1120
-
 from django.conf.urls import include
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import path, re_path
 from django.views.decorators.cache import never_cache

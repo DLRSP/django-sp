@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 14:21+0100\n"
-"PO-Revision-Date: 2022-03-17 14:22+0100\n"
+"PO-Revision-Date: 2022-03-17 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -493,12 +493,11 @@ msgid ""
 "service to authenticate your identity!"
 msgstr ""
 "I provider di identità di terze parti ti consentono di fare affidamento su "
-"un servizio esterno affidabile per autenticare la tua identità!"
+"un servizio esterno conosciuto per autenticare la tua identità!"
 
 #: .\templates\socialprofile\sp_account_select.html:64
 msgid "We will never know and store your password anywhere!"
-msgstr ""
-"Non sapremo mai e non memorizzeremo mai la tua password da nessuna parte!"
+msgstr "Non conosceremo e non salveremo mai la tua password da nessuna parte!"
 
 #: .\templates\socialprofile\sp_account_select.html:67
 #: .\templates\socialprofile\sp_account_select.html:68

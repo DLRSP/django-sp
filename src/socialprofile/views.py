@@ -1,6 +1,4 @@
 """Django Views for the socialprofile module"""
-
-# pylint: disable=R0901,R0904
 import json
 import logging
 
@@ -11,24 +9,16 @@ from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.forms.models import model_to_dict
-from django.http import (
-    Http404,
-    HttpResponse,
-    HttpResponseBadRequest,
-    HttpResponseRedirect,
-)
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, DetailView, TemplateView, UpdateView
-from django.views.generic.base import ContextMixin, TemplateResponseMixin
-from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+from django.views.generic import DeleteView, TemplateView, UpdateView
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope
 from rest_framework import permissions, viewsets
-from social_core.backends.google import GooglePlusAuth
 from social_core.backends.oauth import BaseOAuth1, BaseOAuth2
 from social_core.backends.utils import load_backends
-from social_django.utils import load_backend, psa
+from social_django.utils import psa
 
 from .decorators import render_to
 from .forms import SocialProfileForm
@@ -291,8 +281,6 @@ class SocialProfileEditView(UpdateView):
                         messages.SUCCESS,
                         _("Your profile has been updated."),
                     )
-
-                # return HttpResponseRedirect(sp_form.cleaned_data.get('returnTo', DEFAULT_RETURNTO_PATH))
                 return self.render_to_response(
                     {
                         "success": True,
@@ -333,13 +321,14 @@ class SocialProfileEditView(UpdateView):
             if custom_alerts:
                 sweetify.toast(
                     self.request,
-                    _(f"Your profile has NOT been updated!"),
+                    _("Your profile has NOT been updated!"),
                     icon="error",
                     timer=3000,
                 )
                 # multi = []
                 # for x, err_msg in enumerate(sp_form.errors):
-                #     multi.append({f"err_mess_{x}": dict(title='Error', icon='warning', text=err_msg, toast=True, timer=3000, timerProgressBar='true')})
+                #     multi.append({f"err_mess_{x}": dict(title='Error', icon='warning',
+                #     text=err_msg, toast=True, timer=3000, timerProgressBar='true')})
                 #     # sweetify.toast(
                 #     #     self.request,
                 #     #     err_msg,
