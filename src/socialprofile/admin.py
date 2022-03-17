@@ -1,14 +1,35 @@
 """Django Admin Site configuration for socialprofiles"""
-
-# pylint: disable=R0901,R0904
-
+from axes.admin import AccessAttemptAdmin, AccessLogAdmin
+from axes.models import AccessAttempt, AccessLog
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django_otp.plugins.otp_static.admin import StaticDeviceAdmin
+from django_otp.plugins.otp_static.models import StaticDevice
+from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+from django_otp.plugins.otp_totp.models import TOTPDevice
 from image_cropping.admin import ImageCroppingMixin
+from oauth2_provider.admin import (
+    AccessTokenAdmin,
+    ApplicationAdmin,
+    GrantAdmin,
+    IDTokenAdmin,
+    RefreshTokenAdmin,
+)
+from oauth2_provider.models import (
+    get_access_token_model,
+    get_application_model,
+    get_grant_model,
+    get_id_token_model,
+    get_refresh_token_model,
+)
 from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
 from social_django.models import Association, Nonce, UserSocialAuth
+from two_factor.admin import PhoneDeviceAdmin
+from two_factor.models import PhoneDevice
+from user_sessions.admin import SessionAdmin
+from user_sessions.models import Session
 
 from socialprofile.models import SocialProfile
 
@@ -268,14 +289,8 @@ admin.site.register(ProxyUserSocialAuth, UserSocialAuthOption)
 admin.site.register(ProxyNonce, NonceOption)
 admin.site.register(ProxyAssociation, AssociationOption)
 
-from django_otp.plugins.otp_static.admin import StaticDeviceAdmin
-from django_otp.plugins.otp_static.models import StaticDevice
-from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
-from django_otp.plugins.otp_totp.models import TOTPDevice
-from two_factor.admin import PhoneDeviceAdmin
-from two_factor.models import PhoneDevice
 
-
+# django_otp + two_factor
 class ProxyPhoneDevice(PhoneDevice):
     """Create PhoneDevice proxy model for OAuth two_factor"""
 
@@ -310,10 +325,8 @@ admin.site.register(ProxyPhoneDevice, PhoneDeviceAdmin)
 admin.site.register(ProxyStaticDevice, StaticDeviceAdmin)
 admin.site.register(ProxyTOTPDevice, TOTPDeviceAdmin)
 
-from user_sessions.admin import SessionAdmin
-from user_sessions.models import Session
 
-
+# user_sessions
 class ProxySession(Session):
     """Create Session proxy model for user_session"""
 
@@ -326,10 +339,8 @@ class ProxySession(Session):
 admin.site.unregister(Session)
 admin.site.register(ProxySession, SessionAdmin)
 
-from axes.admin import AccessAttemptAdmin, AccessLogAdmin
-from axes.models import AccessAttempt, AccessLog
 
-
+# axes
 class ProxyAccessAttempt(AccessAttempt):
     """Create AccessAttempt proxy model for axes"""
 
@@ -353,21 +364,7 @@ admin.site.unregister(AccessLog)
 admin.site.register(ProxyAccessAttempt, AccessAttemptAdmin)
 admin.site.register(ProxyAccessLog, AccessLogAdmin)
 
-from oauth2_provider.admin import (
-    AccessTokenAdmin,
-    ApplicationAdmin,
-    GrantAdmin,
-    IDTokenAdmin,
-    RefreshTokenAdmin,
-)
-from oauth2_provider.models import (
-    get_access_token_model,
-    get_application_model,
-    get_grant_model,
-    get_id_token_model,
-    get_refresh_token_model,
-)
-
+# oauth2_provider
 Application = get_application_model()
 Grant = get_grant_model()
 AccessToken = get_access_token_model()

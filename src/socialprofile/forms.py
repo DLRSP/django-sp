@@ -5,12 +5,8 @@ from crispy_forms.bootstrap import (
     Accordion,
     AccordionGroup,
     Field,
-    FieldWithButtons,
     InlineRadios,
     PrependedText,
-    StrictButton,
-    Tab,
-    TabHolder,
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
@@ -19,11 +15,8 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_countries.widgets import CountrySelectWidget
-from image_cropping import ImageCropWidget
 
 from .models import SocialProfile
-
-# pylint: disable=E1120,W0212
 
 LOGGER = logging.getLogger(name="socialprofile.forms")
 

@@ -1,29 +1,14 @@
 """Unit Tests for the socialprofile module forms"""
-
-# pylint: disable=R0904, C0103
-
 import logging
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.forms.models import model_to_dict
 from django.test import TestCase
-from social.apps.django_app.default.models import UserSocialAuth
 from social.backends.google import GoogleOAuth2
 from social.backends.twitter import TwitterOAuth
 
-from socialprofile.forms import SocialProfileForm
 from socialprofile.models import SocialProfile
-from socialprofile.pipeline import (
-    facebook_extra_values,
-    google_extra_values,
-    socialprofile_extra_values,
-    twitter_extra_values,
-)
+from socialprofile.pipeline import socialprofile_extra_values
 
-# from social.backends.facebook import Facebook2OAuth2
-
-
-LOGGER = logging.getLogger(name="socialprofile.test_forms")
+LOGGER = logging.getLogger(name="socialprofile.test_pipeline")
 
 
 class SocialProfilePipelineTestCase(TestCase):
