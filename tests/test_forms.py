@@ -2,14 +2,15 @@
 
 # pylint: disable=R0904, C0103
 
-from django.test import TestCase
+import logging
 
 from django.core.exceptions import ObjectDoesNotExist
-from socialprofile.models import SocialProfile
-from social.apps.django_app.default.models import UserSocialAuth
-from socialprofile.forms import SocialProfileForm
 from django.forms.models import model_to_dict
-import logging
+from django.test import TestCase
+from social.apps.django_app.default.models import UserSocialAuth
+
+from socialprofile.forms import SocialProfileForm
+from socialprofile.models import SocialProfile
 
 LOGGER = logging.getLogger(name="socialprofile.test_forms")
 
@@ -75,10 +76,10 @@ class SocialProfileFormTestCase(TestCase):
         form = SocialProfileForm(data=data, instance=self.user1)
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEquals(self.user1.description, "new description")
-        self.assertEquals(self.user1.url, "http://new.url/")
-        self.assertEquals(self.user1.gender, "female")
-        self.assertEquals(self.user1.image_url, "http://new.image.url/")
+        self.assertEqual(self.user1.description, "new description")
+        self.assertEqual(self.user1.url, "http://new.url/")
+        self.assertEqual(self.user1.gender, "female")
+        self.assertEqual(self.user1.image_url, "http://new.image.url/")
 
     def test_socialprofile_form_clean_desc(self):
         """Test Form Clean"""
@@ -88,7 +89,7 @@ class SocialProfileFormTestCase(TestCase):
         form = SocialProfileForm(data=data, instance=self.user1)
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEquals(self.user1.description, "Bad Link")
+        self.assertEqual(self.user1.description, "Bad Link")
 
 
 #

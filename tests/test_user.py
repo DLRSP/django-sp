@@ -2,22 +2,22 @@
 import os
 import re
 from unittest import skipIf, skipUnless
+from unittest.mock import patch
 
 import django
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.core import mail, management
-from django.urls import reverse
 from django.db import connection
 from django.forms.fields import Field
 from django.http import HttpRequest
 from django.test import TestCase
 from django.test.utils import override_settings
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
-from mock import patch
 
 from socialprofile.forms import EmailUserChangeForm, EmailUserCreationForm
 
@@ -164,9 +164,9 @@ class UserManagerTest(TestCase):
 
     def test_create_user_email_domain_normalize_with_whitespace(self):
         returned = get_user_model().objects.normalize_email(
-            "email\ with_whitespace@D.COM"
+            r"email\ with_whitespace@D.COM"
         )
-        self.assertEqual(returned, "email\ with_whitespace@d.com")
+        self.assertEqual(returned, r"email\ with_whitespace@d.com")
 
     def test_empty_username(self):
         self.assertRaisesMessage(
@@ -400,7 +400,7 @@ class EmailUserChangeFormTest(TestCase):
 
         class MyUserForm(EmailUserChangeForm):
             def __init__(self, *args, **kwargs):
-                super(MyUserForm, self).__init__(*args, **kwargs)
+                super().__init__(*args, **kwargs)
                 self.fields[
                     "groups"
                 ].help_text = "These groups give users different permissions"
@@ -523,7 +523,7 @@ class EmailUserAdminTest(TestCase):
         )
 
         response = self.client.get(
-            reverse("admin:%s_%s_changelist" % (self.app_name, self.model_name))
+            reverse(f"admin:{self.app_name}_{self.model_name}_changelist")
         )
         self.assertEqual(
             force_text(response.context["title"]),
@@ -553,7 +553,7 @@ class EmailUserAdminTest(TestCase):
         )
 
         user_change_url = reverse(
-            "admin:%s_%s_change" % (self.app_name, self.model_name),
+            f"admin:{self.app_name}_{self.model_name}_change",
             args=(self.user.pk,),
         )
 

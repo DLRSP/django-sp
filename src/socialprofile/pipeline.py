@@ -1,11 +1,10 @@
 """Python Social Auth Pipeline Extensions"""
 
+from requests import request
 from social_core.backends.facebook import FacebookOAuth2
 from social_core.backends.google import GoogleOAuth2
-from social_core.backends.twitter import TwitterOAuth
 from social_core.backends.live import LiveOAuth2
-from requests import request
-
+from social_core.backends.twitter import TwitterOAuth
 
 # def create_profile(user, is_new=False, *args, **kwargs):
 #     """Create a profile instance for the given user"""

@@ -6,28 +6,36 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('socialprofile', '0020_remove_socialprofile_last_accessed'),
+        ("socialprofile", "0020_remove_socialprofile_last_accessed"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='socialprofile',
-            name='facebook_avatar',
-            field=models.URLField(blank=True, max_length=500, null=True, verbose_name='Facebook Avatar'),
+            model_name="socialprofile",
+            name="facebook_avatar",
+            field=models.URLField(
+                blank=True, max_length=500, null=True, verbose_name="Facebook Avatar"
+            ),
         ),
         migrations.AddField(
-            model_name='socialprofile',
-            name='google_avatar',
-            field=models.URLField(blank=True, max_length=500, null=True, verbose_name='Google Avatar'),
+            model_name="socialprofile",
+            name="google_avatar",
+            field=models.URLField(
+                blank=True, max_length=500, null=True, verbose_name="Google Avatar"
+            ),
         ),
         migrations.AddField(
-            model_name='socialprofile',
-            name='instagram_avatar',
-            field=models.URLField(blank=True, max_length=500, null=True, verbose_name='Instagram Avatar'),
+            model_name="socialprofile",
+            name="instagram_avatar",
+            field=models.URLField(
+                blank=True, max_length=500, null=True, verbose_name="Instagram Avatar"
+            ),
         ),
         migrations.AddField(
-            model_name='socialprofile',
-            name='twitter_avatar',
-            field=models.URLField(blank=True, max_length=500, null=True, verbose_name='Twitter Avatar'),
+            model_name="socialprofile",
+            name="twitter_avatar",
+            field=models.URLField(
+                blank=True, max_length=500, null=True, verbose_name="Twitter Avatar"
+            ),
         ),
     ]
