@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-17 14:21+0100\n"
-"PO-Revision-Date: 2022-03-17 16:47+0100\n"
+"POT-Creation-Date: 2022-03-21 10:25+0100\n"
+"PO-Revision-Date: 2022-03-21 10:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -18,153 +18,175 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\admin.py:22
+#: .\admin.py:48
 msgid "Personal info"
 msgstr "Informazioni Personali"
 
-#: .\admin.py:24
+#: .\admin.py:50
 msgid "Permissions"
 msgstr "Permessi"
 
-#: .\admin.py:36
+#: .\admin.py:62
 msgid "Important dates"
 msgstr "Date importanti"
 
-#: .\admin.py:39
+#: .\admin.py:65
 msgid "Common Info"
 msgstr "Informazioni Comuni"
 
-#: .\admin.py:41
+#: .\admin.py:67
 #, fuzzy
 #| msgid "Avatar Picture"
 msgid "Avatar"
 msgstr "Immagine Avatar"
 
-#: .\admin.py:51 .\models.py:177
+#: .\admin.py:77 .\models.py:176
 msgid "Staff"
 msgstr "Staff"
 
-#: .\admin.py:72
+#: .\admin.py:98
 msgid "Providers"
 msgstr "Providers"
 
-#: .\forms.py:47 .\models.py:194
+#: .\admin.py:243
+msgid "Mark selected object as published"
+msgstr "Segna l'oggetto selezionato come pubblicato"
+
+#: .\admin.py:249
+#, python-format
+msgid "%d object was successfully marked as published."
+msgid_plural "%d objects were successfully marked as published."
+msgstr[0] "%d oggetto è stato segnato correttamente come pubblicato."
+msgstr[1] "%d oggetti sono stati segnati correttamente come pubblicati."
+
+#: .\admin.py:256
+msgid "Mark selected object as unpublished"
+msgstr "Segna l'oggetto selezionato come non pubblicato"
+
+#: .\admin.py:262
+#, python-format
+msgid "%d object was successfully marked as unpublished."
+msgid_plural "%d objects were successfully marked as unpublished."
+msgstr[0] "%d oggetto è stato segnato correttamente come non pubblicato."
+msgstr[1] "%d oggetti sono stati segnati correttamente come non pubblicati."
+
+#: .\forms.py:40 .\models.py:193
 msgid "Date of Birth"
 msgstr "Data di Nascita"
 
-#: .\forms.py:138
+#: .\forms.py:131
 msgid "Contact"
 msgstr "Contatti"
 
-#: .\forms.py:164 .\models.py:115
+#: .\forms.py:157 .\models.py:114
 msgid "Socials"
 msgstr "Socials"
 
-#: .\forms.py:185 .\models.py:206
+#: .\forms.py:178 .\models.py:205
 msgid "Address"
 msgstr "Indirizzo"
 
-#: .\forms.py:202
+#: .\forms.py:195
 msgid "Info"
 msgstr "Info"
 
-#: .\forms.py:209
+#: .\forms.py:202
 msgid "Security"
 msgstr "Sicurezza"
 
-#: .\forms.py:217
+#: .\forms.py:210
 msgid "Save"
 msgstr "Salva"
 
-#: .\models.py:63
+#: .\models.py:62
 msgid "The given email must be set"
 msgstr "L'email deve essere settata"
 
-#: .\models.py:109
+#: .\models.py:108
 msgid "Male"
 msgstr "Maschio"
 
-#: .\models.py:110
+#: .\models.py:109
 msgid "Female"
 msgstr "Femmina"
 
-#: .\models.py:111
+#: .\models.py:110
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: .\models.py:116
+#: .\models.py:115
 msgid "Predefined"
 msgstr "Predefinito"
 
-#: .\models.py:117
+#: .\models.py:116
 msgid "Custom"
 msgstr "Personalizzato"
 
-#: .\models.py:121
+#: .\models.py:120
 #, fuzzy
 #| msgid "Male"
 msgid "Male 1"
 msgstr "Maschio"
 
-#: .\models.py:122
+#: .\models.py:121
 #, fuzzy
 #| msgid "Male"
 msgid "Male 2"
 msgstr "Maschio"
 
-#: .\models.py:123
+#: .\models.py:122
 #, fuzzy
 #| msgid "Female"
 msgid "Female 1"
 msgstr "Femmina"
 
-#: .\models.py:124
+#: .\models.py:123
 #, fuzzy
 #| msgid "Male"
 msgid "Male 3"
 msgstr "Maschio"
 
-#: .\models.py:125
+#: .\models.py:124
 #, fuzzy
 #| msgid "Male"
 msgid "Male 4"
 msgstr "Maschio"
 
-#: .\models.py:126
+#: .\models.py:125
 #, fuzzy
 #| msgid "Male"
 msgid "Male 5"
 msgstr "Maschio"
 
-#: .\models.py:127
+#: .\models.py:126
 #, fuzzy
 #| msgid "Male"
 msgid "Male 6"
 msgstr "Maschio"
 
-#: .\models.py:128
+#: .\models.py:127
 #, fuzzy
 #| msgid "Female"
 msgid "Female 2"
 msgstr "Femmina"
 
-#: .\models.py:132
+#: .\models.py:131
 msgid "Yes"
 msgstr "Si"
 
-#: .\models.py:133
+#: .\models.py:132
 msgid "No"
 msgstr "No"
 
-#: .\models.py:140
+#: .\models.py:139
 msgid "Username"
 msgstr "Nome utente"
 
-#: .\models.py:145
+#: .\models.py:144
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only"
 msgstr "Richiesto. 30 caratteri o meno. Solo lettere, numeri e @/./+/-/_"
 
-#: .\models.py:151
+#: .\models.py:150
 msgid ""
 "Enter a valid username. This value may contain 30 characters or fewer. Only "
 "letters, numbers and @/./+/-/_ characters"
@@ -172,35 +194,35 @@ msgstr ""
 "Inserisci un nome utente valido. Può contenere 30 caratteri o meno. Solo "
 "lettere, numeri e caratteri @/./+/-/_"
 
-#: .\models.py:158
+#: .\models.py:157
 msgid "A user with that username already exists."
 msgstr "Un utente con questo username già esiste."
 
-#: .\models.py:162
+#: .\models.py:161
 msgid "First Name"
 msgstr "Nome"
 
-#: .\models.py:164
+#: .\models.py:163
 msgid "Last Name"
 msgstr "Cognome"
 
-#: .\models.py:166
+#: .\models.py:165
 msgid "Gender"
 msgstr "Sesso"
 
-#: .\models.py:174
+#: .\models.py:173
 msgid "Email Address"
 msgstr "Indirizzo email"
 
-#: .\models.py:181
+#: .\models.py:180
 msgid "Designates whether the user can log into this admin site."
 msgstr "Indica se l'utente può loggarsi nel sito di amministrazione."
 
-#: .\models.py:184
+#: .\models.py:183
 msgid "Active"
 msgstr "Attivo"
 
-#: .\models.py:189
+#: .\models.py:188
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
@@ -208,51 +230,51 @@ msgstr ""
 "Indica se questo utente dovrebbe essere gestito come attivo. Deseleziona "
 "questo invece di eliminare l'account."
 
-#: .\models.py:196
+#: .\models.py:195
 msgid "Date Joined"
 msgstr "Data Iscrizione"
 
-#: .\models.py:197
+#: .\models.py:196
 msgid "Date Updated"
 msgstr "Data Aggiornamento"
 
-#: .\models.py:200
+#: .\models.py:199
 msgid "Country"
 msgstr "Nazione"
 
-#: .\models.py:203
+#: .\models.py:202
 msgid "City"
 msgstr "Città"
 
-#: .\models.py:209
+#: .\models.py:208
 msgid "Postal Code"
 msgstr "Codice Postale"
 
-#: .\models.py:213
+#: .\models.py:212
 msgid "Homepage"
 msgstr "Homepage"
 
-#: .\models.py:214
+#: .\models.py:213
 msgid "Where can we find out more about you?"
 msgstr "Dove possiamo trovare qualcosa su di te?"
 
-#: .\models.py:220 .\models.py:224
+#: .\models.py:219 .\models.py:223
 msgid "Avatar Picture"
 msgstr "Immagine Avatar"
 
-#: .\models.py:232
+#: .\models.py:231
 msgid "Predef Avatar Picture"
 msgstr "Immagine Avatar Predefinita"
 
-#: .\models.py:249
+#: .\models.py:248
 msgid "Description"
 msgstr "Descrizione"
 
-#: .\models.py:250
+#: .\models.py:249
 msgid "Tell us about yourself!"
 msgstr "Raccontaci qualcosa su di te!"
 
-#: .\models.py:260
+#: .\models.py:259
 msgid ""
 "Phone number must be entered in the format: '+999999999'. Up to 15 digits "
 "allowed."
@@ -260,19 +282,19 @@ msgstr ""
 "Numero di telefono deve essere inserito nel formato: '+999999999'. Sono "
 "consentiti massimo 15 cifre."
 
-#: .\models.py:264
+#: .\models.py:263
 msgid "Phone Number"
 msgstr "Numero di Telefono"
 
-#: .\models.py:273
+#: .\models.py:272
 msgid "Sort order"
 msgstr "Ordine"
 
-#: .\models.py:281
+#: .\models.py:280
 msgid "Public"
 msgstr "Pubblico"
 
-#: .\models.py:287
+#: .\models.py:286
 msgid ""
 "Designates whether this user should be visible by all. Select 'no' this make "
 "your account private!"
@@ -280,143 +302,143 @@ msgstr ""
 "Indica se questo utente può essere visibile a tutti. Seleziona 'no' per "
 "rendere il tuo account privato!"
 
-#: .\models.py:293
+#: .\models.py:292
 msgid "Company"
 msgstr "Compagnia"
 
-#: .\models.py:296
+#: .\models.py:295
 msgid "Title"
 msgstr "Titolo"
 
-#: .\models.py:297
+#: .\models.py:296
 msgid "Member"
 msgstr "Membro"
 
-#: .\models.py:303
+#: .\models.py:302
 msgid "Role"
 msgstr "Ruolo"
 
-#: .\models.py:317
+#: .\models.py:316
 msgid "User edited"
 msgstr "Mod. da Utente"
 
-#: .\models.py:320
+#: .\models.py:319
 msgid "Google edited"
 msgstr ""
 
-#: .\models.py:323
+#: .\models.py:322
 msgid "Twitter edited"
 msgstr ""
 
-#: .\models.py:326
+#: .\models.py:325
 msgid "Facebook edited"
 msgstr ""
 
-#: .\models.py:329
+#: .\models.py:328
 msgid "Instagram edited"
 msgstr ""
 
-#: .\models.py:334
+#: .\models.py:333
 msgid "Google Username"
 msgstr ""
 
-#: .\models.py:340
+#: .\models.py:339
 msgid "Google Plus"
 msgstr ""
 
-#: .\models.py:343
+#: .\models.py:342
 msgid "Google Plus Page"
 msgstr ""
 
-#: .\models.py:346
+#: .\models.py:345
 msgid "Google Circle byCount"
 msgstr ""
 
-#: .\models.py:349
+#: .\models.py:348
 msgid "Google Language"
 msgstr ""
 
-#: .\models.py:352
+#: .\models.py:351
 msgid "Google Kind"
 msgstr ""
 
-#: .\models.py:355
+#: .\models.py:354
 msgid "Google Verified"
 msgstr ""
 
-#: .\models.py:358
+#: .\models.py:357
 msgid "Google Avatar"
 msgstr ""
 
-#: .\models.py:363
+#: .\models.py:362
 msgid "Twitter Username"
 msgstr ""
 
-#: .\models.py:369
+#: .\models.py:368
 msgid "Twitter Language"
 msgstr ""
 
-#: .\models.py:372
+#: .\models.py:371
 msgid "Twitter Verified"
 msgstr ""
 
-#: .\models.py:375
+#: .\models.py:374
 msgid "Twitter Profile"
 msgstr ""
 
-#: .\models.py:381
+#: .\models.py:380
 msgid "Twitter Avatar"
 msgstr ""
 
-#: .\models.py:385
+#: .\models.py:384
 msgid "Facebook Username"
 msgstr ""
 
-#: .\models.py:391
+#: .\models.py:390
 msgid "Facebook Profile"
 msgstr ""
 
-#: .\models.py:397
+#: .\models.py:396
 msgid "Facebook Avatar"
 msgstr ""
 
-#: .\models.py:401
+#: .\models.py:400
 msgid "Instagram Username"
 msgstr ""
 
-#: .\models.py:407
+#: .\models.py:406
 msgid "Instagram Profile"
 msgstr ""
 
-#: .\models.py:413
+#: .\models.py:412
 msgid "Instagram Avatar"
 msgstr ""
 
-#: .\models.py:418
+#: .\models.py:417
 msgid "Live Username"
 msgstr ""
 
-#: .\models.py:424
+#: .\models.py:423
 msgid "Live Language"
 msgstr ""
 
-#: .\models.py:427
+#: .\models.py:426
 msgid "Live Verified"
 msgstr ""
 
-#: .\models.py:430
+#: .\models.py:429
 msgid "Live Profile"
 msgstr ""
 
-#: .\models.py:436
+#: .\models.py:435
 msgid "Live Avatar"
 msgstr ""
 
-#: .\models.py:442
+#: .\models.py:441
 msgid "Social Profile"
 msgstr "Profilo Social"
 
-#: .\models.py:443
+#: .\models.py:442
 msgid "Social Profiles"
 msgstr "Profili Social"
 
@@ -424,27 +446,27 @@ msgstr "Profili Social"
 msgid "Created"
 msgstr "Creato"
 
-#: .\models.py:534
+#: .\models.py:536
 msgid "Created By"
 msgstr "Creato Da"
 
-#: .\models.py:535
+#: .\models.py:540
 msgid "Modified"
 msgstr "Modificato"
 
-#: .\models.py:536
+#: .\models.py:545
 msgid "Modified By"
 msgstr "Modificato Da"
 
-#: .\models.py:546
+#: .\models.py:559
 msgid "Published"
 msgstr "Pubblicato"
 
-#: .\models.py:547
+#: .\models.py:564
 msgid "Published By"
 msgstr "Pubblicato Da"
 
-#: .\models.py:548
+#: .\models.py:568
 msgid "Publish"
 msgstr "Pubblico"
 
@@ -638,15 +660,15 @@ msgstr ""
 msgid "End All Other Sessions"
 msgstr "Termina tutte le altre sessioni"
 
-#: .\views.py:106
+#: .\views.py:96
 msgid "Wrong backend type"
 msgstr "Tipo backend errato"
 
-#: .\views.py:284 .\views.py:292
+#: .\views.py:274 .\views.py:282
 msgid "Your profile has been updated."
 msgstr "Il tuo profilo è stato aggiornato."
 
-#: .\views.py:336 .\views.py:353
+#: .\views.py:324 .\views.py:342
 msgid "Your profile has NOT been updated!"
 msgstr "Il tuo profilo NON è stato aggiornato!"
 
