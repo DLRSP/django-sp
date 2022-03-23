@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 10:25+0100\n"
-"PO-Revision-Date: 2022-03-21 10:28+0100\n"
+"POT-Creation-Date: 2022-03-23 20:02+0100\n"
+"PO-Revision-Date: 2022-03-23 20:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -52,18 +52,18 @@ msgstr "Providers"
 msgid "Mark selected object as published"
 msgstr "Segna l'oggetto selezionato come pubblicato"
 
-#: .\admin.py:249
+#: .\admin.py:251
 #, python-format
 msgid "%d object was successfully marked as published."
 msgid_plural "%d objects were successfully marked as published."
 msgstr[0] "%d oggetto è stato segnato correttamente come pubblicato."
 msgstr[1] "%d oggetti sono stati segnati correttamente come pubblicati."
 
-#: .\admin.py:256
+#: .\admin.py:266
 msgid "Mark selected object as unpublished"
 msgstr "Segna l'oggetto selezionato come non pubblicato"
 
-#: .\admin.py:262
+#: .\admin.py:274
 #, python-format
 msgid "%d object was successfully marked as unpublished."
 msgid_plural "%d objects were successfully marked as unpublished."
@@ -509,7 +509,16 @@ msgstr "Aggiungi connessione Social"
 msgid "Disconnect"
 msgstr "Disconnetti"
 
-#: .\templates\socialprofile\sp_account_select.html:62
+#: .\templates\socialprofile\sp_account_select.html:47
+#: .\templates\socialprofile\sp_account_select.html:54
+msgid "Continue with"
+msgstr "Continua con"
+
+#: .\templates\socialprofile\sp_account_select.html:52
+msgid "Connect with"
+msgstr "Connettiti con"
+
+#: .\templates\socialprofile\sp_account_select.html:64
 msgid ""
 "Third-party identity providers enable you to rely on a trusted external "
 "service to authenticate your identity!"
@@ -517,16 +526,16 @@ msgstr ""
 "I provider di identità di terze parti ti consentono di fare affidamento su "
 "un servizio esterno conosciuto per autenticare la tua identità!"
 
-#: .\templates\socialprofile\sp_account_select.html:64
+#: .\templates\socialprofile\sp_account_select.html:66
 msgid "We will never know and store your password anywhere!"
 msgstr "Non conosceremo e non salveremo mai la tua password da nessuna parte!"
 
-#: .\templates\socialprofile\sp_account_select.html:67
-#: .\templates\socialprofile\sp_account_select.html:68
 #: .\templates\socialprofile\sp_account_select.html:69
 #: .\templates\socialprofile\sp_account_select.html:70
 #: .\templates\socialprofile\sp_account_select.html:71
 #: .\templates\socialprofile\sp_account_select.html:72
+#: .\templates\socialprofile\sp_account_select.html:73
+#: .\templates\socialprofile\sp_account_select.html:74
 msgid "Sign In with"
 msgstr "Registrati con"
 
