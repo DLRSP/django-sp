@@ -17,12 +17,28 @@ def social_provider_name(provider_slug):
     """Decode name of Social Auth Provider to Friendly Name"""
     if provider_slug == "google-oauth2":
         return "Google"
-
     if provider_slug == "twitter":
         return "Twitter"
-
     if provider_slug == "facebook":
         return "Facebook"
+    if provider_slug == "live":
+        return "Microsoft"
+
+
+@register.filter
+@stringfilter
+def social_provider_color(provider_slug):
+    """Decode name of Social Auth Provider to font-awesome btn-{color}"""
+    if provider_slug == "google-oauth2":
+        return "red"
+    if provider_slug == "twitter":
+        return "aqua"
+    if provider_slug == "facebook":
+        return "blue"
+    if provider_slug == "live":
+        return "forest"
+    if provider_slug == "apple":
+        return "navy"
 
 
 @register.filter
