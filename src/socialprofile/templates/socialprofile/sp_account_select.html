@@ -44,12 +44,14 @@
 					{% if name == "google-plus" %}
 					  <div class="col-md-2 btn btn-default" id="{{ name }}-button" name="{{ backend|backend_class }}">
 						<i class="fa fa-{{ name|icon_name }}"></i>
-						{{ backend|backend_name }}
+						{% trans 'Continue with' %} {{ backend|backend_name }}
 					  </div>
 					{% else %}
-					  <a class="col-md-2 btn btn-default" id="{{ name }}-button" name="{{ backend|backend_class }}" href="{% url 'social:begin' backend=name %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}">
+					  <a class="col-md-2 btn btn-default" id="{{ name }}-button" name="{{ backend|backend_class }}"
+						 href="{% url 'social:begin' backend=name %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"
+					  	 title="{% trans 'Connect with' %} {{ name|social_provider_name }}">
 						<i class="fa fa-{{ name|icon_name }}"></i>
-						{{ backend|backend_name }}
+						{% trans 'Continue with' %} {{ backend|backend_name }}
 					  </a>
 					{% endif %}
 				  {% endif %}

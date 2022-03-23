@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 10:26+0100\n"
+"POT-Creation-Date: 2022-03-23 20:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,18 +49,18 @@ msgstr ""
 msgid "Mark selected object as published"
 msgstr ""
 
-#: .\admin.py:249
+#: .\admin.py:251
 #, python-format
 msgid "%d object was successfully marked as published."
 msgid_plural "%d objects were successfully marked as published."
 msgstr[0] ""
 msgstr[1] ""
 
-#: .\admin.py:256
+#: .\admin.py:266
 msgid "Mark selected object as unpublished"
 msgstr ""
 
-#: .\admin.py:262
+#: .\admin.py:274
 #, python-format
 msgid "%d object was successfully marked as unpublished."
 msgid_plural "%d objects were successfully marked as unpublished."
@@ -482,22 +482,31 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
-#: .\templates\socialprofile\sp_account_select.html:62
+#: .\templates\socialprofile\sp_account_select.html:47
+#: .\templates\socialprofile\sp_account_select.html:54
+msgid "Continue with"
+msgstr ""
+
+#: .\templates\socialprofile\sp_account_select.html:52
+msgid "Connect with"
+msgstr ""
+
+#: .\templates\socialprofile\sp_account_select.html:64
 msgid ""
 "Third-party identity providers enable you to rely on a trusted external "
 "service to authenticate your identity!"
 msgstr ""
 
-#: .\templates\socialprofile\sp_account_select.html:64
+#: .\templates\socialprofile\sp_account_select.html:66
 msgid "We will never know and store your password anywhere!"
 msgstr ""
 
-#: .\templates\socialprofile\sp_account_select.html:67
-#: .\templates\socialprofile\sp_account_select.html:68
 #: .\templates\socialprofile\sp_account_select.html:69
 #: .\templates\socialprofile\sp_account_select.html:70
 #: .\templates\socialprofile\sp_account_select.html:71
 #: .\templates\socialprofile\sp_account_select.html:72
+#: .\templates\socialprofile\sp_account_select.html:73
+#: .\templates\socialprofile\sp_account_select.html:74
 msgid "Sign In with"
 msgstr ""
 
