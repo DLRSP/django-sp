@@ -327,6 +327,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     edited_by_instagram = models.BooleanField(
         verbose_name=_("Instagram edited"), default=False, null=False, blank=True
     )
+    edited_by_live = models.BooleanField(
+        verbose_name=_("Live edited"), default=False, null=False, blank=True
+    )
 
     # Add Info retrieved by Google
     google_username = models.CharField(
