@@ -1,0 +1,424 @@
+@media (min-width: 768px) {
+    .sp_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.sp_login .sp_authTitle {
+    text-align: center;
+	line-height: 300%;
+}
+
+.sp_login .sp_subTitle {
+    text-align: center;
+	line-height: 100%;
+}
+
+.sp_login .sp_socialButtons a {
+	color: white; // In yourUse @body-bg
+	opacity:0.9;
+}
+.sp_login .sp_socialButtons a:hover {
+    color: white;
+	opacity:1;
+}
+.sp_login .sp_socialButtons .sp_btn-facebook {background: #3b5998; color: white;}
+.sp_login .sp_socialButtons .sp_btn-twitter {background: #00aced;}
+.sp_login .sp_socialButtons .sp_btn-google-oauth2 {background: #c32f10;}
+.sp_login .sp_socialButtons .sp_btn-live {background: #7CC011;}
+.sp_login .sp_socialButtons .sp_btn-apple {background: #000000;}
+
+
+.sp_socialButtons a.btn.btn-lg.btn-block i {
+    position: absolute;
+    left: 42px;
+    font-size: 26px;
+    margin-top: -7px;
+}
+
+.sp_login .sp_loginOr {
+	position: relative;
+	font-size: 1.5em;
+	color: #aaa;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.sp_login .sp_loginOr .sp_hrOr {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+.sp_login .sp_loginOr .sp_spanOr {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -0.6em;
+	margin-left: -1.5em;
+	background-color: white;
+	width: 3em;
+	text-align: center;
+}
+
+.sp_login .sp_loginForm .input-group.i {
+	width: 2em;
+}
+.sp_login .sp_loginForm  .help-block {
+    color: red;
+}
+
+@media (min-width: 768px) {
+    .sp_login .sp_forgotPwd {
+        text-align: right;
+		margin-top:10px;
+ 	}
+}
+
+.sp_login .sp_terms_conditions{
+    text-align: center;
+	margin-top:10px;
+	color: #aaa;
+	font-size: 0.8em;
+}
+
+/*
+	chooseUser.html
+*/
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    padding-top: 5px;
+}
+
+.account-wall {
+    margin-top: 20px;
+    padding: 20px 25px 30px;
+    /*background-color: #f7f7f7;*/
+    -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+}
+.logo {
+    margin: 0px auto 0px;
+    float: none;
+    display: block;
+    height: 65px;
+    width: 200px;
+}
+
+.title {
+    font-size: 20px;
+    color: #262626;
+    margin: 0 0 15px;
+    font-weight: normal;
+}
+
+.accountchooser ol {
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.accountchooser ol li {
+    height: 76px;
+  /*  border-top: 1px solid #d5d5d5; */
+}
+
+
+.accountchooser ol li button {
+    padding: 15px 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    background: url(//ssl.gstatic.com/accounts/ui/arrow_right_1x.png) right center no-repeat;
+    background-size: 21px 21px;
+}
+
+.accountchooser ol li button img {
+    float: left;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    height: 46px;
+    width: 46px;
+}
+
+.accountchooser ol li button span.account-name {
+    font-weight: bold;
+    font-size: 16px;
+    padding-top: 3px;
+    color: #427fed;
+}
+
+.accountchooser ol li button span {
+    display: block;
+    margin-left: 58px;
+    padding-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action {
+    padding: 5px;
+}
+
+.action ul {
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.action ul li:first-child {
+    border-right: 1px solid #d5d5d5;
+}
+
+.action ul li {
+    width: 49%;
+    display: inline-block;
+}
+
+.action ul li a {
+    color: #427fed;
+    cursor: pointer;
+    text-decoration: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    background: none;
+    text-align: center;
+    padding: 12px 0;
+    outline: none;
+    text-decoration: none;
+    border: 0;
+}
+
+// userProfile.html
+
+
+legend{
+	color:#141823;
+	font-size:25px;
+	font-weight:bold;
+}
+
+.navbar-default .navbar-brand{
+		color:#fff;
+		font-size:30px;
+		font-weight:bold;
+	}
+
+.form-control {
+	height: 46px;
+	margin-bottom: 10px;
+}
+
+.form-horizontal .control-label {
+	line-height: 36px;
+}
+
+
+.message-box {
+	background-color: #C3E9C0;
+	border-radius: 6px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 400;
+	padding: 10px;
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+
+.err-box {
+	background-color: #FDD;
+	border-radius: 6px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 400;
+	padding: 10px;
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+
+@media (min-width:768px) {
+	#home{
+		margin-top:50px;
+	}
+	#home .slogan{
+		color: #0e385f;
+		line-height: 29px;
+		font-weight:bold;
+	}
+}
+
+.og-spinner {
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../../img/ajax_loader_gray_350.gif) center no-repeat transparent;
+	background-size: 40px;
+    background-color: rgba(0,0,0, 0.6);
+}
+
+.notdefault {
+	display: none;
+}
+
+.sp_thankyou{
+    text-align: center;
+	font-size: 1.2em;
+	margin-bottom: 2em;
+}
+
+.passwordpolicy  {
+	font-size: 0.8em;
+}
+
+.linklike-button {
+     background:none!important;
+     color:inherit;
+     border:none;
+     padding:0!important;
+     font: inherit;
+     cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #ee4444;
+    border-color: #ee4444;
+}
+
+
+/**********************************************************************************************/
+/**TABS**/
+.ogPageTab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.ogPageTab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.ogPageTab button:hover {
+  background-color: #ddd;
+}
+
+.ogPageTab button.active {
+  background-color: #ccc;
+}
+
+.ogPageTabContent {
+  display: none;
+  padding-top: 20px;
+}
+/**********************************************************************************************/
+/**********************************************************************************************/
+/**MOBILE MEDIA QUERIES**/
+
+@media screen and (max-device-width:768px) {
+    .sp_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 0%;
+    }
+
+    .container {
+    	width: 90%;
+    	font-size: 4vw;
+    }
+
+    .h3, h3 {
+    	font-size: 4vw;
+    }
+
+    .textarea {
+    	font-size: 4vw;
+    }
+
+    .form-control {
+    	font-size: 4vw;
+    	height: 2em;
+    	margin-bottom: .5em;
+    }
+
+    .col-sm-6 {
+    	width: 100%;
+    }
+
+    .sp_spanOr {
+    	font-size: 4vw;
+    }
+
+    .err-box {
+    	font-size: 4vw;
+    }
+
+    .message-box {
+    	font-size: 4vw;
+    }
+
+
+    /**BUTTONS******************************************************************/
+
+    .btn {
+    	font-size: 4vw;
+    	margin-bottom: 10px;
+    }
+
+    .bg-logo {
+    	font-size: 4vw;
+    }
+
+
+    /**ACCOUNT CHOOSER**********************************************************/
+
+    .accountchooser ol li button {
+        background-size: 5vw 5vw;
+    }
+
+	.accountchooser ol li {
+		height: 13vw;
+	}
+
+	.accountchooser ol li button img {
+		width : 10vw;
+		height: 10vw;
+    }
+
+    .accountchooser ol li button span.account-name {
+    	font-size: 3vw;
+    	margin-left: 13vw;
+    }
+
+    .accountchooser ol li button span.account-email {
+    	font-size: 4vw;
+    	margin-left: 13vw;
+    }
+}
