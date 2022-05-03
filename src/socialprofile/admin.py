@@ -103,6 +103,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
                     "edited_by_twitter",
                     "edited_by_facebook",
                     "edited_by_instagram",
+                    "edited_by_live",
                 )
             },
         ),
@@ -183,6 +184,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "edited_by_twitter",
         "edited_by_facebook",
         "edited_by_instagram",
+        "edited_by_live",
         "google_username",
         "google_isPlusUser",
         "google_url",
@@ -221,6 +223,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "edited_by_twitter",
         "edited_by_facebook",
         "edited_by_instagram",
+        "edited_by_live",
         "visible",
         "date_joined",
         "last_login",
