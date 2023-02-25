@@ -289,9 +289,8 @@ iniconfig==1.1.1 \
     --hash=sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3 \
     --hash=sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32
     # via pytest
-jwcrypto==1.0 \
-    --hash=sha256:db93a656d9a7a35dda5a68deb5c9f301f4e60507d8aef1559e0637b9ac497137 \
-    --hash=sha256:f88816eb0a41b8f006af978ced5f171f33782525006cdb055b536a40f4d46ac9
+jwcrypto==1.4 \
+    --hash=sha256:30bcfc2d199f2f1a52d04558ffa99112ad81d7b787f29e0d9aa4ef499934307e
     # via django-oauth-toolkit
 lxml==4.6.5 \
     --hash=sha256:abcf7daa5ebcc89328326254f6dd6d566adb483d4d00178892afd386ab389de2 \
