@@ -28,8 +28,6 @@ from oauth2_provider.models import (
 )
 from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
 from social_django.models import Association, Nonce, UserSocialAuth
-from two_factor.admin import PhoneDeviceAdmin
-from two_factor.models import PhoneDevice
 from user_sessions.admin import SessionAdmin
 from user_sessions.models import Session
 
@@ -237,6 +235,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
     )
 
 
+# TODO: check if update can be managed by save_model or clear cache key directly
 class ModelAdminPublishFieldsMixin(admin.ModelAdmin):
     """Custom model mixin for Publish Date and Publish By information"""
 
@@ -365,16 +364,7 @@ admin.site.register(ProxyAssociation, AssociationOption)
 # admin.site.register(TokenProxy, ProxyTokenAdmin)
 
 
-# django_otp + two_factor
-class ProxyPhoneDevice(PhoneDevice):
-    """Create PhoneDevice proxy model for OAuth two_factor"""
-
-    class Meta:
-        proxy = True
-        verbose_name = f"Otp: {PhoneDevice._meta.verbose_name}"
-        verbose_name_plural = f"Otp: {PhoneDevice._meta.verbose_name_plural}"
-
-
+# django_otp
 class ProxyStaticDevice(StaticDevice):
     """Create StaticDevice proxy model for OAuth social_django"""
 
@@ -393,10 +383,8 @@ class ProxyTOTPDevice(TOTPDevice):
         verbose_name_plural = f"Otp: {TOTPDevice._meta.verbose_name_plural}"
 
 
-admin.site.unregister(PhoneDevice)
 admin.site.unregister(StaticDevice)
 admin.site.unregister(TOTPDevice)
-admin.site.register(ProxyPhoneDevice, PhoneDeviceAdmin)
 admin.site.register(ProxyStaticDevice, StaticDeviceAdmin)
 admin.site.register(ProxyTOTPDevice, TOTPDeviceAdmin)
 
