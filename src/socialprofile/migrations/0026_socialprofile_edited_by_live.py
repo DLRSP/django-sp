@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('socialprofile', '0025_auto_20220317_1059'),
+        ("socialprofile", "0025_auto_20220317_1059"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='socialprofile',
-            name='edited_by_live',
-            field=models.BooleanField(blank=True, default=False, verbose_name='Live edited'),
+            model_name="socialprofile",
+            name="edited_by_live",
+            field=models.BooleanField(
+                blank=True, default=False, verbose_name="Live edited"
+            ),
         ),
     ]
