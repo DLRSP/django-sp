@@ -4,6 +4,8 @@ version: 2
 updates:
 
   - package-ecosystem: "pip"
+    ignore:
+      - dependency-name: "django"
     directory: "/"
     schedule:
       interval: "daily"
