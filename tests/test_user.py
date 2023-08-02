@@ -16,10 +16,15 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
-from socialprofile.forms import EmailUserChangeForm, EmailUserCreationForm
+try:
+    from django.utils.encoding import force_text
+except ImportError:
+    # Only available from Django 4, ignore the tests otherwise
+    from django.utils.encoding import force_str
+
+# from socialprofile.forms import EmailUserChangeForm, EmailUserCreationForm
 
 try:
     from django.contrib.auth.middleware import SessionAuthenticationMiddleware
