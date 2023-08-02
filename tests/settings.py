@@ -30,6 +30,10 @@ TEMPLATES = [
 ROOT_URLCONF = "socialprofile.urls"
 
 USE_TZ = True
+LANGUAGE_CODE = "en"
+USE_I18N = True
+
+STATIC_URL = "/static/"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
