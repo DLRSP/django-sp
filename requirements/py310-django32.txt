@@ -427,9 +427,9 @@ django-phonenumber-field==6.4.0 \
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
-django-two-factor-auth==1.15.3 \
-    --hash=sha256:311b7f0c5ee47ae5c3734f7810f90c9390b3aef556f58a767b0d80d6b54013fb \
-    --hash=sha256:a5752732225304ba0461ec6f5347def517bdde98685e90bb7879aa066c91f3a4
+django-two-factor-auth==1.15.4 \
+    --hash=sha256:4570ffa774bbced191f670079fea4e72a350ee91b2a937d5eb08e535ca47f1a6 \
+    --hash=sha256:6be4313069bffcaef8b657573ddc82f82e77da1a0bdb31175b1649c2411c0b0a
     # via -r requirements/requirements.in
 django-user-sessions==2.0.0 \
     --hash=sha256:0965554279f556b47062965609fa08b3ae45bbc581001dbe84b2ea599cc67748 \
@@ -450,10 +450,6 @@ easy-thumbnails==2.8.5 \
     --hash=sha256:7e4e912609fc9b60b3a1fef6557ec15ddf9c4f946267a92e6920dfd4dd765e35 \
     --hash=sha256:97f5a5278d8b6c1f5b1b7473f3737d29b18f5c1159cbdf0ab28674fdac2f8c87
     # via -r requirements/requirements.in
-exceptiongroup==1.1.2 \
-    --hash=sha256:12c3e887d6485d16943a309616de20ae5582633e0a2eda17f4e10fd61c1e8af5 \
-    --hash=sha256:e346e69d186172ca7cf029c8c1d16235aa0e04035e5750b4b95039e65204328f
-    # via pytest
 frozenlist==1.4.0 \
     --hash=sha256:007df07a6e3eb3e33e9a1fe6a9db7af152bbd8a185f9aaa6ece10a3529e3e1c6 \
     --hash=sha256:008eb8b31b3ea6896da16c38c1b136cb9fec9e249e77f6211d479db79a4eaf01 \
@@ -820,15 +816,10 @@ sweetify==2.3.1 \
     --hash=sha256:37100d8f02929076cd060b1c1aae7575448af32e61ca8c03bc003548e31ffc70 \
     --hash=sha256:941ed8914467d5a29eb263079fd4f39661df81bfded6476ed4ef2ad57a4c25ba
     # via -r requirements/requirements.in
-tomli==2.0.1 \
-    --hash=sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc \
-    --hash=sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
-    # via pytest
 typing-extensions==4.7.1 \
     --hash=sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36 \
     --hash=sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2
     # via
-    #   asgiref
     #   django-countries
     #   qrcode
 urllib3==2.0.4 \
