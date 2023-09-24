@@ -20,10 +20,5 @@ django-user-sessions
 django-axes
 sweetify
 docutils
-coverage
 coveralls
 django-jenkins
-coverage
-pytest
-pytest-django
-pytest-randomly
