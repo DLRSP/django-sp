@@ -55,7 +55,9 @@ type = [
 
 # bump-my-version
 [tool.bumpversion]
-current_version = "1.18.0-dev"
+current_version = "1.18.1"
+commit = true
+tag = true
 allow_dirty = true
 
 [[tool.bumpversion.files]]
