@@ -36,7 +36,7 @@ package = "socialprofile"
 package_dir = "src"
 filename = "CHANGELOG.rst"
 directory = "news/"
-version = "1.17.0"
+version = "1.18.0-dev"
 
 # For rendering properly for this project
 issue_format = "`#{issue} <https://github.com/DLRSP/django-sp/issues/{issue}>`_"
@@ -52,3 +52,14 @@ type = [
   { name = "Improved Documentation",    directory = "doc",     showcontent = true },
   { name = "Trivial Changes",           directory = "trivial", showcontent = false },
 ]
+
+# bump-my-version
+[tool.bumpversion]
+current_version = "1.18.0-dev"
+allow_dirty = true
+
+[[tool.bumpversion.files]]
+filename = "./setup.cfg"
+
+[[tool.bumpversion.files]]
+filename = "./src/socialprofile/__init__.py"
