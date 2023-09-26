@@ -7,6 +7,7 @@ from crispy_forms.bootstrap import (
     Field,
     InlineRadios,
     PrependedText,
+    UneditableField,
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
@@ -129,7 +130,7 @@ class SocialProfileForm(forms.ModelForm):
             Accordion(
                 AccordionGroup(
                     _("Contact"),
-                    Field("email", readonly=True),
+                    UneditableField("email"),
                     Field("phone_number"),
                     Field("url"),
                     active=False,

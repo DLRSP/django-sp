@@ -80,10 +80,13 @@ def google_extra_values(backend, details, response, uid, user, *args, **kwargs):
         country = response.get("locale")
         if country:
             user.country = country
+        description = response.get("occupation")
+        if description:
+            user.description = description
 
     username_google = response.get("username")
     if username_google:
-        user.username_facebook = username_google
+        user.username_google = username_google
 
     user.google_verified = response.get("email_verified", False)
     user.google_isPlusUser = response.get("isPlusUser", False)
