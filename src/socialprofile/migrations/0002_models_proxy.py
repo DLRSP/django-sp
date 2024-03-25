@@ -95,17 +95,17 @@ class Migration(migrations.Migration):
             },
             bases=("social_django.nonce",),
         ),
-        migrations.CreateModel(
-            name="ProxyPhoneDevice",
-            fields=[],
-            options={
-                "verbose_name": "Otp: phone device",
-                "proxy": True,
-                "verbose_name_plural": "Otp: phone devices",
-                "indexes": [],
-            },
-            bases=("two_factor.phonedevice",),
-        ),
+        # migrations.CreateModel(
+        #     name="ProxyPhoneDevice",
+        #     fields=[],
+        #     options={
+        #         "verbose_name": "Otp: phone device",
+        #         "proxy": True,
+        #         "verbose_name_plural": "Otp: phone devices",
+        #         "indexes": [],
+        #     },
+        #     bases=("two_factor.phonedevice",),
+        # ),
         migrations.CreateModel(
             name="ProxyRefreshToken",
             fields=[],

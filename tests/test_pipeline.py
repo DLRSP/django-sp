@@ -2,8 +2,8 @@
 import logging
 
 from django.test import TestCase
-from social.backends.google import GoogleOAuth2
-from social.backends.twitter import TwitterOAuth
+from social_core.backends.google import GoogleOAuth2
+from social_core.backends.twitter import TwitterOAuth
 
 from socialprofile.models import SocialProfile
 from socialprofile.pipeline import socialprofile_extra_values

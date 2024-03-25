@@ -1,0 +1,24 @@
+# https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates
+---
+version: 2
+updates:
+
+  - package-ecosystem: "pip"
+    ignore:
+      - dependency-name: "django"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "📦 dependencies"
+    assignees:
+      - "dlrsp-dev"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "📦 dependencies"
+    assignees:
+      - "dlrsp-dev"
