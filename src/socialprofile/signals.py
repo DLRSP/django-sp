@@ -22,7 +22,7 @@ def post_save_user(sender, instance, created, *args, **kwargs):
 
         # ToDo: notify the user with a welcome custom message
         html_mail = f"""<!DOCTYPE html><html><body>
-                        <h1> Welcome!</h1> 
+                        <h1> Welcome!</h1>
                     """
         html_mail += f"""</body></html>"""
         plain_message = strip_tags(html_mail)
