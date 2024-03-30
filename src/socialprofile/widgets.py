@@ -1,4 +1,5 @@
 """Custom Widget to enable use of HTML5 Form element types"""
+
 from django.forms.widgets import DateInput, DateTimeInput, TextInput, TimeInput
 
 
