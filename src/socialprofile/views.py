@@ -1,4 +1,5 @@
 """Django Views for the socialprofile module"""
+
 import json
 import logging
 

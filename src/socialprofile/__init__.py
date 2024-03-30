@@ -9,6 +9,7 @@ Release logic:
 6. git commit
 7. push to github (to avoid confusion)
 """
+
 import django
 
 __version__ = "1.21.0"
