@@ -1,5 +1,5 @@
 import image_cropping.fields
-from django.db import migrations, models
+from django.db import migrations
 
 import socialprofile.models
 
