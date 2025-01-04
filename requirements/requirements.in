@@ -1,5 +1,6 @@
 django
 django-errors
+django-model-mixin
 python-social-auth
 social-auth-app-django
 django-oauth-toolkit

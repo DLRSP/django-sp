@@ -1,12 +1,10 @@
 """Django Admin Site configuration for socialprofiles"""
+
 from axes.admin import AccessAttemptAdmin, AccessLogAdmin
 from axes.models import AccessAttempt, AccessLog
-from django.contrib import admin, messages
-from django.contrib.auth import get_permission_codename
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ngettext
 from django_otp.plugins.otp_static.admin import StaticDeviceAdmin
 from django_otp.plugins.otp_static.models import StaticDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
@@ -110,6 +108,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             {
                 "fields": (
                     "google_username",
+                    "google_email",
                     "google_isPlusUser",
                     "google_url",
                     "google_circledByCount",
@@ -125,6 +124,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             {
                 "fields": (
                     "twitter_username",
+                    "twitter_email",
                     "twitter_url",
                     "twitter_language",
                     "twitter_verified",
@@ -137,6 +137,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             {
                 "fields": (
                     "facebook_username",
+                    "facebook_email",
                     "facebook_url",
                     "facebook_avatar",
                 )
@@ -147,6 +148,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             {
                 "fields": (
                     "instagram_username",
+                    "instagram_email",
                     "instagram_url",
                     "instagram_avatar",
                 )
@@ -157,6 +159,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             {
                 "fields": (
                     "live_username",
+                    "live_email",
                     "live_url",
                     "live_language",
                     "live_avatar",
@@ -169,12 +172,12 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "email", "password1", "password2"),
+                "fields": ("username", "email", "password1", "password2"),
             },
         ),
     )
     readonly_fields = [
-        "email",
+        # "email",
         "last_login",
         "date_joined",
         "edited_by_user",
@@ -233,85 +236,6 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "date_joined",
         "email",
     )
-
-
-# TODO: check if update can be managed by save_model or clear cache key directly
-class ModelAdminPublishFieldsMixin(admin.ModelAdmin):
-    """Custom model mixin for Publish Date and Publish By information"""
-
-    actions = ["make_published", "make_unpublished"]
-
-    @admin.action(
-        permissions=["publish"], description=_("Mark selected object as published")
-    )
-    def make_published(self, request, queryset):
-        """Action to update selected object as published"""
-        updated = queryset.update(published=True)
-        self.message_user(
-            request,
-            ngettext(
-                "%d object was successfully marked as published.",
-                "%d objects were successfully marked as published.",
-                updated,
-            )
-            % updated,
-            messages.SUCCESS,
-        )
-
-    def has_publish_permission(self, request):
-        """Does the user have the publish permission?"""
-        opts = self.opts
-        codename = get_permission_codename("publish", opts)
-        return request.user.has_perm(f"{opts.app_label}.{codename}")
-
-    @admin.action(
-        permissions=["unpublish"], description=_("Mark selected object as unpublished")
-    )
-    def make_unpublished(self, request, queryset):
-        """Action to update selected object as unpublished"""
-        updated = queryset.update(published=False)
-        self.message_user(
-            request,
-            ngettext(
-                "%d object was successfully marked as unpublished.",
-                "%d objects were successfully marked as unpublished.",
-                updated,
-            )
-            % updated,
-            messages.SUCCESS,
-        )
-
-    def has_unpublish_permission(self, request):
-        """Does the user have the unpublish permission?"""
-        opts = self.opts
-        codename = get_permission_codename("unpublish", opts)
-        return request.user.has_perm(f"{opts.app_label}.{codename}")
-
-    def save_model(self, request, obj, form, change) -> None:
-        """Update publish fields from request object before save."""
-        current_now = timezone.now()
-        if obj.published and not obj.publish:
-            obj.publish = current_now
-            obj.publish_by = request.user
-        if not obj.published and obj.publish:
-            obj.publish = None
-            obj.publish_by = None
-        super().save_model(request, obj, form, change)
-
-
-class ModelAdminAuditFieldsMixin(admin.ModelAdmin):
-    """Custom model mixin for Create/Modify Date and Create/Modify By information"""
-
-    def save_model(self, request, obj, form, change) -> None:
-        """Update audit fields from request object before save."""
-        current_now = timezone.now()
-        if not change:
-            obj.created = current_now
-            obj.created_by = request.user
-        else:
-            obj.modified = current_now
-            obj.modified_by = request.user
-        super().save_model(request, obj, form, change)
 
 
 # social_django

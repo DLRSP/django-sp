@@ -23,6 +23,8 @@ def social_provider_name(provider_slug):
         return "Facebook"
     if provider_slug == "live":
         return "Microsoft"
+    if provider_slug == "instagram":
+        return "Instagram"
 
 
 @register.filter
@@ -35,6 +37,8 @@ def social_provider_color(provider_slug):
         return "aqua"
     if provider_slug == "facebook":
         return "blue"
+    if provider_slug == "instagram":
+        return "salmon"
     if provider_slug == "live":
         return "forest"
     if provider_slug == "apple":
