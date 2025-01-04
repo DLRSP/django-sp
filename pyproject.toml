@@ -55,7 +55,7 @@ type = [
 
 # bump-my-version
 [tool.bumpversion]
-current_version = "1.22.1"
+current_version = "1.23.0"
 commit = true
 tag = true
 allow_dirty = true
