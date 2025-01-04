@@ -92,4 +92,7 @@ urlpatterns = [
     # path("api-token-verify/", verify_jwt_token),
     # One-Time-Password
     # path("", include('two_factor.urls', 'two_factor')),
+
+    # path("check_username_exist/", login_required(views.check_username_exist), name="check_username_exist"),
+
 ]

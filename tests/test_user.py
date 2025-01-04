@@ -122,7 +122,7 @@ class UserTest(TestCase):
 
 class UserManagerTest(TestCase):
     def test_create_user(self):
-        email_lowercase = "normal@normal.com"
+        email_lowercase = "normal@user.test"
         user = get_user_model().objects.create_user(email_lowercase)
         self.assertEqual(user.email, email_lowercase)
         self.assertFalse(user.has_usable_password())
@@ -131,7 +131,7 @@ class UserManagerTest(TestCase):
         self.assertFalse(user.is_superuser)
 
     def test_create_superuser(self):
-        email_lowercase = "normal@normal.com"
+        email_lowercase = "super@user.test"
         password = "password1234$%&/"
         user = get_user_model().objects.create_superuser(email_lowercase, password)
         self.assertEqual(user.email, email_lowercase)
@@ -142,7 +142,7 @@ class UserManagerTest(TestCase):
 
     def test_user_creation_is_active(self):
         # Create deactivated user
-        email_lowercase = "normal@normal.com"
+        email_lowercase = "disabled@user.test"
         password = "password1234$%&/"
         user = get_user_model().objects.create_user(
             email_lowercase, password, is_active=False
@@ -151,7 +151,7 @@ class UserManagerTest(TestCase):
 
     def test_user_creation_is_staff(self):
         # Create staff user
-        email_lowercase = "normal@normal.com"
+        email_lowercase = "staff@user.test"
         password = "password1234$%&/"
         user = get_user_model().objects.create_user(
             email_lowercase, password, is_staff=True
@@ -233,8 +233,9 @@ class TestSessionAuthenticationMiddleware(TestCase):
     def setUp(self):
         self.user_email = "test@example.com"
         self.user_password = "test_password"
+        self.user_username = "test_username"
         self.user = get_user_model().objects.create_user(
-            self.user_email, self.user_password
+            self.user_email, self.user_password, self.user_username
         )
 
         self.middleware_auth = AuthenticationMiddleware()
@@ -478,7 +479,10 @@ class EmailUserAdminTest(TestCase):
     def setUp(self):
         self.user_email = "test@example.com"
         self.user_password = "test_password"
-        self.user = get_user_model().objects.create_superuser(self.user_email)
+        self.user_username = "test_username"
+        self.user = get_user_model().objects.create_user(
+            self.user_email, self.user_password, self.user_username
+        )
         self.user.set_password(self.user_password)
 
         if settings.AUTH_USER_MODEL == "custom_user.EmailUser":

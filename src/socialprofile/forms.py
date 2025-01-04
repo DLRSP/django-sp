@@ -1,4 +1,5 @@
 """Django forms for the socialprofile application"""
+
 import logging
 
 from crispy_forms.bootstrap import (
@@ -16,6 +17,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_countries.widgets import CountrySelectWidget
+# from django.conf import settings
 
 from .models import SocialProfile
 
@@ -67,9 +69,15 @@ class SocialProfileForm(forms.ModelForm):
             "image",
             "cropping",
             "image_avatar_predef",
+            "google_username",
             "twitter_username",
             "instagram_username",
             "facebook_username",
+            "google_email",
+            "twitter_email",
+            "instagram_email",
+            "facebook_email",
+            "live_email",
             "country",
             "city",
             "postalcode",
@@ -77,6 +85,18 @@ class SocialProfileForm(forms.ModelForm):
             "description",
             "visible",
         ]
+        # todo: Avoid bound_field = form[field] missing fields
+        # if "google" in str(settings.AUTHENTICATION_BACKENDS):
+        #     fields.append("google_email")
+        # if "twitter" in str(settings.AUTHENTICATION_BACKENDS):
+        #     fields.append("twitter_email")
+        # if "instagram" in str(settings.AUTHENTICATION_BACKENDS):
+        #     fields.append("instagram_email")
+        # if "facebook" in str(settings.AUTHENTICATION_BACKENDS):
+        #     fields.append("facebook_email")
+        # if "live" in str(settings.AUTHENTICATION_BACKENDS):
+        #     fields.append("live_email")
+
         widgets = {
             "country": CountrySelectWidget(layout="{widget}"),
             "gender": forms.RadioSelect,
@@ -94,9 +114,13 @@ class SocialProfileForm(forms.ModelForm):
         # self.helper.form_show_errors = True
         # self.helper.use_custom_control = True
 
+        # disable all mail's fields to avoid hijacking inside html
+        for nam, field in self.fields.items():
+            if "email" in nam:
+                field.disabled = True
+
         # self.helper.form_show_labels = False
         self.fields["username"].label = False
-        self.fields["email"].label = False
         # self.fields["country"].label = False
         self.fields["twitter_username"].label = False
         self.fields["facebook_username"].label = False
@@ -130,7 +154,7 @@ class SocialProfileForm(forms.ModelForm):
             Accordion(
                 AccordionGroup(
                     _("Contact"),
-                    UneditableField("email"),
+                    # UneditableField("email"),
                     Field("phone_number"),
                     Field("url"),
                     active=False,
@@ -176,6 +200,34 @@ class SocialProfileForm(forms.ModelForm):
                     ),
                 ),
                 AccordionGroup(
+                    _("Mails"),
+                    Row(
+                        Field("email",
+                            placeholder=f"Mail",
+                            readonly=True
+                        ),Field(
+                            "google_email",
+                            placeholder=f"Google Mail",
+                            readonly=True
+                        ),Field(
+                            "twitter_email",
+                            placeholder=f"Twitter Mail",
+                            readonly=True
+                        ),
+                        Field(
+                            "instagram_email",
+                            placeholder=f"Instagram Mail",
+                            readonly=True
+                        ),
+                        Field(
+                            "facebook_email",
+                            placeholder=f"Facebook Mail",
+                            readonly=True
+                        ),
+                        css_class="row mt-3",
+                    ),
+                ),
+                AccordionGroup(
                     _("Address"),
                     Field(
                         PrependedText(
@@ -215,6 +267,9 @@ class SocialProfileForm(forms.ModelForm):
             ),
         )
         # self.helper.fields['email'].initial = "test"
+
+        # for nam, field in self.fields.items():
+        #     field.disabled = True
 
     def clean_description(self):
         """Automatically called by Django, this method 'cleans' the description, e.g. stripping HTML out of desc"""

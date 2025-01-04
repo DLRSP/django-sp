@@ -26,6 +26,8 @@ class SocialProfileFormTestCase(TestCase):
             username="user1",
         )
         self.user1.set_password("user1password")
+        # todo: check because is not rendered as field inside forms
+        self.user1.username = "user1"
         self.user1.gender = "other"
         self.user1.url = "http://test.com"
         self.user1.description = "Test User 1"
@@ -75,7 +77,11 @@ class SocialProfileFormTestCase(TestCase):
         data["gender"] = "female"
         data["url"] = "http://new.url/"
         data["image_url"] = "http://new.image.url/"
+        # data["country"] = 'en' # Raise error
+        data["country"] = "IT"
         form = SocialProfileForm(data=data, instance=self.user1)
+        if not form.is_valid():
+            LOGGER.error(form.errors)
         self.assertTrue(form.is_valid())
         form.save()
         self.assertEqual(self.user1.description, "new description")
@@ -90,6 +96,8 @@ class SocialProfileFormTestCase(TestCase):
         data["description"] = '<a href="http://bad.url">Bad Link</a>'
         data["gender"] = "female"
         form = SocialProfileForm(data=data, instance=self.user1)
+        if not form.is_valid():
+            LOGGER.error(form.errors)
         self.assertTrue(form.is_valid())
         form.save()
         self.assertEqual(self.user1.description, "Bad Link")

@@ -3,6 +3,7 @@ Alternative implementation of Django's authentication User model, which allows t
 This alternative implementation is activated by setting ``AUTH_USER_MODEL = 'socialprofile.SocialProfile'`` in
 settings.py, otherwise the default Django or another implementation is used.
 """
+
 import logging
 
 from django.conf import settings
@@ -47,25 +48,37 @@ class SocialProfileManager(BaseUserManager):
         except self.model.DoesNotExist:
             return self.get(is_active=True, email=username)
 
-    def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
+    def _create_user(
+        self,
+        email,
+        password,
+        username=None,
+        is_staff=False,
+        is_superuser=False,
+        is_active=True,
+        **extra_fields,
+    ):
         """
         Creates and saves a User with the given email and password.
         :param str email: user email
         :param str password: user password
+        :param str username: user's name
         :param bool is_staff: whether user staff or not
         :param bool is_superuser: whether user admin or not
+        :param bool is_active: user state active/disabled
         :return socialprofile.models.SocialProfile user: user
         :raise ValueError: email is not set
         """
-        now = timezone.localtime(timezone.now())
+        now = timezone.now()
         if not email:
             raise ValueError(_("The given email must be set"))
         email = self.normalize_email(email)
         user = self.model(
             email=email,
+            # username=username,
             is_staff=is_staff,
-            is_active=True,
             is_superuser=is_superuser,
+            is_active=is_active,
             last_login=now,
             date_joined=now,
             **extra_fields,
@@ -74,21 +87,45 @@ class SocialProfileManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(
+        self,
+        email,
+        password=None,
+        username=None,
+        is_staff=False,
+        is_superuser=False,
+        is_active=True,
+        **extra_fields,
+    ):
         """
         Create and save a SocialProfile with the given email and password.
         :param str email: user email
         :param str password: user password
+        :param str username: user's name
+        :param bool is_staff: whether user staff or not
+        :param bool is_superuser: whether user admin or not
+        :param bool is_active: user state active/disabled
         :return socialprofile.models.SocialProfile user: regular user
         """
-        is_staff = extra_fields.pop("is_staff", False)
-        is_superuser = extra_fields.pop("is_superuser", False)
+        # is_staff = extra_fields.pop("is_staff", False)
+        # is_superuser = extra_fields.pop("is_superuser", False)
         return self._create_user(
-            email, password, is_staff, is_superuser, **extra_fields
+            email, password, username, is_staff, is_superuser, is_active, **extra_fields
         )
 
-    def create_superuser(self, email, password, **extra_fields):
-        return self._create_user(email, password, True, True, **extra_fields)
+    def create_superuser(
+        self,
+        email,
+        password=None,
+        username=None,
+        is_staff=True,
+        is_superuser=True,
+        is_active=True,
+        **extra_fields,
+    ):
+        return self._create_user(
+            email, password, username, is_staff, is_superuser, is_active, **extra_fields
+        )
 
 
 class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
@@ -332,6 +369,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     )
 
     # Add Info retrieved by Google
+    google_email = models.EmailField(
+        verbose_name=_("Google's Email"), max_length=254, null=True, blank=True
+    )
     google_username = models.CharField(
         _("Google Username"),
         max_length=30,
@@ -361,6 +401,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     )
 
     # Add Info retrieved by Twitter
+    twitter_email = models.EmailField(
+        verbose_name=_("Twitter's Email"), max_length=254, null=True, blank=True
+    )
     twitter_username = models.CharField(
         _("Twitter Username"),
         max_length=30,
@@ -383,6 +426,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Twitter Avatar"), max_length=500, null=True, blank=True
     )
 
+    # Add Info retrieved by Facebook
+    facebook_email = models.EmailField(
+        verbose_name=_("Facebook's Email"), max_length=254, null=True, blank=True
+    )
     facebook_username = models.CharField(
         _("Facebook Username"),
         max_length=30,
@@ -399,6 +446,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Facebook Avatar"), max_length=500, null=True, blank=True
     )
 
+    # Add Info retrieved by Instagram
+    instagram_email = models.EmailField(
+        verbose_name=_("Instagram's Email"), max_length=254, null=True, blank=True
+    )
     instagram_username = models.CharField(
         _("Instagram Username"),
         max_length=30,
@@ -416,6 +467,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     )
 
     # Add Info retrieved by Live
+    live_email = models.EmailField(
+        verbose_name=_("Live's Email"), max_length=254, null=True, blank=True
+    )
     live_username = models.CharField(
         _("Live Username"),
         max_length=30,
@@ -474,7 +528,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         Returns the first_name plus the last_name, with a space in between else email
         """
         full_name = f"{self.first_name} {self.last_name}"
-        if full_name:
+        if len(full_name) > 1:
             return full_name.strip()
         return self.get_email()
 
@@ -482,7 +536,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         """
         Returns the short name for the user.
         """
-        return self.first_name
+        if len(self.first_name) > 1:
+            return self.first_name
+        return self.get_email()
 
     def get_avatar_img(self):
         """
@@ -526,52 +582,6 @@ class SocialProfile(AbstractSocialProfile):
 
     class Meta(AbstractSocialProfile.Meta):  # noqa: D101
         swappable = "AUTH_USER_MODEL"
-
-
-class AuditModelMixin(models.Model):
-    """
-    Mixin that provides fields created and modified at and by fields
-    """
-
-    created = models.DateTimeField(_("Created"), auto_now_add=True)
-    created_by = models.ForeignKey(
-        SocialProfile,
-        verbose_name=_("Created By"),
-        on_delete=models.CASCADE,
-        related_name="%(class)s_created_by",
-    )
-    modified = models.DateTimeField(_("Modified"), blank=True, null=True)
-    modified_by = models.ForeignKey(
-        SocialProfile,
-        blank=True,
-        null=True,
-        verbose_name=_("Modified By"),
-        on_delete=models.CASCADE,
-        related_name="%(class)s_modified_by",
-    )
-
-    class Meta:
-        abstract = True
-
-
-class PublishModelMixin(models.Model):
-    """
-    Mixin that provides fields publish at and by fields
-    """
-
-    publish = models.DateTimeField(_("Published"), blank=True, null=True)
-    publish_by = models.ForeignKey(
-        SocialProfile,
-        blank=True,
-        null=True,
-        verbose_name=_("Published By"),
-        on_delete=models.CASCADE,
-        related_name="%(class)s_publish_by",
-    )
-    published = models.BooleanField(_("Publish"), default=False)
-
-    class Meta:
-        abstract = True
 
 
 # def __str__(self):

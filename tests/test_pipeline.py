@@ -1,9 +1,11 @@
 """Unit Tests for the socialprofile module forms"""
+
 import logging
 
 from django.test import TestCase
 from social_core.backends.google import GoogleOAuth2
 from social_core.backends.twitter import TwitterOAuth
+from social_core.backends.facebook import FacebookOAuth2
 
 from socialprofile.models import SocialProfile
 from socialprofile.pipeline import socialprofile_extra_values
@@ -18,12 +20,29 @@ class SocialProfilePipelineTestCase(TestCase):
         """Set up common assets for tests"""
         LOGGER.debug("SocialProfile Pipeline Tests setUp")
         self.user1 = SocialProfile.objects.create_user(
-            "user1", "user1@user1.com", "user1password"
+            "user1@user1.com", "mypassword", "user1"
         )
-        self.user1.gender = "other"
-        self.user1.url = "http://test.com"
         self.user1.description = "Test User 1"
-        self.user1.image_url = (
+        self.user1.gender = "other"
+        self.user1.url = "http://test.url"
+
+        self.user1.google_url = "http://test.url"
+        self.user1.google_avatar = (
+            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+        )
+
+        self.user1.twitter_url = "http://test.url"
+        self.user1.twitter_avatar = (
+            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+        )
+
+        self.user1.instagram_url = "http://test.url"
+        self.user1.instagram_avatar = (
+            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
+        )
+
+        self.user1.facebook_url = "http://test.url"
+        self.user1.facebook_avatar = (
             "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
         )
         self.user1.save()
@@ -36,35 +55,34 @@ class SocialProfilePipelineTestCase(TestCase):
         response = {
             "name": {"familyName": "User 1", "givenName": "Test"},
             "gender": "other",
-            "image": {"url": "http://image.url"},
+            "picture": "http://image-google.url",
             "occupation": "User Description",
-            "url": "http://test.com",
+            "url": "http://google.url",
         }
 
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
+        self.assertTrue(self.user1.edited_by_google)
         self.assertEqual(self.user1.description, "User Description")
         self.assertEqual(self.user1.gender, "other")
-        self.assertEqual(self.user1.image_url, "http://image.url")
-        self.assertEqual(self.user1.url, "http://test.com")
+        self.assertEqual(self.user1.google_avatar, "http://image-google.url")
+        self.assertEqual(self.user1.google_url, "http://google.url")
 
-    # def test_socialprofile_pipeline_facebook(self):
-    #     """Test editing executing pipeline methods in isolation for facebook"""
-    #     LOGGER.debug("Test socialprofile pipeline Facebook")
-    #     backend = Facebook2OAuth2()
-    #     response = {
-    #         'name': {
-    #             'last_name': 'User 1',
-    #             'first_name': 'Test'
-    #         },
-    #         'gender': 'other',
-    #         'picture': {'data': {'url': 'http://image.url'}},
-    #         'link': 'http://test.com'
-    #     }
-    #
-    #     socialprofile_extra_values(backend, {}, response, '1', self.user1)
-    #     self.assertEquals(self.user1.gender, 'other')
-    #     self.assertEquals(self.user1.image_url, 'http://image.url')
-    #     self.assertEquals(self.user1.url, 'http://test.com')
+    def test_socialprofile_pipeline_facebook(self):
+        """Test editing executing pipeline methods in isolation for facebook"""
+        LOGGER.debug("Test socialprofile pipeline Facebook")
+        backend = FacebookOAuth2()
+        response = {
+            "name": {"last_name": "User 1", "first_name": "Test"},
+            "gender": "other",
+            "picture": {"data": {"url": "http://image-facebook.url"}},
+            "link": "http://facebook.url",
+        }
+
+        socialprofile_extra_values(backend, {}, response, "1", self.user1)
+        self.assertTrue(self.user1.edited_by_facebook)
+        self.assertEquals(self.user1.gender, "other")
+        self.assertEquals(self.user1.facebook_avatar, "http://image-facebook.url")
+        self.assertEquals(self.user1.facebook_url, "http://facebook.url")
 
     def test_socialprofile_pipeline_twitter(self):
         """Test editing executing pipeline methods in isolation for twitter"""
@@ -73,13 +91,14 @@ class SocialProfilePipelineTestCase(TestCase):
         response = {
             "name": {"last_name": "User 1", "first_name": "Test"},
             "gender": "other",
-            "profile_image_url_https": "http://image.url",
+            "profile_image_url_https": "http://image-twitter.url",
             "description": "User Description",
-            "url": "http://test.com",
+            "url": "http://twitter.url",
         }
 
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
+        self.assertTrue(self.user1.edited_by_twitter)
         self.assertEqual(self.user1.description, "User Description")
         self.assertEqual(self.user1.gender, "other")
-        self.assertEqual(self.user1.image_url, "http://image.url")
-        self.assertEqual(self.user1.url, "http://test.com")
+        self.assertEqual(self.user1.twitter_avatar, "http://image-twitter.url")
+        self.assertEqual(self.user1.twitter_url, "http://twitter.url")

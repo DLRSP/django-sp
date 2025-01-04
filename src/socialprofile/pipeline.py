@@ -84,13 +84,13 @@ def google_extra_values(backend, details, response, uid, user, *args, **kwargs):
         if description:
             user.description = description
 
-    username_google = response.get("username")
-    if username_google:
-        user.username_google = username_google
+    google_username = response.get("username")
+    if google_username:
+        user.google_username = google_username
 
     user.google_verified = response.get("email_verified", False)
     user.google_isPlusUser = response.get("isPlusUser", False)
-    user.google_plusUrl = response.get("url", "")
+    user.google_url = response.get("url", "")
     user.google_circledByCount = response.get("circledByCount", 0)
     user.google_language = response.get("language", "")
     user.google_kind = response.get("kind", "")
