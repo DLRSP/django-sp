@@ -1,4 +1,5 @@
 """Test's settings"""
+
 DEBUG = False
 
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
@@ -156,6 +157,12 @@ AUTHENTICATION_BACKENDS = (
     "axes.backends.AxesBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
+
+# ToDo: test for tests/test_user.py::EmailUserAdminTest::
+OAUTH2_PROVIDER = {
+    "OAUTH2_VALIDATOR_CLASS": "socialprofile.validators.AxesOAuth2Validator",
+    "SCOPES": {"read": "Read scope", "write": "Write scope"},
+}
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
