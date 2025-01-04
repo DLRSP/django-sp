@@ -390,6 +390,7 @@ django==4.2.17 \
     #   django-errors
     #   django-formtools
     #   django-jenkins
+    #   django-model-mixin
     #   django-oauth-toolkit
     #   django-otp
     #   django-phonenumber-field
@@ -433,6 +434,10 @@ django-image-cropping==1.7 \
 django-jenkins==0.110.0 \
     --hash=sha256:2dda72ffc85311612cadf400b90900be4972867e074daf1f1602c607a9899ba8 \
     --hash=sha256:a8a11487323c90dc77e781fce584341c8f40b50e93c846550167ea71e2b41956
+    # via -r requirements/requirements.in
+django-model-mixin==0.3.3 \
+    --hash=sha256:1da66ead6b94fad5ab88dca47ba1b5e38ec5c53797583a2cf73bebdf51babca0 \
+    --hash=sha256:71b6b8f1f53c990b26adacf10c50b96344eb6fed2c74ddc18c3cab855bba1f8a
     # via -r requirements/requirements.in
 django-oauth-toolkit==3.0.1 \
     --hash=sha256:3ef00b062a284f2031b0732b32dc899e3bbf0eac221bbb1cffcb50b8932e55ed \
