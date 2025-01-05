@@ -13,6 +13,7 @@ from crispy_forms.bootstrap import (
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
 from django import forms
+from django.conf import settings
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -229,13 +230,13 @@ class SocialProfileForm(forms.ModelForm):
                 ),
                 AccordionGroup(
                     _("Address"),
-                    Field(
-                        PrependedText(
-                            "country",
-                            mark_safe(
-                                '<img class="country-select-flag" id="flag_id_country" src="/static/flags/it.gif" style="margin: 4px 4px 0" width="25" height="20">'
-                            ),
-                        )
+                    PrependedText(
+                        "country",
+                        mark_safe(
+                            f'<img class="country-select-flag" id="flag_id_country" '
+                            f'src="{settings.STATIC_URL}flags/it.gif" '
+                            f'style="margin: 4px 4px 0" width="25" height="20">'
+                        ),
                     ),
                     Row(
                         Column("city", css_class="col-md-6"),
