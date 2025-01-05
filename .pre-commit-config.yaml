@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v4.4.0
   hooks:
   - id: check-added-large-files
   - id: check-case-conflict
@@ -12,26 +12,27 @@ repos:
   - id: trailing-whitespace
     exclude: .bumpversion.cfg
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.19.1
+  rev: v3.10.1
   hooks:
   - id: pyupgrade
     args: [--py36-plus]
 - repo: https://github.com/psf/black
-  rev: 24.10.0
+  rev: 23.7.0
   hooks:
   - id: black
 - repo: https://github.com/asottile/blacken-docs
-  rev: 1.19.1
+  rev: 1.15.0
   hooks:
   - id: blacken-docs
     additional_dependencies:
-    - black==21.9b0
+    - black>=22.12.0
 - repo: https://github.com/pycqa/isort
-  rev: 5.13.2
+  rev: 5.12.0
   hooks:
   - id: isort
+    args: ["--profile", "black"]
 - repo: https://github.com/PyCQA/flake8
-  rev: 7.1.1
+  rev: 6.1.0
   hooks:
   - id: flake8
     additional_dependencies:
@@ -40,8 +41,8 @@ repos:
     - flake8-tidy-imports
     - flake8-typing-imports
 - repo: https://github.com/mgedmin/check-manifest
-  rev: "0.50"
+  rev: "0.49"
   hooks:
   - id: check-manifest
     args: [--no-build-isolation]
-    additional_dependencies: ["Django>=2.2"]
+    additional_dependencies: ["Django>=3.2"]

@@ -4,7 +4,6 @@
 
 import logging
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.forms.models import model_to_dict
 from django.test import TestCase
 from social.apps.django_app.default.models import UserSocialAuth

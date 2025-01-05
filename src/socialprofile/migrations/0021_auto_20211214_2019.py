@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("socialprofile", "0020_remove_socialprofile_last_accessed"),
     ]

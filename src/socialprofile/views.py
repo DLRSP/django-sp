@@ -6,7 +6,7 @@ import logging
 import sweetify
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import REDIRECT_FIELD_NAME, login, get_user_model
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -14,6 +14,7 @@ from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+
 # from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DeleteView, TemplateView, UpdateView
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope
@@ -45,6 +46,7 @@ DEFAULT_RETURNTO_PATH = getattr(settings, "DEFAULT_RETURNTO_PATH", "/")
 #     else:
 #         return HttpResponse(False)
 #
+
 
 # ViewSets define the view behavior.
 class SocialProfileViewSet(viewsets.ModelViewSet):
@@ -306,7 +308,6 @@ class SocialProfileEditView(UpdateView):
                     }
                 )
             except Exception as e:
-
                 if custom_alerts:
                     sweetify.toast(
                         self.request,
