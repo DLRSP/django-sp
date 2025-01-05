@@ -6,7 +6,7 @@
 
 ## GitHub ![GitHub release](https://img.shields.io/github/tag/DLRSP/django-sp.svg) ![GitHub release](https://img.shields.io/github/release/DLRSP/django-sp.svg)
 
-## Test [![codecov.io](https://codecov.io/github/DLRSP/django-sp/coverage.svg?branch=master)](https://codecov.io/github/DLRSP/django-sp?branch=master)
+## Test [![codecov.io](https://codecov.io/github/DLRSP/django-sp/coverage.svg?branch=main)](https://codecov.io/github/DLRSP/django-sp?branch=main)
 
 Report Issues with [***waffle.io***](https://waffle.io/DLRSP/django-sp/join)
 
