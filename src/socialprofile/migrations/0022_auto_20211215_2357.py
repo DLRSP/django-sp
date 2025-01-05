@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("socialprofile", "0021_auto_20211214_2019"),
     ]

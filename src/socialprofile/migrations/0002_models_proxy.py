@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("axes", "0003_auto_20160322_0929"),
         ("oauth2_provider", "0002_auto_20190406_1805"),

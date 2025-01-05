@@ -1,12 +1,14 @@
+"""Unit Tests for the socialprofile module tags """
+
+# pylint: disable=R0904, C0103
+
 from django.conf import settings
 from django.template import Context, Template
 from django.test import TestCase
-from django.utils import translation
 from social_core.backends.utils import load_backends
 
 
 class TestSocialProfileTags(TestCase):
-
     TEMPLATE_BACKEND_NAME = Template(
         "{% load socialprofile_tags %}{% for sublist in available_backends|social_backends %}{% for name, backend in sublist %}"
         "{{ name }} "
