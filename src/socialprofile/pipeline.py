@@ -130,7 +130,7 @@ def twitter_extra_values(backend, details, response, uid, user, *args, **kwargs)
     if not user.edited_by_user:
         try:
             first_name, last_name = response.get("name", "").split(" ", 1)
-        except:
+        except Exception:
             first_name = response.get("name", "")
             last_name = ""
         user.last_name = last_name

@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("socialprofile", "0002_models_proxy"),
         ("socialprofile", "0002_auto_20170107_0237"),

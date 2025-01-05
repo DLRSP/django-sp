@@ -8,7 +8,6 @@ import socialprofile.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("socialprofile", "0003_merge_20200207_1147"),
     ]

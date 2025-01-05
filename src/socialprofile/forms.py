@@ -18,7 +18,6 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_countries.widgets import CountrySelectWidget
-# from django.conf import settings
 
 from .models import SocialProfile
 
@@ -203,27 +202,22 @@ class SocialProfileForm(forms.ModelForm):
                 AccordionGroup(
                     _("Mails"),
                     Row(
-                        Field("email",
-                            placeholder=f"Mail",
-                            readonly=True
-                        ),Field(
-                            "google_email",
-                            placeholder=f"Google Mail",
-                            readonly=True
-                        ),Field(
-                            "twitter_email",
-                            placeholder=f"Twitter Mail",
-                            readonly=True
+                        Field("email", placeholder=f"Mail", readonly=True),
+                        Field(
+                            "google_email", placeholder=f"Google Mail", readonly=True
+                        ),
+                        Field(
+                            "twitter_email", placeholder=f"Twitter Mail", readonly=True
                         ),
                         Field(
                             "instagram_email",
                             placeholder=f"Instagram Mail",
-                            readonly=True
+                            readonly=True,
                         ),
                         Field(
                             "facebook_email",
                             placeholder=f"Facebook Mail",
-                            readonly=True
+                            readonly=True,
                         ),
                         css_class="row mt-3",
                     ),

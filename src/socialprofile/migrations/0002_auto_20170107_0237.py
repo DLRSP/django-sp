@@ -5,7 +5,6 @@ import socialprofile.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("socialprofile", "0001_initial"),
     ]

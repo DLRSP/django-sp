@@ -1,7 +1,7 @@
-"""EmailUser tests."""
+"""Unit Tests for the socialprofile module user"""
 
-import os
-import re
+# pylint: disable=R0904, C0103
+
 from unittest import skipIf, skipUnless
 from unittest.mock import patch
 
@@ -11,13 +11,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.core import mail, management
 from django.db import connection
-from django.forms.fields import Field
 from django.http import HttpRequest
 from django.test import TestCase
-from django.test.utils import override_settings
-from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 
 try:
     from django.utils.encoding import force_text
@@ -35,7 +31,6 @@ except ImportError:
 
 
 class UserTest(TestCase):
-
     user_email = "newuser@localhost.local"
     user_password = "1234"
 

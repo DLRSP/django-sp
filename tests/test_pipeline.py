@@ -3,9 +3,9 @@
 import logging
 
 from django.test import TestCase
+from social_core.backends.facebook import FacebookOAuth2
 from social_core.backends.google import GoogleOAuth2
 from social_core.backends.twitter import TwitterOAuth
-from social_core.backends.facebook import FacebookOAuth2
 
 from socialprofile.models import SocialProfile
 from socialprofile.pipeline import socialprofile_extra_values
@@ -80,9 +80,9 @@ class SocialProfilePipelineTestCase(TestCase):
 
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
         self.assertTrue(self.user1.edited_by_facebook)
-        self.assertEquals(self.user1.gender, "other")
-        self.assertEquals(self.user1.facebook_avatar, "http://image-facebook.url")
-        self.assertEquals(self.user1.facebook_url, "http://facebook.url")
+        self.assertEqual(self.user1.gender, "other")
+        self.assertEqual(self.user1.facebook_avatar, "http://image-facebook.url")
+        self.assertEqual(self.user1.facebook_url, "http://facebook.url")
 
     def test_socialprofile_pipeline_twitter(self):
         """Test editing executing pipeline methods in isolation for twitter"""

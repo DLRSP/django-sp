@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("oauth2_provider", "0005_auto_20211222_2352"),
         ("socialprofile", "0024_auto_20220111_0008"),
