@@ -383,9 +383,9 @@ defusedxml==0.8.0rc2 \
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.25 \
-    --hash=sha256:7ca38a78654aee72378594d63e51636c04b8e28574f5505dff630895b5472777 \
-    --hash=sha256:a52ea7fcf280b16f7b739cec38fa6d3f8953a5456986944c3ca97e79882b4e38
+django==5.1.5 \
+    --hash=sha256:19bbca786df50b9eca23cee79d495facf55c8f5c54c529d9bf1fe7b5ea086af3 \
+    --hash=sha256:c46eb936111fffe6ec4bc9930035524a8be98ec2f74d8a0ff351226a3e52f459
     # via
     #   -r requirements/requirements.in
     #   django-appconf
@@ -412,9 +412,9 @@ django-axes==7.0.1 \
     --hash=sha256:16121bbb7bacf1ed83f23a4800ac168707ffce014407df1049aa4f2ea28d3d52 \
     --hash=sha256:31832eff26735fd1c600b30d987eb848fea175e59b256da43f36fe205a474961
     # via -r requirements/requirements.in
-django-cors-headers==4.5.0 \
-    --hash=sha256:28c1ded847aa70208798de3e42422a782f427b8b720e8d7319d34b654b5978e6 \
-    --hash=sha256:6c01a85cf1ec779a7bde621db853aa3ce5c065a5ba8e27df7a9f9e8dac310f4f
+django-cors-headers==4.6.0 \
+    --hash=sha256:14d76b4b4c8d39375baeddd89e4f08899051eeaf177cb02a29bd6eae8cf63aa8 \
+    --hash=sha256:8edbc0497e611c24d5150e0055d3b178c6534b8ed826fb6f53b21c63f5d48ba3
     # via -r requirements/requirements.in
 django-countries==7.6.1 \
     --hash=sha256:1ed20842fe0f6194f91faca21076649513846a8787c9eb5aeec3cbe1656b8acc \
@@ -1009,9 +1009,7 @@ python3-openid==3.2.0 \
 pytz==2025.1 \
     --hash=sha256:89dd22dca55b46eac6eda23b2d72721bf1bdfef212645d81513ef5d03038de57 \
     --hash=sha256:c2db42be2a2518b28e65f9207c4d05e6ff547d1efa4086469ef855e4ab70178e
-    # via
-    #   django
-    #   django-oauth-toolkit
+    # via django-oauth-toolkit
 qrcode==7.4.2 \
     --hash=sha256:581dca7a029bcb2deef5d01068e39093e80ef00b4a61098a2182eac59d01643a \
     --hash=sha256:9dd969454827e127dbd93696b20747239e6d540e082937c90f14ac95b30f5845
