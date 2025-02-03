@@ -1,4 +1,4 @@
-"""Unit Tests for the socialprofile module tags """
+"""Unit Tests for the socialprofile module tags"""
 
 # pylint: disable=R0904, C0103
 

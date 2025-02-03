@@ -1,6 +1,6 @@
 """
-    Master URL Pattern List for the application.  Most of the patterns here should be top-level
-    pass-offs to sub-modules, who will have their own urls.py defining actions within.
+Master URL Pattern List for the application.  Most of the patterns here should be top-level
+pass-offs to sub-modules, who will have their own urls.py defining actions within.
 """
 
 from django.conf.urls import include
