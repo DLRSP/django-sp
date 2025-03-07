@@ -431,9 +431,9 @@ defusedxml==0.8.0rc2 \
     # via
     #   python3-openid
     #   social-auth-core
-django==4.2.19 \
-    --hash=sha256:6c833be4b0ca614f0a919472a1028a3bbdeb6f056fa04023aeb923346ba2c306 \
-    --hash=sha256:a104e13f219fc55996a4e416ef7d18ab4eeb44e0aa95174c192f16cda9f94e75
+django==4.2.20 \
+    --hash=sha256:213381b6e4405f5c8703fffc29cd719efdf189dec60c67c04f76272b3dc845b9 \
+    --hash=sha256:92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789
     # via
     #   -r requirements/requirements.in
     #   django-appconf
@@ -837,9 +837,9 @@ oauthlib==3.2.2 \
     #   django-oauth-toolkit
     #   requests-oauthlib
     #   social-auth-core
-phonenumbers==8.13.55 \
-    --hash=sha256:25feaf46135f0fb1e61b69513dc97c477285ba98a69204bf5a8cf241a844a718 \
-    --hash=sha256:57c989dda3eabab1b5a9e3d24438a39ebd032fa0172bf68bfd90ab70b3d5e08b
+phonenumbers==9.0.0 \
+    --hash=sha256:094a6f728e3c2b1906df4494a480743a3c797320f721f2b53f1400fd4d8ed5f5 \
+    --hash=sha256:f566eddf6219d9af9b4aad454ba411a1df565d13b875a490fd33d1d202c1148d
     # via -r requirements/requirements.in
 pillow==10.4.0 \
     --hash=sha256:02a2be69f9c9b8c1e97cf2713e789d4e398c751ecfd9967c18d0ce304efbf885 \
