@@ -392,9 +392,9 @@ defusedxml==0.7.1 \
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.25 \
-    --hash=sha256:7ca38a78654aee72378594d63e51636c04b8e28574f5505dff630895b5472777 \
-    --hash=sha256:a52ea7fcf280b16f7b739cec38fa6d3f8953a5456986944c3ca97e79882b4e38
+django==5.1.5 \
+    --hash=sha256:19bbca786df50b9eca23cee79d495facf55c8f5c54c529d9bf1fe7b5ea086af3 \
+    --hash=sha256:c46eb936111fffe6ec4bc9930035524a8be98ec2f74d8a0ff351226a3e52f459
     # via
     #   -r requirements/requirements.in
     #   django-appconf
@@ -469,9 +469,9 @@ django-phonenumber-field==7.3.0 \
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
-django-two-factor-auth==1.16.0 \
-    --hash=sha256:662782a4ab9f59a06afe3be04540dc8dd04e63b06f52520386a546fcad8d2d41 \
-    --hash=sha256:bf57713232b15dc85abbed45244f372bd01de5c145159d3bee3e468af7e2b6d1
+django-two-factor-auth==1.17.0 \
+    --hash=sha256:622e78b0d6cf12eeafa239665d99c1221c399228f2f902fe478aea7759995e0e \
+    --hash=sha256:a2dcc3efedd0ce4b4c14d389766c9fd8e13cabdff5e4e1b645adeb650c550cf7
     # via -r requirements/requirements.in
 django-user-sessions==2.0.0 \
     --hash=sha256:0965554279f556b47062965609fa08b3ae45bbc581001dbe84b2ea599cc67748 \
@@ -1031,9 +1031,7 @@ python3-openid==3.2.0 \
 pytz==2025.1 \
     --hash=sha256:89dd22dca55b46eac6eda23b2d72721bf1bdfef212645d81513ef5d03038de57 \
     --hash=sha256:c2db42be2a2518b28e65f9207c4d05e6ff547d1efa4086469ef855e4ab70178e
-    # via
-    #   django
-    #   django-oauth-toolkit
+    # via django-oauth-toolkit
 qrcode==7.4.2 \
     --hash=sha256:581dca7a029bcb2deef5d01068e39093e80ef00b4a61098a2182eac59d01643a \
     --hash=sha256:9dd969454827e127dbd93696b20747239e6d540e082937c90f14ac95b30f5845
