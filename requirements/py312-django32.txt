@@ -533,9 +533,9 @@ djangorestframework==3.15.1 \
 docopt==0.6.2 \
     --hash=sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491
     # via coveralls
-docutils==0.22 \
-    --hash=sha256:4ed966a0e96a0477d852f7af31bdcb3adc049fbb35ccba358c2ea8a03287615e \
-    --hash=sha256:ba9d57750e92331ebe7c08a1bbf7a7f8143b86c476acd51528b042216a6aad0f
+docutils==0.22.1 \
+    --hash=sha256:806e896f256a17466426544038f30cb860a99f5d4af640e36c284bfcb1824512 \
+    --hash=sha256:d2fb50923a313532b6d41a77776d24cb459a594be9b7e4afa1fbcb5bda1893e6
     # via -r requirements/requirements.in
 easy-thumbnails==2.9 \
     --hash=sha256:532ff633abc5e0d1631b9d0e8e73517c8fa99e37814397fd2ae54c46da244857 \
