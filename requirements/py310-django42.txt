@@ -538,9 +538,9 @@ django-phonenumber-field==8.1.0 \
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
-django-two-factor-auth==1.18.0 \
-    --hash=sha256:3c1a6ece0bf9c72026457b2a66322b382d41ccdace4c328cf536f19f2ba60f3e \
-    --hash=sha256:9307a38d7102981662f762f282966da6db76953c9f89d9d25a629993d545f517
+django-two-factor-auth==1.18.1 \
+    --hash=sha256:9d624db63123141cd95a6afe3d626105c3c29a7c8e25a3d93411dd1fac0be464 \
+    --hash=sha256:ccc9cee10be880037914e572389be6dcae93947709a8a9ff01fb23f7dee254f2
     # via -r requirements/requirements.in
 django-user-sessions==2.0.0 \
     --hash=sha256:0965554279f556b47062965609fa08b3ae45bbc581001dbe84b2ea599cc67748 \
