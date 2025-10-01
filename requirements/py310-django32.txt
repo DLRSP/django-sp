@@ -557,9 +557,9 @@ docutils==0.22.2 \
     --hash=sha256:9fdb771707c8784c8f2728b67cb2c691305933d68137ef95a75db5f4dfbc213d \
     --hash=sha256:b0e98d679283fc3bb0ead8a5da7f501baa632654e7056e9c5846842213d674d8
     # via -r requirements/requirements.in
-easy-thumbnails==2.9 \
-    --hash=sha256:532ff633abc5e0d1631b9d0e8e73517c8fa99e37814397fd2ae54c46da244857 \
-    --hash=sha256:7a7e83b48c2b6808d58ce101ddb9ea6eae2c5285e608cc337c2e110a7bb442b4
+easy-thumbnails==2.10.1 \
+    --hash=sha256:24462d63dd31543ef1585538b2bfefe0db96d3409bb431c70b81548fb2cfc5be \
+    --hash=sha256:a50aa5f99387546c35ab5ba1ea9b3cbbc5658e65601cd34949f62137c32c222e
     # via -r requirements/requirements.in
 frozenlist==1.7.0 \
     --hash=sha256:04fb24d104f425da3540ed83cbfc31388a586a7696142004c577fa61c6298c3f \
@@ -1190,9 +1190,7 @@ python3-openid==3.2.0 \
 pytz==2025.2 \
     --hash=sha256:360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3 \
     --hash=sha256:5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00
-    # via
-    #   django
-    #   django-oauth-toolkit
+    # via django-oauth-toolkit
 qrcode==7.4.2 \
     --hash=sha256:581dca7a029bcb2deef5d01068e39093e80ef00b4a61098a2182eac59d01643a \
     --hash=sha256:9dd969454827e127dbd93696b20747239e6d540e082937c90f14ac95b30f5845
