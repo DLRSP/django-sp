@@ -532,9 +532,9 @@ django-otp==1.5.4 \
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
-django-phonenumber-field==7.3.0 \
-    --hash=sha256:bc6eaa49d1f9d870944f5280258db511e3a1ba5e2fbbed255488dceacae45d06 \
-    --hash=sha256:f9cdb3de085f99c249328293a3b93d4e5fa440c0c8e3b99eb0d0f54748629797
+django-phonenumber-field==8.1.0 \
+    --hash=sha256:9ba66873bf47401b13fc57797fbf85e785864a6bfdc8b9daa3a9012886567045 \
+    --hash=sha256:f19450625574ad3a2de047c409527d0e57699496849e71e53b53e8679ff67b27
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
