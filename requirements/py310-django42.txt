@@ -522,9 +522,9 @@ django-model-mixin==0.3.3 \
     --hash=sha256:1da66ead6b94fad5ab88dca47ba1b5e38ec5c53797583a2cf73bebdf51babca0 \
     --hash=sha256:71b6b8f1f53c990b26adacf10c50b96344eb6fed2c74ddc18c3cab855bba1f8a
     # via -r requirements/requirements.in
-django-oauth-toolkit==3.0.1 \
-    --hash=sha256:3ef00b062a284f2031b0732b32dc899e3bbf0eac221bbb1cffcb50b8932e55ed \
-    --hash=sha256:7200e4a9fb229b145a6d808cbf0423b6d69a87f68557437733eec3c0cf71db02
+django-oauth-toolkit==3.1.0 \
+    --hash=sha256:10ddc90804297d913dfb958edd58d5fac541eb1ca912f47893ca1e482bb2a11f \
+    --hash=sha256:d5a59d07588cfefa8818e99d65040a252eb2ede22512483e2240c91d0b885c8e
     # via -r requirements/requirements.in
 django-otp==1.6.1 \
     --hash=sha256:68dafa008921fd418382492d81b717636d8cc1364e24e8f9222b72264adf3c5d \
