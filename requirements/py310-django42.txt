@@ -550,9 +550,9 @@ django-cors-headers==4.9.0 \
     --hash=sha256:15c7f20727f90044dcee2216a9fd7303741a864865f0c3657e28b7056f61b449 \
     --hash=sha256:fe5d7cb59fdc2c8c646ce84b727ac2bca8912a247e6e68e1fb507372178e59e8
     # via -r requirements/requirements.in
-django-countries==8.1.1 \
-    --hash=sha256:0d51c2a31a3fe01227df56762f2449e97eb843c53f69cf3c9a3a0d6702e34538 \
-    --hash=sha256:7b92907a82d2b44cd4d72d7ad47b2a24c7e7854b6d9dd8f1d2b310f18f659cd6
+django-countries==8.2.0 \
+    --hash=sha256:2b2617bec7c15dc735bdec38ae89f0058e38fddfffdb19a7f6b75ef1e3d5380f \
+    --hash=sha256:6df3883180599052c7dfa9a8be0601792441cfb248935dc229ad1ac92e9e39e3
     # via -r requirements/requirements.in
 django-crispy-forms==2.5 \
     --hash=sha256:066e72a8f152a1334f1c811cc37740868efe3265e5a218f79079ef89f848c3d8 \
@@ -588,9 +588,9 @@ django-otp==1.6.3 \
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
-django-phonenumber-field==8.3.0 \
-    --hash=sha256:193b3acc3b83ff4aad95dd9530a6d01e1c7c1cecbdfa8a56159789bbb85ab0e2 \
-    --hash=sha256:afaf8b16693c8d64646acf7693f5a9c4a809e7f1f9b66a84dabbe04a2d6c1513
+django-phonenumber-field==8.4.0 \
+    --hash=sha256:2b83e843dac35eec6a69880a166487235b737a71a1e38c9a52e5ad67d6996083 \
+    --hash=sha256:7a1cb3a6456edb54d879f11ffa0acb227ded08c93b587035d0f28093f0e46511
     # via
     #   -r requirements/requirements.in
     #   django-two-factor-auth
