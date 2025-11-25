@@ -562,9 +562,9 @@ django-cors-headers==4.9.0 \
     --hash=sha256:15c7f20727f90044dcee2216a9fd7303741a864865f0c3657e28b7056f61b449 \
     --hash=sha256:fe5d7cb59fdc2c8c646ce84b727ac2bca8912a247e6e68e1fb507372178e59e8
     # via -r requirements/requirements.in
-django-countries==8.1.1 \
-    --hash=sha256:0d51c2a31a3fe01227df56762f2449e97eb843c53f69cf3c9a3a0d6702e34538 \
-    --hash=sha256:7b92907a82d2b44cd4d72d7ad47b2a24c7e7854b6d9dd8f1d2b310f18f659cd6
+django-countries==8.2.0 \
+    --hash=sha256:2b2617bec7c15dc735bdec38ae89f0058e38fddfffdb19a7f6b75ef1e3d5380f \
+    --hash=sha256:6df3883180599052c7dfa9a8be0601792441cfb248935dc229ad1ac92e9e39e3
     # via -r requirements/requirements.in
 django-crispy-forms==2.5 \
     --hash=sha256:066e72a8f152a1334f1c811cc37740868efe3265e5a218f79079ef89f848c3d8 \
