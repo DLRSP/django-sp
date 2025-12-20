@@ -542,9 +542,9 @@ django-appconf==1.2.0 \
     --hash=sha256:15a88d60dd942d6059f467412fe4581db632ef03018a3c183fb415d6fc9e5cec \
     --hash=sha256:b81bce5ef0ceb9d84df48dfb623a32235d941c78cc5e45dbb6947f154ea277f4
     # via django-image-cropping
-django-axes==8.0.0 \
-    --hash=sha256:7ddc55f21b704b7e9b3e793a75deac01ff16cb67f561649b04336e1e96980035 \
-    --hash=sha256:f95b6ae67fd77d44cc688818cef174914c4ad98c48daf65020b6f03f37220e45
+django-axes==8.1.0 \
+    --hash=sha256:50117de17d189497a01d0544a9977b5136764c513085cf15138084de9dd81993 \
+    --hash=sha256:92cae514b6270d4b76c7afa657d5988c28b7c6ac1ce367c368eea2dd976199e7
     # via -r requirements/requirements.in
 django-cors-headers==4.9.0 \
     --hash=sha256:15c7f20727f90044dcee2216a9fd7303741a864865f0c3657e28b7056f61b449 \
