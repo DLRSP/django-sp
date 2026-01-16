@@ -1007,9 +1007,9 @@ oauthlib==3.3.1 \
     #   django-oauth-toolkit
     #   requests-oauthlib
     #   social-auth-core
-phonenumbers==9.0.21 \
-    --hash=sha256:3a0f717fddf901a5a424f47c43fb72722cb45bd25ee87331987b00eafe6855bf \
-    --hash=sha256:df4145cba0a8b3ee9c425d5d9b5dbe1b4fceccc68b030ac549ea13c95592b602
+phonenumbers==9.0.22 \
+    --hash=sha256:645e66cd9a136b3b257b5f941fa97d324124114d31ad3c9f2488682f47ad7ee1 \
+    --hash=sha256:eff985c65575749d1d54e07c56c3517d5243e03e08e4a6191761df9aab2278f2
     # via -r requirements/requirements.in
 pillow==12.1.0 \
     --hash=sha256:00162e9ca6d22b7c3ee8e61faa3c3253cd19b6a37f126cad04f2f88b306f557d \
