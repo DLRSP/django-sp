@@ -464,9 +464,9 @@ defusedxml==0.8.0rc2 \
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.25 \
-    --hash=sha256:7ca38a78654aee72378594d63e51636c04b8e28574f5505dff630895b5472777 \
-    --hash=sha256:a52ea7fcf280b16f7b739cec38fa6d3f8953a5456986944c3ca97e79882b4e38
+django==4.2.29 \
+    --hash=sha256:074d7c4d2808050e528388bda442bd491f06def4df4fe863f27066851bba010c \
+    --hash=sha256:86d91bc8086569c8d08f9c55888b583a921ac1f95ed3bdc7d5659d4709542014
     # via
     #   -r requirements/requirements.in
     #   django-appconf
