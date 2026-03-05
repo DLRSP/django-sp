@@ -772,17 +772,13 @@ idna==3.11 \
     # via
     #   requests
     #   yarl
-importlib-metadata==8.7.1 \
-    --hash=sha256:49fef1ae6440c182052f407c8d34a68f72efc36db9ca90dc0113398f2fdde8bb \
-    --hash=sha256:5a1f80bf1daa489495071efbb095d75a634cf28a8bc299581244063b53176151
-    # via markdown
 jwcrypto==1.5.6 \
     --hash=sha256:150d2b0ebbdb8f40b77f543fb44ffd2baeff48788be71f67f03566692fd55789 \
     --hash=sha256:771a87762a0c081ae6166958a954f80848820b2ab066937dc8b8379d65b1b039
     # via django-oauth-toolkit
-markdown==3.9 \
-    --hash=sha256:9f4d91ed810864ea88a6f32c07ba8bee1346c0cc1f6b1f9f6c822f2a9667d280 \
-    --hash=sha256:d2900fe1782bd33bdbbd56859defef70c2e78fc46668f8eb9df3128138f2cb6a
+markdown==3.8.1 \
+    --hash=sha256:46cc0c0f1e5211ab2e9d453582f0b28a1bfaf058a9f7d5c50386b99b588d8811 \
+    --hash=sha256:a2e2f01cead4828ee74ecca9623045f62216aef2212a7685d6eb9163f590b8c1
     # via -r requirements/requirements.in
 maxminddb==2.8.2 \
     --hash=sha256:027a8bc9e622532196cb84f14f8b18d555b0937a3e0a6e95805db215f98c451b \
@@ -1572,7 +1568,3 @@ yarl==1.22.0 \
     --hash=sha256:f87ac53513d22240c7d59203f25cc3beac1e574c6cd681bbfd321987b69f95fd \
     --hash=sha256:ff86011bd159a9d2dfc89c34cfd8aff12875980e3bd6a39ff097887520e60249
     # via aiohttp
-zipp==3.23.0 \
-    --hash=sha256:071652d6115ed432f5ce1d34c336c0adfd6a884660d1e9712a256d3d3bd4b14e \
-    --hash=sha256:a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166
-    # via importlib-metadata
