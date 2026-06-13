@@ -17,3 +17,58 @@
 	$ python manage.py runserver
 
 
+
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+user = User.objects.get(username=\"example-user\")
+user.is_staff = True
+user.is_admin = True
+user.is_superuser = True
+user.save()
+
+
+# Get current user model from settings
+from django.contrib.auth import get_user_model
+User = get_user_model()
+user = User.objects.create_user('myemail@crazymail.com', 'mypassword')
+user.first_name = 'Tyrone'
+user.last_name = 'Citizen'
+user.save()
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+user = User.objects.create_user('myemail@crazymail.com', 'mypassword', 'myemail')
+user.first_name = 'Tyrone'
+user.last_name = 'Citizen'
+user.save()
+
+
+# Error
+ERROR 2023-12-29 13:19:35,275 log 1728326 139722162782720 Internal Server Error: /it/sp/complete/google-oauth2/
+Traceback (most recent call last):
+  File "[redacted-path]", line 55, in inner
+    response = get_response(request)
+  File "[redacted-path]", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "[redacted-path]", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "[redacted-path]", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "[redacted-path]", line 49, in wrapper
+    return func(request, backend, *args, **kwargs)
+  File "[redacted-path]", line 31, in complete
+    return do_complete(
+  File "[redacted-path]", line 49, in do_complete
+    user = backend.complete(user=user, *args, **kwargs)
+  File "[redacted-path]", line 39, in complete
+    return self.auth_complete(*args, **kwargs)
+  File "[redacted-path]", line 253, in wrapper
+    return func(*args, **kwargs)
+  File "[redacted-path]", line 408, in auth_complete
+    state = self.validate_state()
+  File "[redacted-path]", line 98, in validate_state
+    raise AuthStateMissing(self, "state")
+social_core.exceptions.AuthStateMissing: Session value state missing.
+
+
