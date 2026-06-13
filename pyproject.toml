@@ -165,4 +165,3 @@ allow_dirty = true
 
 [[tool.bumpversion.files]]
 filename = "./src/socialprofile/__init__.py"
-
