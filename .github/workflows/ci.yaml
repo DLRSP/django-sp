@@ -1,0 +1,19 @@
+---
+name: CI/CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ci:
+    # Pin to @main while validating the tox matrix change; tag workflows and bump here after merge.
+    uses: DLRSP/workflows/.github/workflows/ci.yaml@main
+    secrets: inherit
