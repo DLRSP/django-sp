@@ -15,9 +15,19 @@ dynamic = ["version"]
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
-keywords = ["django", "socialprofile"]
+keywords = [
+    "django",
+    "socialprofile",
+    "authentication",
+    "oauth",
+    "social-auth",
+    "2fa",
+    "user-profile",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+    "Topic :: Security",
     "Environment :: Web Environment",
     "Framework :: Django",
     "Framework :: Django :: 3.2",
@@ -41,6 +51,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
+    "Django>=3.2",
     "django-errors",
     "python-social-auth",
     "social-auth-app-django",
@@ -80,6 +91,10 @@ linting = [
 
 [project.urls]
 Homepage = "https://github.com/DLRSP/django-sp"
+Documentation = "https://github.com/DLRSP/django-sp/"
+Repository = "https://github.com/DLRSP/django-sp"
+Issues = "https://github.com/DLRSP/django-sp/issues"
+Changelog = "https://github.com/DLRSP/django-sp/blob/main/CHANGELOG.rst"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
@@ -126,7 +141,6 @@ ignore = [
     "docs/community/third-party-packages.md",
     "docs/tutorial/customize.md",
 ]
-["AGENTS.md"]
 
 # Read by flake8 when flake8-pyproject is installed (extra `linting`).
 [tool.mypy]
