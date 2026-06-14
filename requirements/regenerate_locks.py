@@ -9,7 +9,6 @@ REQ_IN = ROOT / "requirements.in"
 
 LOCKS: dict[str, tuple[str, str]] = {
     "py310-django32": ("3.10", "Django>=3.2a1,<3.3"),
-    "py38-django42": ("3.8", "Django>=4.2,<4.3"),
     "py39-django42": ("3.9", "Django>=4.2,<4.3"),
     "py310-django42": ("3.10", "Django>=4.2,<4.3"),
     "py311-django42": ("3.11", "Django>=4.2,<4.3"),
