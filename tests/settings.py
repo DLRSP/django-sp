@@ -62,7 +62,7 @@ INSTALLED_APPS = [
 ]
 
 # Social Profile
-### Custom Social Profile User
+# Custom Social Profile User
 
 MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",

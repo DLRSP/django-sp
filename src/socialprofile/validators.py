@@ -5,7 +5,9 @@ from oauth2_provider.oauth2_validators import OAuth2Validator
 
 
 class AxesOAuth2Validator(OAuth2Validator):
-    def validate_user(self, username, password, client, request, *args, **kwargs):
+    def validate_user(
+        self, username, password, client, request, *args, **kwargs
+    ):
         """
         Check username and password correspond to a valid and active User
         Set defaults for necessary request object attributes for Axes compatibility.
@@ -26,7 +28,9 @@ class AxesOAuth2Validator(OAuth2Validator):
                 request.GET = body
             elif request.method == "POST":
                 request.POST = body
-        user = authenticate(request=request, username=username, password=password)
+        user = authenticate(
+            request=request, username=username, password=password
+        )
         if user is not None and user.is_active:
             request = _request
             request.user = user

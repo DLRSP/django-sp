@@ -72,7 +72,11 @@ urlpatterns = [
         name="sp_profile_edit_page",
     ),
     # Select Sign Up Method
-    path("select/", never_cache(views.SelectAuthView.as_view()), name="sp_select_page"),
+    path(
+        "select/",
+        never_cache(views.SelectAuthView.as_view()),
+        name="sp_select_page",
+    ),
     # Delete
     path(
         "delete/",
@@ -86,7 +90,9 @@ urlpatterns = [
     # OAuth2 Token
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
     # Rest Framework
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path(
+        "api-auth/", include("rest_framework.urls", namespace="rest_framework")
+    ),
     # path("api-token-auth/", obtain_jwt_token),
     # path("api-token-refresh/', refresh_jwt_token),
     # path("api-token-verify/", verify_jwt_token),

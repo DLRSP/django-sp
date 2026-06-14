@@ -97,7 +97,10 @@ universal = false
 [tool.flake8]
 max-line-length = 80
 select = ["E", "F", "W", "B", "B950", "C", "I", "TYP"]
-ignore = ["E203", "E501", "W503"]
+ignore = ["E203", "E501", "W503", "B950"]
+per-file-ignores = [
+    "**/migrations/*:B950",
+]
 
 [tool.coverage.paths]
 source = ["src", ".tox/*/site-packages"]
@@ -110,6 +113,7 @@ source = ["socialprofile"]
 show_missing = true
 
 [tool.black]
+line-length = 80
 target-version = ['py311']
 
 [tool.isort]

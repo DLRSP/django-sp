@@ -8,7 +8,6 @@ from crispy_forms.bootstrap import (
     Field,
     InlineRadios,
     PrependedText,
-    UneditableField,
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
@@ -202,21 +201,25 @@ class SocialProfileForm(forms.ModelForm):
                 AccordionGroup(
                     _("Mails"),
                     Row(
-                        Field("email", placeholder=f"Mail", readonly=True),
+                        Field("email", placeholder="Mail", readonly=True),
                         Field(
-                            "google_email", placeholder=f"Google Mail", readonly=True
+                            "google_email",
+                            placeholder="Google Mail",
+                            readonly=True,
                         ),
                         Field(
-                            "twitter_email", placeholder=f"Twitter Mail", readonly=True
+                            "twitter_email",
+                            placeholder="Twitter Mail",
+                            readonly=True,
                         ),
                         Field(
                             "instagram_email",
-                            placeholder=f"Instagram Mail",
+                            placeholder="Instagram Mail",
                             readonly=True,
                         ),
                         Field(
                             "facebook_email",
-                            placeholder=f"Facebook Mail",
+                            placeholder="Facebook Mail",
                             readonly=True,
                         ),
                         css_class="row mt-3",

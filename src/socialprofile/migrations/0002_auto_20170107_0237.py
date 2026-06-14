@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="socialprofile",
             name="image",
-            field=image_cropping.fields.ImageCropField(upload_to="user/", blank=True),
+            field=image_cropping.fields.ImageCropField(
+                upload_to="user/", blank=True
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",

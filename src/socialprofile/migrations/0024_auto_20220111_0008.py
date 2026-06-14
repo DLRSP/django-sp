@@ -40,7 +40,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="socialprofile",
             name="edited_by_user",
-            field=models.BooleanField(default=False, verbose_name="User edited"),
+            field=models.BooleanField(
+                default=False, verbose_name="User edited"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
@@ -53,7 +55,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="google_verified",
             field=models.BooleanField(
-                blank=True, default=False, null=True, verbose_name="Google Verified"
+                blank=True,
+                default=False,
+                null=True,
+                verbose_name="Google Verified",
             ),
         ),
         migrations.AlterField(
@@ -117,7 +122,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="twitter_verified",
             field=models.BooleanField(
-                blank=True, default=False, null=True, verbose_name="Twitter Verified"
+                blank=True,
+                default=False,
+                null=True,
+                verbose_name="Twitter Verified",
             ),
         ),
     ]
