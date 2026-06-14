@@ -1,0 +1,20 @@
+---
+name: Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+jobs:
+  docs:
+    uses: DLRSP/workflows/.github/workflows/docs.yaml@main
+    secrets: inherit
