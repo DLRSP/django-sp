@@ -6,8 +6,8 @@ It's an app to for social authentication and other security integrations.
 
 These packages are required:
 
-* Python (3.6, 3.7, 3.8, 3.9, 3.10)
-* Django (2.2, 3.2)
+* Python (3.9+)
+* Django (3.2+)
 
 We **highly recommend** and only officially support the latest patch release of each Python and Django series.
 
@@ -114,7 +114,7 @@ We **highly recommend** and only officially support the latest patch release of 
     ```
 
 7. Add the following .... `XxX` setting.
-    
+
     ``` python title="settings.py"
     # Need by Social Profile / user_sessions
     GEOIP_PATH = '/home/sh/SH_CusData/intf/in/geoip2'
@@ -129,7 +129,7 @@ We **highly recommend** and only officially support the latest patch release of 
     LOGIN_ERROR_URL = '/sp/select/'
     LOGIN_REDIRECT_URL = '/sp/'
     DEFAULT_RETURNTO_PATH = '/sp/'
-   
+
     # Social Auth Redirects Settings
     SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/sp/'
     SOCIAL_AUTH_LOGIN_ERROR_URL = '/sp/login-error/'
@@ -137,7 +137,7 @@ We **highly recommend** and only officially support the latest patch release of 
     SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/sp/new-profile/'
     SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/sp/new-association/'
     ```
-   
+
 9. Add the following .... `XxX` setting.
 
     ``` python title="settings.py"
@@ -174,7 +174,7 @@ We **highly recommend** and only officially support the latest patch release of 
     SOCIAL_AUTH_TWITTER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     ```
 
-  
+
 ## Example
 
 Let's take a look at a quick example of using this project to build a simple App with **custom social login**.

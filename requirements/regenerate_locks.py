@@ -1,4 +1,5 @@
 """Regenerate django-sp requirement locks with target Python and Django pins."""
+
 from __future__ import annotations
 
 import subprocess
