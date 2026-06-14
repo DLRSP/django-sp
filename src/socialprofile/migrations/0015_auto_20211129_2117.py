@@ -18,14 +18,20 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="facebook_url",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Facebook Profile"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Facebook Profile",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="twitter_url",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Twitter Profile"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Twitter Profile",
             ),
         ),
         migrations.AlterField(

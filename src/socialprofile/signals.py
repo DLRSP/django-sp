@@ -21,10 +21,10 @@ def post_save_user(sender, instance, created, *args, **kwargs):
         mail_admins(f"New user [{instance.user}]", "New user was created!")
 
         # ToDo: notify the user with a welcome custom message
-        html_mail = f"""<!DOCTYPE html><html><body>
+        html_mail = """<!DOCTYPE html><html><body>
                         <h1> Welcome!</h1>
                     """
-        html_mail += f"""</body></html>"""
+        html_mail += """</body></html>"""
         plain_message = strip_tags(html_mail)
         send_mail(
             f"Welcome {instance.user}!",

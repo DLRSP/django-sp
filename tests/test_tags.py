@@ -42,7 +42,11 @@ class TestSocialProfileTags(TestCase):
     def test_backend_name(self):
         rendered = self.TEMPLATE_BACKEND_NAME.render(
             Context(
-                {"available_backends": load_backends(settings.AUTHENTICATION_BACKENDS)}
+                {
+                    "available_backends": load_backends(
+                        settings.AUTHENTICATION_BACKENDS
+                    )
+                }
             )
         )
         self.assertEqual(rendered, "google-oauth2 twitter ")
@@ -50,7 +54,11 @@ class TestSocialProfileTags(TestCase):
     def test_backend_icon_name(self):
         rendered = self.TEMPLATE_BACKEND_ICON_NAME.render(
             Context(
-                {"available_backends": load_backends(settings.AUTHENTICATION_BACKENDS)}
+                {
+                    "available_backends": load_backends(
+                        settings.AUTHENTICATION_BACKENDS
+                    )
+                }
             )
         )
         self.assertEqual(rendered, "google twitter ")

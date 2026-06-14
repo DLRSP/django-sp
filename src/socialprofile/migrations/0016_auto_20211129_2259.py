@@ -20,7 +20,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="instagram_url",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Instagram Profile"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Instagram Profile",
             ),
         ),
         migrations.AddField(

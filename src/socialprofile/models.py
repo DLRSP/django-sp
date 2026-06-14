@@ -28,7 +28,12 @@ LOGGER = logging.getLogger(name="socialprofile.models")
 
 class IntegerRangeField(models.IntegerField):
     def __init__(
-        self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs
+        self,
+        verbose_name=None,
+        name=None,
+        min_value=None,
+        max_value=None,
+        **kwargs,
     ):
         self.min_value, self.max_value = min_value, max_value
         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
@@ -110,7 +115,13 @@ class SocialProfileManager(BaseUserManager):
         # is_staff = extra_fields.pop("is_staff", False)
         # is_superuser = extra_fields.pop("is_superuser", False)
         return self._create_user(
-            email, password, username, is_staff, is_superuser, is_active, **extra_fields
+            email,
+            password,
+            username,
+            is_staff,
+            is_superuser,
+            is_active,
+            **extra_fields,
         )
 
     def create_superuser(
@@ -124,7 +135,13 @@ class SocialProfileManager(BaseUserManager):
         **extra_fields,
     ):
         return self._create_user(
-            email, password, username, is_staff, is_superuser, is_active, **extra_fields
+            email,
+            password,
+            username,
+            is_staff,
+            is_superuser,
+            is_active,
+            **extra_fields,
         )
 
 
@@ -197,7 +214,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(
         verbose_name=_("First Name"), max_length=30, blank=True
     )
-    last_name = models.CharField(verbose_name=_("Last Name"), max_length=30, blank=True)
+    last_name = models.CharField(
+        verbose_name=_("Last Name"), max_length=30, blank=True
+    )
     gender = models.CharField(
         verbose_name=_("Gender"),
         max_length=10,
@@ -214,7 +233,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         default=False,
         null=True,
         blank=True,
-        help_text=_("Designates whether the user can log into this admin site."),
+        help_text=_(
+            "Designates whether the user can log into this admin site."
+        ),
     )
     is_active = models.BooleanField(
         verbose_name=_("Active"),
@@ -229,8 +250,12 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(
         verbose_name=_("Date of Birth"), null=True, blank=True
     )
-    date_joined = models.DateTimeField(verbose_name=_("Date Joined"), auto_now_add=True)
-    date_modified = models.DateTimeField(verbose_name=_("Date Updated"), auto_now=True)
+    date_joined = models.DateTimeField(
+        verbose_name=_("Date Joined"), auto_now_add=True
+    )
+    date_modified = models.DateTimeField(
+        verbose_name=_("Date Updated"), auto_now=True
+    )
 
     # status = models.ForeignKey(MembershipStatus, on_delete=models.SET_NULL, null=True, default=1)
     country = CountryField(_("Country"), null=True, blank=True)
@@ -362,7 +387,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Facebook edited"), default=False, null=False, blank=True
     )
     edited_by_instagram = models.BooleanField(
-        verbose_name=_("Instagram edited"), default=False, null=False, blank=True
+        verbose_name=_("Instagram edited"),
+        default=False,
+        null=False,
+        blank=True,
     )
     edited_by_live = models.BooleanField(
         verbose_name=_("Live edited"), default=False, null=False, blank=True
@@ -382,10 +410,16 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Google Plus"), default=False, null=True, blank=True
     )
     google_url = models.URLField(
-        verbose_name=_("Google Plus Page"), max_length=500, null=True, blank=True
+        verbose_name=_("Google Plus Page"),
+        max_length=500,
+        null=True,
+        blank=True,
     )
     google_circledByCount = models.IntegerField(
-        verbose_name=_("Google Circle byCount"), default=0, null=True, blank=True
+        verbose_name=_("Google Circle byCount"),
+        default=0,
+        null=True,
+        blank=True,
     )
     google_language = models.CharField(
         verbose_name=_("Google Language"), max_length=10, null=True, blank=True
@@ -428,7 +462,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
 
     # Add Info retrieved by Facebook
     facebook_email = models.EmailField(
-        verbose_name=_("Facebook's Email"), max_length=254, null=True, blank=True
+        verbose_name=_("Facebook's Email"),
+        max_length=254,
+        null=True,
+        blank=True,
     )
     facebook_username = models.CharField(
         _("Facebook Username"),
@@ -448,7 +485,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
 
     # Add Info retrieved by Instagram
     instagram_email = models.EmailField(
-        verbose_name=_("Instagram's Email"), max_length=254, null=True, blank=True
+        verbose_name=_("Instagram's Email"),
+        max_length=254,
+        null=True,
+        blank=True,
     )
     instagram_username = models.CharField(
         _("Instagram Username"),
@@ -463,7 +503,10 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         blank=True,
     )
     instagram_avatar = models.URLField(
-        verbose_name=_("Instagram Avatar"), max_length=500, null=True, blank=True
+        verbose_name=_("Instagram Avatar"),
+        max_length=500,
+        null=True,
+        blank=True,
     )
 
     # Add Info retrieved by Live
@@ -545,9 +588,7 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         """
         if self.image_avatar:
-            return (
-                "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-            )
+            return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
 
         if self.image_avatar == "socials":
             if self.google_avatar:
@@ -564,7 +605,9 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
                 return static(f"{self.image}")
 
         elif self.image_avatar == "predef":
-            return static(f"socialprofile/img/avatar/{self.image_avatar_predef}")
+            return static(
+                f"socialprofile/img/avatar/{self.image_avatar_predef}"
+            )
 
         else:
             return static(f"{self.image}")

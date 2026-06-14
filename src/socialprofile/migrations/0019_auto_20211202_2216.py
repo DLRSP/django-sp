@@ -30,7 +30,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="socialprofile",
             name="edited_by_user",
-            field=models.NullBooleanField(default=False, verbose_name="User edited"),
+            field=models.NullBooleanField(
+                default=False, verbose_name="User edited"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
@@ -61,7 +63,9 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="username",
             field=models.CharField(
-                error_messages={"unique": "A user with that username already exists."},
+                error_messages={
+                    "unique": "A user with that username already exists."
+                },
                 help_text="Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only",
                 max_length=30,
                 unique=True,

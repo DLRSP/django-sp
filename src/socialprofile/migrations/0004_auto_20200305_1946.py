@@ -43,7 +43,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="postalcode",
             field=models.CharField(
-                blank=True, max_length=255, null=True, verbose_name="Postal Code"
+                blank=True,
+                max_length=255,
+                null=True,
+                verbose_name="Postal Code",
             ),
         ),
         migrations.AlterField(
@@ -56,7 +59,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="socialprofile",
             name="date_of_birth",
-            field=models.DateField(blank=True, null=True, verbose_name="Date of Birth"),
+            field=models.DateField(
+                blank=True, null=True, verbose_name="Date of Birth"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
@@ -78,7 +83,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="socialprofile",
             name="email",
-            field=models.EmailField(max_length=254, verbose_name="Email Address"),
+            field=models.EmailField(
+                max_length=254, verbose_name="Email Address"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
@@ -150,13 +157,18 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="google_circledByCount",
             field=models.IntegerField(
-                blank=True, default=0, null=True, verbose_name="Google Circle byCount"
+                blank=True,
+                default=0,
+                null=True,
+                verbose_name="Google Circle byCount",
             ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
             name="google_isPlusUser",
-            field=models.NullBooleanField(default=False, verbose_name="Google Plus"),
+            field=models.NullBooleanField(
+                default=False, verbose_name="Google Plus"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
@@ -169,14 +181,20 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="google_language",
             field=models.CharField(
-                blank=True, max_length=2, null=True, verbose_name="Google Language"
+                blank=True,
+                max_length=2,
+                null=True,
+                verbose_name="Google Language",
             ),
         ),
         migrations.AlterField(
             model_name="socialprofile",
             name="google_plusUrl",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Google Plus Page"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Google Plus Page",
             ),
         ),
         migrations.AlterField(
@@ -197,7 +215,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="image_url",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Avatar Picture"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Avatar Picture",
             ),
         ),
         migrations.AlterField(
@@ -280,7 +301,9 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="username",
             field=models.CharField(
-                error_messages={"unique": "A user with that username already exists."},
+                error_messages={
+                    "unique": "A user with that username already exists."
+                },
                 help_text="Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.",
                 max_length=30,
                 unique=True,

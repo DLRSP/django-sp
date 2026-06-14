@@ -1,6 +1,5 @@
 """Python Social Auth Pipeline Extensions"""
 
-from requests import request
 from social_core.backends.facebook import FacebookOAuth2
 from social_core.backends.google import GoogleOAuth2
 from social_core.backends.live import LiveOAuth2
@@ -18,7 +17,9 @@ from social_core.backends.twitter import TwitterOAuth
 #         profile.save()
 
 
-def socialprofile_extra_values(backend, details, response, uid, user, *args, **kwargs):
+def socialprofile_extra_values(
+    backend, details, response, uid, user, *args, **kwargs
+):
     """Routes the extra values call to the appropriate back end"""
     if type(backend) is GoogleOAuth2:
         return {
@@ -101,7 +102,9 @@ def google_extra_values(backend, details, response, uid, user, *args, **kwargs):
     return user
 
 
-def facebook_extra_values(backend, details, response, uid, user, *args, **kwargs):
+def facebook_extra_values(
+    backend, details, response, uid, user, *args, **kwargs
+):
     """Populates a UserProfile Object when a new User is created via Facebook Auth"""
     if not user.edited_by_user:
         user.last_name = response.get("last_name", "")
@@ -119,13 +122,17 @@ def facebook_extra_values(backend, details, response, uid, user, *args, **kwargs
     if profile_url:
         user.facebook_url = profile_url
     if response.get("picture", False):
-        user.facebook_avatar = response.get("picture").get("data").get("url", "")
+        user.facebook_avatar = (
+            response.get("picture").get("data").get("url", "")
+        )
     user.edited_by_facebook = True
     user.save()
     return user
 
 
-def twitter_extra_values(backend, details, response, uid, user, *args, **kwargs):
+def twitter_extra_values(
+    backend, details, response, uid, user, *args, **kwargs
+):
     """Populates a UserProfile Object when a new User is created via Twitter Auth"""
     if not user.edited_by_user:
         try:
