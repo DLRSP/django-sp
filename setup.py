@@ -11,7 +11,9 @@ except ImportError:
 
 
 class CompileTranslations(Command):
-    description = "compile message catalogs to MO files via django compilemessages"
+    description = (
+        "compile message catalogs to MO files via django compilemessages"
+    )
     user_options = []  # type: list
 
     def initialize_options(self):
@@ -21,21 +23,26 @@ class CompileTranslations(Command):
         pass
 
     def run(self):
+        try:
+            from django.core.management import call_command
+        except ModuleNotFoundError:
+            return
         curdir = os.getcwd()
         os.chdir(os.path.realpath(os.path.join("src", "socialprofile")))
-        from django.core.management import call_command
-
         call_command("compilemessages")
         os.chdir(curdir)
 
 
 class Build(_build):
-    sub_commands = [("compile_translations", None)] + _build.sub_commands
+    sub_commands = [] + _build.sub_commands
+    if os.path.isdir(
+        os.path.realpath(os.path.join("src", "socialprofile", "locale"))
+    ):
+        sub_commands = [("compile_translations", None)] + _build.sub_commands
 
 
 class InstallLib(_install_lib):
     def run(self):
-        self.run_command("compile_translations")
         _install_lib.run(self)
 
 
