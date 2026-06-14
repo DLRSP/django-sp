@@ -13,28 +13,40 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="facebook_avatar",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Facebook Avatar"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Facebook Avatar",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="google_avatar",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Google Avatar"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Google Avatar",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="instagram_avatar",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Instagram Avatar"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Instagram Avatar",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="twitter_avatar",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Twitter Avatar"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Twitter Avatar",
             ),
         ),
     ]

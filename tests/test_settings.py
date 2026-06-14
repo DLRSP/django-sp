@@ -1,7 +1,7 @@
 SITE_ID = 1
 
 # Social Profile
-### Custom Social Profile User
+# Custom Social Profile User
 AUTH_USER_MODEL = "socialprofile.SocialProfile"
 SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
     "https://www.googleapis.com/auth/drive",

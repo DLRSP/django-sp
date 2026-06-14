@@ -15,12 +15,6 @@ from django.http import HttpRequest
 from django.test import TestCase
 from django.utils import timezone
 
-try:
-    from django.utils.encoding import force_text
-except ImportError:
-    # Only available from Django 4, ignore the tests otherwise
-    from django.utils.encoding import force_str
-
 # from socialprofile.forms import EmailUserChangeForm, EmailUserCreationForm
 
 try:
@@ -36,7 +30,9 @@ class UserTest(TestCase):
 
     def create_user(self):
         """Create and return a new user with self.user_email as login and self.user_password as password."""
-        return get_user_model().objects.create_user(self.user_email, self.user_password)
+        return get_user_model().objects.create_user(
+            self.user_email, self.user_password
+        )
 
     def test_user_creation(self):
         # Create a new user saving the time frame
@@ -48,11 +44,17 @@ class UserTest(TestCase):
 
         # Check user exists and email is correct
         self.assertEqual(get_user_model().objects.all().count(), 1)
-        self.assertEqual(get_user_model().objects.all()[0].email, self.user_email)
+        self.assertEqual(
+            get_user_model().objects.all()[0].email, self.user_email
+        )
 
         # Check date_joined and last_login dates
-        self.assertEqual(get_user_model().objects.all()[0].date_joined, right_now)
-        self.assertEqual(get_user_model().objects.all()[0].last_login, right_now)
+        self.assertEqual(
+            get_user_model().objects.all()[0].date_joined, right_now
+        )
+        self.assertEqual(
+            get_user_model().objects.all()[0].last_login, right_now
+        )
 
         # Check flags
         self.assertTrue(get_user_model().objects.all()[0].is_active)
@@ -128,7 +130,9 @@ class UserManagerTest(TestCase):
     def test_create_superuser(self):
         email_lowercase = "super@user.test"
         password = "password1234$%&/"
-        user = get_user_model().objects.create_superuser(email_lowercase, password)
+        user = get_user_model().objects.create_superuser(
+            email_lowercase, password
+        )
         self.assertEqual(user.email, email_lowercase)
         self.assertTrue(user.check_password, password)
         self.assertTrue(user.is_active)
@@ -156,7 +160,9 @@ class UserManagerTest(TestCase):
     def test_create_user_email_domain_normalize_rfc3696(self):
         # According to http://tools.ietf.org/html/rfc3696#section-3
         # the "@" symbol can be part of the local part of an email address
-        returned = get_user_model().objects.normalize_email(r"Abc\@DEF@EXAMPLE.com")
+        returned = get_user_model().objects.normalize_email(
+            r"Abc\@DEF@EXAMPLE.com"
+        )
         self.assertEqual(returned, r"Abc\@DEF@example.com")
 
     def test_create_user_email_domain_normalize(self):
@@ -178,7 +184,10 @@ class UserManagerTest(TestCase):
         )
 
 
-@skipIf(django.VERSION < (1, 7, 0), "Migrations not available in this Django version")
+@skipIf(
+    django.VERSION < (1, 7, 0),
+    "Migrations not available in this Django version",
+)
 class MigrationsTest(TestCase):
     def test_makemigrations_no_changes(self):
         try:
@@ -187,18 +196,24 @@ class MigrationsTest(TestCase):
             from io import StringIO
 
         with patch("sys.stdout", new_callable=StringIO) as mock:
-            management.call_command("makemigrations", "socialprofile", dry_run=True)
+            management.call_command(
+                "makemigrations", "socialprofile", dry_run=True
+            )
         self.assertEqual(
             mock.getvalue(), "No changes detected in app 'socialprofile'\n"
         )
 
-    @skipUnless(django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7")
+    @skipUnless(
+        django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7"
+    )
     def test_monkey_patch_model_field(self):
         field_last_login = get_user_model()._meta.get_field("last_login")
         self.assertTrue(field_last_login.null)
         self.assertTrue(field_last_login.blank)
 
-    @skipUnless(django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7")
+    @skipUnless(
+        django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7"
+    )
     def test_monkey_patch_db_column(self):
         table_name = get_user_model()._meta.db_table
         cursor = connection.cursor()
@@ -210,7 +225,9 @@ class MigrationsTest(TestCase):
         )  # pragma: no cover
         self.assertTrue(field.null_ok)
 
-    @skipUnless(django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7")
+    @skipUnless(
+        django.VERSION[:2] == (1, 7), "Monkey patch only applied to Django 1.7"
+    )
     def test_monkey_patch_side_effects(self):
         # Check the parent model isn't affected from the monkey patch
         from django.contrib.auth.models import AbstractBaseUser
@@ -489,11 +506,16 @@ class EmailUserAdminTest(TestCase):
                 self.app_verbose_name = "Custom_User"
             else:
                 self.app_verbose_name = "Custom User"
-        if settings.AUTH_USER_MODEL == "test_custom_user_subclass.MyCustomEmailUser":
+        if (
+            settings.AUTH_USER_MODEL
+            == "test_custom_user_subclass.MyCustomEmailUser"
+        ):
             self.app_name = "test_custom_user_subclass"
             self.model_name = "mycustomemailuser"
             self.model_verbose_name = "MyCustomEmailUserVerboseName"
-            self.model_verbose_name_plural = "MyCustomEmailUserVerboseNamePlural"
+            self.model_verbose_name_plural = (
+                "MyCustomEmailUserVerboseNamePlural"
+            )
             if django.VERSION[:2] < (1, 7):
                 self.app_verbose_name = "Test_Custom_User_Subclass"
             else:

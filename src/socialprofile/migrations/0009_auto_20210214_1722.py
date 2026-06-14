@@ -29,7 +29,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="twitter_language",
             field=models.CharField(
-                blank=True, max_length=2, null=True, verbose_name="Twitter Language"
+                blank=True,
+                max_length=2,
+                null=True,
+                verbose_name="Twitter Language",
             ),
         ),
         migrations.AddField(

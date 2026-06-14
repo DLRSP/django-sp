@@ -24,7 +24,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="socialprofile",
             name="edited_by_google",
-            field=models.NullBooleanField(default=False, verbose_name="Google edited"),
+            field=models.NullBooleanField(
+                default=False, verbose_name="Google edited"
+            ),
         ),
         migrations.AddField(
             model_name="socialprofile",
@@ -36,7 +38,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="socialprofile",
             name="edited_by_twitter",
-            field=models.NullBooleanField(default=False, verbose_name="Twitter edited"),
+            field=models.NullBooleanField(
+                default=False, verbose_name="Twitter edited"
+            ),
         ),
         migrations.AlterField(
             model_name="socialprofile",

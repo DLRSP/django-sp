@@ -26,21 +26,30 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="live_avatar",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Live Avatar"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Live Avatar",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="live_language",
             field=models.CharField(
-                blank=True, max_length=10, null=True, verbose_name="Live Language"
+                blank=True,
+                max_length=10,
+                null=True,
+                verbose_name="Live Language",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="live_url",
             field=models.URLField(
-                blank=True, max_length=500, null=True, verbose_name="Live Profile"
+                blank=True,
+                max_length=500,
+                null=True,
+                verbose_name="Live Profile",
             ),
         ),
         migrations.AddField(
@@ -54,7 +63,10 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="live_verified",
             field=models.BooleanField(
-                blank=True, default=False, null=True, verbose_name="Live Verified"
+                blank=True,
+                default=False,
+                null=True,
+                verbose_name="Live Verified",
             ),
         ),
     ]

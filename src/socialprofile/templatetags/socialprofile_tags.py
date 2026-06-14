@@ -118,7 +118,9 @@ def associated(context, backend):
     context["association"] = None
     if user and user.is_authenticated:
         try:
-            context["association"] = user.social_auth.filter(provider=backend.name)[0]
+            context["association"] = user.social_auth.filter(
+                provider=backend.name
+            )[0]
         except IndexError:
             pass
     return ""

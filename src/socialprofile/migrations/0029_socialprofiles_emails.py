@@ -13,35 +13,50 @@ class Migration(migrations.Migration):
             model_name="socialprofile",
             name="facebook_email",
             field=models.EmailField(
-                blank=True, max_length=254, null=True, verbose_name="Facebook's Email"
+                blank=True,
+                max_length=254,
+                null=True,
+                verbose_name="Facebook's Email",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="google_email",
             field=models.EmailField(
-                blank=True, max_length=254, null=True, verbose_name="Google's Email"
+                blank=True,
+                max_length=254,
+                null=True,
+                verbose_name="Google's Email",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="instagram_email",
             field=models.EmailField(
-                blank=True, max_length=254, null=True, verbose_name="Instagram's Email"
+                blank=True,
+                max_length=254,
+                null=True,
+                verbose_name="Instagram's Email",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="live_email",
             field=models.EmailField(
-                blank=True, max_length=254, null=True, verbose_name="Live's Email"
+                blank=True,
+                max_length=254,
+                null=True,
+                verbose_name="Live's Email",
             ),
         ),
         migrations.AddField(
             model_name="socialprofile",
             name="twitter_email",
             field=models.EmailField(
-                blank=True, max_length=254, null=True, verbose_name="Twitter's Email"
+                blank=True,
+                max_length=254,
+                null=True,
+                verbose_name="Twitter's Email",
             ),
         ),
     ]

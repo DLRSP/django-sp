@@ -26,7 +26,10 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "password",
+                    models.CharField(max_length=128, verbose_name="password"),
+                ),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -74,7 +77,9 @@ class Migration(migrations.Migration):
                 (
                     "email",
                     models.EmailField(
-                        max_length=254, unique=True, verbose_name="Email Address"
+                        max_length=254,
+                        unique=True,
+                        verbose_name="Email Address",
                     ),
                 ),
                 (
@@ -99,11 +104,15 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date_joined",
-                    models.DateTimeField(auto_now_add=True, verbose_name="Date Joined"),
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Date Joined"
+                    ),
                 ),
                 (
                     "date_modified",
-                    models.DateTimeField(auto_now=True, verbose_name="Date Updated"),
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Date Updated"
+                    ),
                 ),
                 (
                     "country",
@@ -137,7 +146,9 @@ class Migration(migrations.Migration):
                 (
                     "image_url",
                     models.URLField(
-                        blank=True, max_length=500, verbose_name="Avatar Picture"
+                        blank=True,
+                        max_length=500,
+                        verbose_name="Avatar Picture",
                     ),
                 ),
                 (
@@ -184,7 +195,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "manually_edited",
-                    models.BooleanField(default=False, verbose_name="Manually Edited"),
+                    models.BooleanField(
+                        default=False, verbose_name="Manually Edited"
+                    ),
                 ),
                 (
                     "phone_number",
@@ -208,16 +221,21 @@ class Migration(migrations.Migration):
                 (
                     "visible",
                     models.BooleanField(
-                        default=False, verbose_name="Visible in the Public Pages"
+                        default=False,
+                        verbose_name="Visible in the Public Pages",
                     ),
                 ),
                 (
                     "title",
-                    models.CharField(blank=True, max_length=500, verbose_name="Title"),
+                    models.CharField(
+                        blank=True, max_length=500, verbose_name="Title"
+                    ),
                 ),
                 (
                     "role",
-                    models.CharField(blank=True, max_length=500, verbose_name="Role"),
+                    models.CharField(
+                        blank=True, max_length=500, verbose_name="Role"
+                    ),
                 ),
                 ("function_01", models.CharField(blank=True, max_length=200)),
                 ("function_02", models.CharField(blank=True, max_length=200)),
@@ -237,18 +255,24 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "google_isPlusUser",
-                    models.BooleanField(default=False, verbose_name="Google Plus"),
+                    models.BooleanField(
+                        default=False, verbose_name="Google Plus"
+                    ),
                 ),
                 (
                     "google_plusUrl",
                     models.URLField(
-                        blank=True, max_length=500, verbose_name="Google Plus Page"
+                        blank=True,
+                        max_length=500,
+                        verbose_name="Google Plus Page",
                     ),
                 ),
                 (
                     "google_circledByCount",
                     models.IntegerField(
-                        blank=True, default=0, verbose_name="Google Circle byCount"
+                        blank=True,
+                        default=0,
+                        verbose_name="Google Circle byCount",
                     ),
                 ),
                 (
@@ -265,7 +289,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "google_verified",
-                    models.BooleanField(default=False, verbose_name="Google Verified"),
+                    models.BooleanField(
+                        default=False, verbose_name="Google Verified"
+                    ),
                 ),
             ],
             options={

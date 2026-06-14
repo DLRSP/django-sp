@@ -24,7 +24,11 @@ from oauth2_provider.models import (
     get_id_token_model,
     get_refresh_token_model,
 )
-from social_django.admin import AssociationOption, NonceOption, UserSocialAuthOption
+from social_django.admin import (
+    AssociationOption,
+    NonceOption,
+    UserSocialAuthOption,
+)
 from social_django.models import Association, Nonce, UserSocialAuth
 from user_sessions.admin import SessionAdmin
 from user_sessions.models import Session
@@ -41,7 +45,10 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "username", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "phone_number")}),
+        (
+            _("Personal info"),
+            {"fields": ("first_name", "last_name", "phone_number")},
+        ),
         (
             _("Permissions"),
             {
@@ -58,7 +65,10 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             _("Important dates"),
             {"fields": ("last_login", "date_joined", "date_of_birth")},
         ),
-        (_("Common Info"), {"fields": ("country", "gender", "url", "image_url")}),
+        (
+            _("Common Info"),
+            {"fields": ("country", "gender", "url", "image_url")},
+        ),
         (
             _("Avatar"),
             {
@@ -229,7 +239,13 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         "date_joined",
         "last_login",
     )
-    search_fields = ("email", "first_name", "last_name", "groups", "user_permissions")
+    search_fields = (
+        "email",
+        "first_name",
+        "last_name",
+        "groups",
+        "user_permissions",
+    )
 
     ordering = (
         "last_login",
@@ -245,7 +261,9 @@ class ProxyUserSocialAuth(UserSocialAuth):
     class Meta:
         proxy = True
         verbose_name = f"OAuth: {UserSocialAuth._meta.verbose_name}"
-        verbose_name_plural = f"OAuth: {UserSocialAuth._meta.verbose_name_plural}"
+        verbose_name_plural = (
+            f"OAuth: {UserSocialAuth._meta.verbose_name_plural}"
+        )
 
 
 class ProxyNonce(Nonce):
@@ -334,7 +352,9 @@ class ProxyAccessAttempt(AccessAttempt):
     class Meta:
         proxy = True
         verbose_name = f"Monitor: {AccessAttempt._meta.verbose_name}"
-        verbose_name_plural = f"Monitor: {AccessAttempt._meta.verbose_name_plural}"
+        verbose_name_plural = (
+            f"Monitor: {AccessAttempt._meta.verbose_name_plural}"
+        )
 
 
 class ProxyAccessLog(AccessLog):

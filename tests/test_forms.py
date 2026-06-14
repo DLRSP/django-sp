@@ -30,9 +30,7 @@ class SocialProfileFormTestCase(TestCase):
         self.user1.gender = "other"
         self.user1.url = "http://test.com"
         self.user1.description = "Test User 1"
-        self.user1.image_url = (
-            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-        )
+        self.user1.image_url = "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
         self.user1.save()
         self.sa1 = UserSocialAuth.objects.create(
             user=self.user1, provider="google-oauth2", uid="user1@user1.com"

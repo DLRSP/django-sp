@@ -6,7 +6,7 @@ import logging
 import sweetify
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model, login
+from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -76,7 +76,9 @@ def context(**extra):
         {
             # "plus_id": getattr(settings, "SOCIAL_AUTH_GOOGLE_PLUS_KEY", None),
             # "plus_scope": " ".join(GooglePlusAuth.DEFAULT_SCOPE),
-            "available_backends": load_backends(settings.AUTHENTICATION_BACKENDS),
+            "available_backends": load_backends(
+                settings.AUTHENTICATION_BACKENDS
+            ),
         },
         **extra,
     )
@@ -129,14 +131,18 @@ class SelectAuthView(TemplateView):
         """Ensure that 'next' gets passed along"""
         LOGGER.debug("socialprofile.views.SelectAuthView.get_context_data")
 
-        next_url = self.request.GET.get(REDIRECT_FIELD_NAME, DEFAULT_RETURNTO_PATH)
+        next_url = self.request.GET.get(
+            REDIRECT_FIELD_NAME, DEFAULT_RETURNTO_PATH
+        )
 
         context = super().get_context_data(**kwargs)
         context["next_param"] = REDIRECT_FIELD_NAME
         context["next_url"] = next_url
         # context["plus_id"] = getattr(settings, "SOCIAL_AUTH_GOOGLE_PLUS_KEY", None)
         # context["plus_scope"] = " ".join(GooglePlusAuth.DEFAULT_SCOPE)
-        context["available_backends"] = load_backends(settings.AUTHENTICATION_BACKENDS)
+        context["available_backends"] = load_backends(
+            settings.AUTHENTICATION_BACKENDS
+        )
         return context
 
 
@@ -168,11 +174,13 @@ class SocialProfileView(TemplateView):
         if username:
             try:
                 user = get_object_or_404(SocialProfile, username=username)
-            except Exception as e:
+            except Exception:
                 try:
                     user = get_object_or_404(SocialProfile, pk=username)
-                except Exception as e:
-                    user = get_object_or_404(SocialProfile, pk=self.request.user.pk)
+                except Exception:
+                    user = get_object_or_404(
+                        SocialProfile, pk=self.request.user.pk
+                    )
         elif self.request.user.is_authenticated:
             user = get_object_or_404(SocialProfile, pk=self.request.user.pk)
         else:
@@ -183,7 +191,9 @@ class SocialProfileView(TemplateView):
 
         return {
             "user": user,
-            "available_backends": load_backends(settings.AUTHENTICATION_BACKENDS),
+            "available_backends": load_backends(
+                settings.AUTHENTICATION_BACKENDS
+            ),
         }
 
 
@@ -235,10 +245,10 @@ class SocialProfileEditView(UpdateView):
         if username:
             try:
                 user = get_object_or_404(SocialProfile, username=username)
-            except Exception as e:
+            except Exception:
                 try:
                     user = get_object_or_404(SocialProfile, pk=username)
-                except Exception as e:
+                except Exception:
                     user = self.request.user
         elif self.request.user.is_authenticated:
             user = self.request.user
@@ -251,7 +261,9 @@ class SocialProfileEditView(UpdateView):
         sp_form = SocialProfileForm(instance=user)
         return {
             "user": user,
-            "available_backends": load_backends(settings.AUTHENTICATION_BACKENDS),
+            "available_backends": load_backends(
+                settings.AUTHENTICATION_BACKENDS
+            ),
             "sp_form": sp_form,
         }
 
@@ -268,10 +280,10 @@ class SocialProfileEditView(UpdateView):
         if username:
             try:
                 user = get_object_or_404(SocialProfile, username=username)
-            except Exception as e:
+            except Exception:
                 try:
                     user = get_object_or_404(SocialProfile, pk=username)
-                except Exception as e:
+                except Exception:
                     user = self.request.user
 
         if user != self.request.user:
@@ -354,7 +366,9 @@ class SocialProfileEditView(UpdateView):
                 #     sweetify.multiple(request, *multi[0])
             else:
                 messages.add_message(
-                    self.request, messages.INFO, _("Your profile has NOT been updated!")
+                    self.request,
+                    messages.INFO,
+                    _("Your profile has NOT been updated!"),
                 )
 
             return self.render_to_response(

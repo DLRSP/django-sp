@@ -27,24 +27,16 @@ class SocialProfilePipelineTestCase(TestCase):
         self.user1.url = "http://test.url"
 
         self.user1.google_url = "http://test.url"
-        self.user1.google_avatar = (
-            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-        )
+        self.user1.google_avatar = "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
 
         self.user1.twitter_url = "http://test.url"
-        self.user1.twitter_avatar = (
-            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-        )
+        self.user1.twitter_avatar = "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
 
         self.user1.instagram_url = "http://test.url"
-        self.user1.instagram_avatar = (
-            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-        )
+        self.user1.instagram_avatar = "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
 
         self.user1.facebook_url = "http://test.url"
-        self.user1.facebook_avatar = (
-            "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
-        )
+        self.user1.facebook_avatar = "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm"
         self.user1.save()
 
     # self.sa1 = UserSocialAuth.objects.create(user=self.user1, provider='google-oauth2', uid='user1@user1.com')
@@ -81,7 +73,9 @@ class SocialProfilePipelineTestCase(TestCase):
         socialprofile_extra_values(backend, {}, response, "1", self.user1)
         self.assertTrue(self.user1.edited_by_facebook)
         self.assertEqual(self.user1.gender, "other")
-        self.assertEqual(self.user1.facebook_avatar, "http://image-facebook.url")
+        self.assertEqual(
+            self.user1.facebook_avatar, "http://image-facebook.url"
+        )
         self.assertEqual(self.user1.facebook_url, "http://facebook.url")
 
     def test_socialprofile_pipeline_twitter(self):
