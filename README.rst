@@ -9,7 +9,7 @@ Django SocialProfile
 	## Pypi
 	[![PyPi status](https://img.shields.io/pypi/status/django-sp.svg)](https://pypi.python.org/pypi/django_ps)
 	[![PyPi version](https://img.shields.io/pypi/v/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
-	[![Python version](https://img.shields.io/badge/python-3.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-blue.svg)]()
+	[![PyPi python version](https://img.shields.io/pypi/pyversions/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
 	[![PyPi downloads](https://img.shields.io/pypi/dm/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
 	[![PyPi downloads](https://img.shields.io/pypi/dw/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
 	[![PyPi downloads](https://img.shields.io/pypi/dd/django-sp.svg)](https://pypi.python.org/pypi/django_sp)
