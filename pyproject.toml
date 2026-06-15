@@ -107,6 +107,20 @@ version = { attr = "socialprofile.__version__" }
 [tool.setuptools.packages.find]
 where = ["src"]
 
+
+[tool.setuptools.data-files]
+"share/django-sp/requirements" = [
+  "requirements/py310-django32.txt",
+  "requirements/py310-django42.txt",
+  "requirements/py310-django52.txt",
+  "requirements/py311-django42.txt",
+  "requirements/py311-django52.txt",
+  "requirements/py312-django42.txt",
+  "requirements/py312-django52.txt",
+  "requirements/py313-django52.txt",
+  "requirements/py314-django52.txt",
+  "requirements/py39-django42.txt",
+]
 [tool.distutils.bdist_wheel]
 universal = false
 
@@ -197,3 +211,7 @@ allow_dirty = true
 
 [[tool.bumpversion.files]]
 filename = "./src/socialprofile/__init__.py"
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
