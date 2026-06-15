@@ -16,8 +16,9 @@ jobs:
   ci:
     uses: DLRSP/workflows/.github/workflows/ci.yaml@main
     permissions:
-      contents: read
+      contents: write
       actions: read
       checks: write
       security-events: write
+      pull-requests: write
     secrets: inherit
