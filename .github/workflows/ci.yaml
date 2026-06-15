@@ -21,4 +21,8 @@ jobs:
       checks: write
       security-events: write
       pull-requests: write
+    with:
+      requirements-ref: main
+      install-test-deps: false
+      assert-wheel-locks: true
     secrets: inherit
