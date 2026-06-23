@@ -185,7 +185,7 @@ package = "socialprofile"
 package_dir = "src"
 filename = "CHANGELOG.rst"
 directory = "news/"
-version = "1.23.3"
+version = "1.23.4"
 
 # For rendering properly for this project
 issue_format = "`#{issue} <https://github.com/DLRSP/django-sp/issues/{issue}>`_"
@@ -204,7 +204,7 @@ type = [
 
 # bump-my-version
 [tool.bumpversion]
-current_version = "1.23.3"
+current_version = "1.23.4"
 commit = true
 tag = true
 allow_dirty = true
