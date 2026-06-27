@@ -2,6 +2,7 @@
 
 import logging
 
+import django
 from crispy_forms.bootstrap import (
     Accordion,
     AccordionGroup,
@@ -21,6 +22,13 @@ from django_countries.widgets import CountrySelectWidget
 from .models import SocialProfile
 
 LOGGER = logging.getLogger(name="socialprofile.forms")
+
+# Django 5.x form URL fields warn unless the assumed scheme is explicit. The
+# argument does not exist on Django 4.2 and is removed again in Django 6.0,
+# where 'https' becomes the default, so only pass it on the versions in between.
+_URLFIELD_KWARGS = (
+    {"assume_scheme": "https"} if (5, 0) <= django.VERSION < (6, 0) else {}
+)
 
 
 class CustomImageField(Field):
@@ -42,6 +50,14 @@ class SocialProfileForm(forms.ModelForm):
         label=_("Date of Birth"),
         widget=forms.TextInput(attrs={"type": "date"}),
         required=False,
+    )
+
+    url = forms.URLField(
+        label=_("Homepage"),
+        help_text=_("Where can we find out more about you?"),
+        max_length=500,
+        required=False,
+        **_URLFIELD_KWARGS,
     )
 
     class Meta:
