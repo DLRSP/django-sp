@@ -115,6 +115,11 @@ SOCIAL_AUTH_RAISE_EXCEPTIONS = True
 SOCIAL_AUTH_STRATEGY = "social_django.strategy.DjangoStrategy"
 SOCIAL_AUTH_STORAGE = "social_django.models.DjangoStorage"
 
+# Restrict social-login account lookups to active users. Newer
+# social-auth-app-django applies this by default; setting it explicitly keeps
+# behaviour identical on the older release pinned for the Django 4.2 lane.
+SOCIAL_AUTH_ACTIVE_USERS_FILTER = {"is_active": True}
+
 SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.social_details",
     "social_core.pipeline.social_auth.social_uid",
