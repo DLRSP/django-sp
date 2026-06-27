@@ -10,7 +10,7 @@ description = "Django application for custom Social Profile Auth and User model.
 authors = [
     { name = "DLRSP", email = "dlrsp.dev@gmail.com" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dynamic = ["version"]
 readme = "README.md"
 license = "MIT"
@@ -38,7 +38,6 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -118,7 +117,6 @@ where = ["src"]
   "requirements/py312-django52.txt",
   "requirements/py313-django52.txt",
   "requirements/py314-django52.txt",
-  "requirements/py39-django42.txt",
 ]
 [tool.distutils.bdist_wheel]
 universal = false
