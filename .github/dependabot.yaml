@@ -6,10 +6,17 @@ updates:
   - package-ecosystem: "pip"
     ignore:
       - dependency-name: "django"
+      # Locks are compiled per Django lane by the pip-compile flow, so the
+      # resolved version differs between the Django 4.2 LTS lane (5.4.x, the
+      # last release supporting Django 4.2) and the Django 5.2 lane (>=6.0).
+      # Dependabot cannot model divergent per-lane pins and unifies to a
+      # single version, which breaks the 4.2 lane and downgrades the 5.2 lane.
+      # The lock-regen flow owns these upgrades; pip-audit scans both lanes.
+      - dependency-name: "social-auth-app-django"
     directory: "/"
     # Version-update PRs disabled fleet-wide: versions are managed by the
     # pip-compile lock-regen flow (upgrade-dependency.yaml). Security
-    # updates + alerts are unaffected by this limit (AR-033).
+    # updates + alerts are unaffected by this limit.
     open-pull-requests-limit: 0
     schedule:
       interval: "daily"
