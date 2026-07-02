@@ -1,3 +1,22 @@
+socialprofile 1.23.7 (2026-07-02)
+=================================
+
+Bug Fixes
+---------
+
+- Make the profile homepage URL field assume the ``https`` scheme on Django 5.x,
+  matching the default that Django 6.0 adopts, so the form no longer raises a
+  deprecation warning while staying compatible with Django 4.2.
+
+
+Improved Documentation
+----------------------
+
+- Document the recommended ``SOCIAL_AUTH_ACTIVE_USERS_FILTER`` setting so social
+  login restricts account lookups to active users consistently across the
+  supported ``social-auth-app-django`` releases.
+
+
 socialprofile 1.23.6 (2026-06-27)
 =================================
 
