@@ -1215,9 +1215,9 @@ six==1.17.0 \
     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274 \
     --hash=sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
     # via pyjwkest
-social-auth-app-django==6.0.0 \
-    --hash=sha256:421916bf136c77a8683cac7505a3b2ecf7d5c8ec18455ffa883f2cb5161847b1 \
-    --hash=sha256:6974cb00bb462149b8384448c0aff6fb8e6c2b00efacca40d0270695d416cceb
+social-auth-app-django==5.6.0 \
+    --hash=sha256:43ca88cc5cd9161710896165ced58b3155e8aafaaff847e859879194770f138d \
+    --hash=sha256:c695501fcbf6fe87f68f5a79e379abe853662f5129e7ec6cb758a75d5b28c888
     # via -r requirements/runtime.in
 social-auth-core==5.0.2 \
     --hash=sha256:c7250f0c1d539bb1420a7d165b240f066d866ec19d9b829e660260f024f0e2d3 \
