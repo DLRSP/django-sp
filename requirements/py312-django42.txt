@@ -463,9 +463,9 @@ django-crispy-forms==2.5 \
     --hash=sha256:066e72a8f152a1334f1c811cc37740868efe3265e5a218f79079ef89f848c3d8 \
     --hash=sha256:adc99d5901baca09479c53bf536b3909e80a9f2bb299438a223de4c106ebf1f9
     # via -r requirements/runtime.in
-django-errors==2.3.10 \
-    --hash=sha256:8efef77a19ac7d0c7d6a9f2618e65c054dd53847460fd6dd05480d294fe6d947 \
-    --hash=sha256:f51c40dcbe431aa132892d9ef3ddf36b753dfa7e447c667bca4ed927639b3129
+django-errors==2.3.11 \
+    --hash=sha256:92007b45d83436a6571cd8fdce55afdfa58ca13b46b49a17dc15fde5f1d7b3d8 \
+    --hash=sha256:c6ef41f34d390545226d56a3b6fb02f8c7a5face41d15545b2296927c2502755
     # via -r requirements/runtime.in
 django-formtools==2.6.1 \
     --hash=sha256:2848516dc66a7acde1cb595d225b30c1b837528948cad32bf0faafc6d8cc7af8 \
@@ -475,9 +475,9 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.3 \
-    --hash=sha256:1da66ead6b94fad5ab88dca47ba1b5e38ec5c53797583a2cf73bebdf51babca0 \
-    --hash=sha256:71b6b8f1f53c990b26adacf10c50b96344eb6fed2c74ddc18c3cab855bba1f8a
+django-model-mixin==0.3.4 \
+    --hash=sha256:09216fe52ec931c28465acd5b0bce61a6d952dd84757bf259e4b6154ea62692a \
+    --hash=sha256:4ba5103cc3c025cc43f10ab1fb156949942803437a9a3ebb8597ba690adfa10a
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.3.0 \
     --hash=sha256:2b375d14b1c0ff86e5df5e5de5d1a6d9868873304f54aca37c50158552d5b922 \
@@ -909,9 +909,9 @@ oauthlib==3.3.1 \
     #   django-oauth-toolkit
     #   requests-oauthlib
     #   social-auth-core
-phonenumbers==9.0.33 \
-    --hash=sha256:9ab8a02b940b90c64f3866c0b25a30e567ddf7bb9836a3e11efdb0478f65fc1c \
-    --hash=sha256:ba1d0da52711d5fdda6b2b673b2621fe80774fc5d1b2e5a6ef783396b0343186
+phonenumbers==9.0.34 \
+    --hash=sha256:00751c75d1166485ca80ce02ec15b6a61a2628e9b313381579330bc70c934075 \
+    --hash=sha256:1221bf8e65bd2c02770226488af806d4636814bc997104d3a1f7de6ed6410bd2
     # via -r requirements/runtime.in
 pillow==12.3.0 \
     --hash=sha256:00808c5e14ef63ac5161091d242999076604ff74b883423a11e5d7bbb38bf756 \
