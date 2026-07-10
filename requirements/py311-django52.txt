@@ -448,9 +448,9 @@ django-errors==2.3.12 \
     --hash=sha256:32e7e95838340094183aff02b51213b51cc313012b09bc494ab6a8431f399cf2 \
     --hash=sha256:43694915bb843d723e38a69b971d253a3a9bfc4aad1726a95fc39df56df3fee5
     # via -r requirements/runtime.in
-django-formtools==2.6.1 \
-    --hash=sha256:2848516dc66a7acde1cb595d225b30c1b837528948cad32bf0faafc6d8cc7af8 \
-    --hash=sha256:603ebc69a4b76b9bf38534f6e0245face007c7ed31bdfa073f8bf45cff5d7122
+django-formtools==2.7 \
+    --hash=sha256:06e4ab1f9c999f5b2ec6670cb2d51b77117599f4f17c5855f38de158b1c7f247 \
+    --hash=sha256:52b30c08571108023937e4b5d96a5cc35282ff0a2e51630aeea00e27d723d3ac
     # via django-two-factor-auth
 django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
