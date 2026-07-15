@@ -443,9 +443,9 @@ django-crispy-forms==2.5 \
     --hash=sha256:066e72a8f152a1334f1c811cc37740868efe3265e5a218f79079ef89f848c3d8 \
     --hash=sha256:adc99d5901baca09479c53bf536b3909e80a9f2bb299438a223de4c106ebf1f9
     # via -r requirements/runtime.in
-django-errors==2.3.12 \
-    --hash=sha256:32e7e95838340094183aff02b51213b51cc313012b09bc494ab6a8431f399cf2 \
-    --hash=sha256:43694915bb843d723e38a69b971d253a3a9bfc4aad1726a95fc39df56df3fee5
+django-errors==2.3.13 \
+    --hash=sha256:4a65802c5fe2431ca42a1e74a708ebd6b9ee481d688d7520a1f8a0f3bf06a354 \
+    --hash=sha256:fa8fdfce5923291b41cfdf8fc18eeeac36912f879593f7080ed3da3c1420e3d2
     # via -r requirements/runtime.in
 django-formtools==2.6.1 \
     --hash=sha256:2848516dc66a7acde1cb595d225b30c1b837528948cad32bf0faafc6d8cc7af8 \
@@ -455,9 +455,9 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.5 \
-    --hash=sha256:4c5a61d8947f8f605cfbfb1985f2b964d8408ecccb15892e7cade47a381b9f8d \
-    --hash=sha256:9b66a0fce483d409f51b331a6084379b4c4947349cd62da309ce422c906188df
+django-model-mixin==0.3.6 \
+    --hash=sha256:26d2fa99f92ad63156b45f529e3ad64794bf0cccdc739df086d69de7869dd8e2 \
+    --hash=sha256:814d5e1c015bd8c231b03a99370e10247ffb3d6aa637e192caac8ea475b0b637
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.3.0 \
     --hash=sha256:2b375d14b1c0ff86e5df5e5de5d1a6d9868873304f54aca37c50158552d5b922 \
