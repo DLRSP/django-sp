@@ -444,9 +444,9 @@ django-crispy-forms==2.7 \
     --hash=sha256:42a7ecb05ac3fd050d006dfe7aeceb7f318c30e5b5124ff619e2be252f36f096 \
     --hash=sha256:4c59bed60417375cba26cebb2c67ab350b655934670270b1c89dbcd7e60f1b4c
     # via -r requirements/runtime.in
-django-errors==2.3.13 \
-    --hash=sha256:4a65802c5fe2431ca42a1e74a708ebd6b9ee481d688d7520a1f8a0f3bf06a354 \
-    --hash=sha256:fa8fdfce5923291b41cfdf8fc18eeeac36912f879593f7080ed3da3c1420e3d2
+django-errors==2.3.14 \
+    --hash=sha256:4dd84621d4e9a84b8c8924ee3d8e8afcfd513651f13f6bc0bbe90da6897886c2 \
+    --hash=sha256:ad8209f79c28e73048998af74e5974a6b21a92d239e77ab39e5f3bd3219b368e
     # via -r requirements/runtime.in
 django-formtools==2.7 \
     --hash=sha256:06e4ab1f9c999f5b2ec6670cb2d51b77117599f4f17c5855f38de158b1c7f247 \
