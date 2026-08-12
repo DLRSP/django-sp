@@ -456,9 +456,9 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.6 \
-    --hash=sha256:26d2fa99f92ad63156b45f529e3ad64794bf0cccdc739df086d69de7869dd8e2 \
-    --hash=sha256:814d5e1c015bd8c231b03a99370e10247ffb3d6aa637e192caac8ea475b0b637
+django-model-mixin==0.3.8 \
+    --hash=sha256:6c8813372f4ea8f841b8ace9810591c58ec68bd7d3fe14620a95a079a1e0a381 \
+    --hash=sha256:e6e459e779b3656b6790a07fbb57e258ee8720b4990bd4ee1fe13ebf7cfe001f
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.4.0 \
     --hash=sha256:c504457898a363d332fb98beed5eceeec9da4aa659055a50a93aa52e8ed55534 \
