@@ -723,9 +723,9 @@ idna==3.19 \
     # via
     #   requests
     #   yarl
-jwcrypto==1.5.9 \
-    --hash=sha256:30b1c9afc898eefd112c31d836eb2d7a4c6febcac95d4aa727e963cd42911d8e \
-    --hash=sha256:dbbbfcdad7a6fc40cf3d5a635b11115fc42591b7ab869a36ad347a516a6e1c5d
+jwcrypto==1.6.0 \
+    --hash=sha256:02a82b0a3a36b2553309d78c65e1c0e3350b640fe4091f53f66f582b11f49378 \
+    --hash=sha256:09ece277d48620079c90af7dfe84be085a229c1cbe06baa295de41e5019ac998
     # via django-oauth-toolkit
 markdown==3.10.3 \
     --hash=sha256:3589362618f743188b4d955b874402bc814f4f83f544dc207719f4baa7d9c45f \
