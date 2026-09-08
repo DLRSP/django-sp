@@ -563,9 +563,9 @@ django-user-sessions==2.0.0 \
     --hash=sha256:0965554279f556b47062965609fa08b3ae45bbc581001dbe84b2ea599cc67748 \
     --hash=sha256:41b8b1ebeb4736065efbc96437c9cfbf491c39e10fd547a76b98f2312e11fa3e
     # via -r requirements/runtime.in
-djangorestframework==3.18.0 \
-    --hash=sha256:2323a5111837e0b784dcb8323abc78ecc54fa2a5af7aff2677cf50cdd849477f \
-    --hash=sha256:381fc44d3249c9565c5f723850855b734e99030eb30957a49f506d3fe11d7dcb
+djangorestframework==3.18.1 \
+    --hash=sha256:605d79fa2ec2f02905492e5ea13d903c2d842d0b4c915a57f7bf02ab9f3c91dd \
+    --hash=sha256:f1409d698967aaf82d5d98d76b549c8fba8bd92ebd0d83d24454508f72168dc2
     # via -r requirements/runtime.in
 docutils==0.23 \
     --hash=sha256:25d013af9bf23bc1c7b2b093dff4208166c53a94786c9e447808335ef1185fea \
