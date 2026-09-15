@@ -1,3 +1,14 @@
+socialprofile 1.23.35 (2026-09-15)
+==================================
+
+- Fix social login for ``social-auth-app-django`` 6.0.0+: provider buttons use
+  CSRF-protected POST forms instead of GET links (HTTP 405 in production).
+- Add ``socialprofile.conf.apply_sp_defaults`` to centralise redirect URLs,
+  pipeline defaults, Axes proxy settings, and ``SOCIAL_AUTH_REDIRECT_IS_HTTPS``
+  behind nginx/gunicorn.
+- Sanitize ``next`` on the select page; correct private-profile visibility check.
+
+
 socialprofile 1.23.34 (2026-09-12)
 ==================================
 

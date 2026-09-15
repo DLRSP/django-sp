@@ -1,0 +1,18 @@
+{% load i18n socialprofile_tags %}
+{# social:begin is POST-only since social-auth-app-django 6.0.0 #}
+<form method="post" action="{% url 'social:begin' backend=name %}" class="{{ form_class|default:'sp_socialForm' }}"{% if form_style %} style="{{ form_style }}"{% endif %}{% if form_id %} id="{{ form_id }}"{% endif %}>
+  {% csrf_token %}
+  {% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}
+  <button type="submit" class="{{ button_class|default:'btn btn-default' }}" id="{{ name }}-button" name="{{ backend|backend_class }}" title="{% trans 'Connect with' %} {{ name|social_provider_name }}">
+    {% if button_inner %}
+      {{ button_inner|safe }}
+    {% else %}
+      <i class="fa fa-{{ name|icon_name }}"></i>
+      {% if show_provider_name_only %}
+        {{ name|social_provider_name }}
+      {% else %}
+        {% trans 'Continue with' %} {{ backend|backend_name }}
+      {% endif %}
+    {% endif %}
+  </button>
+</form>
