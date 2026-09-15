@@ -69,8 +69,10 @@
 				   data-role="button">{% trans "Add Social Connection" %}</a></li>
 		{% else %}
 				{% for user_social_auth in user.social_auth.all %}
-					<a href="{% url 'social:disconnect' user_social_auth.provider %}"
-					   data-role="button">{% trans "Disconnect" %} {{ user_social_auth.provider|social_provider_name }}</a>
+					<form method="post" action="{% url 'social:disconnect' user_social_auth.provider %}" class="d-inline sp_disconnectForm">
+					  {% csrf_token %}
+					  <button type="submit" data-role="button">{% trans "Disconnect" %} {{ user_social_auth.provider|social_provider_name }}</button>
+					</form>
 				{% endfor %}
 				<li><a href="{% url 'sp_select_page' %}" data-theme="a" data-rel="dialog"
 					   data-role="button">{% trans "Add Social Connection" %}</a></li>

@@ -88,7 +88,7 @@ MIDDLEWARE = (
 # ------------------------
 # Need by Social Profile / user_sessions
 SESSION_ENGINE = "user_sessions.backends.db"
-SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+SESSION_SERIALIZER = "django.contrib.sessions.serializers.JSONSerializer"
 
 # Core Authentication Settings
 LOGIN_URL = "/sp/select/"

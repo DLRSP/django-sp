@@ -127,12 +127,20 @@ class SelectAuthView(TemplateView):
 
     template_name = "socialprofile/sp_account_select.html"
 
+    @staticmethod
+    def _safe_next_url(raw: str | None) -> str:
+        """Allow only same-site relative paths (block open redirects)."""
+        candidate = (raw or DEFAULT_RETURNTO_PATH).strip() or DEFAULT_RETURNTO_PATH
+        if candidate.startswith("/") and not candidate.startswith("//"):
+            return candidate
+        return DEFAULT_RETURNTO_PATH
+
     def get_context_data(self, **kwargs):
         """Ensure that 'next' gets passed along"""
         LOGGER.debug("socialprofile.views.SelectAuthView.get_context_data")
 
-        next_url = self.request.GET.get(
-            REDIRECT_FIELD_NAME, DEFAULT_RETURNTO_PATH
+        next_url = self._safe_next_url(
+            self.request.GET.get(REDIRECT_FIELD_NAME, DEFAULT_RETURNTO_PATH)
         )
 
         context = super().get_context_data(**kwargs)
@@ -186,8 +194,10 @@ class SocialProfileView(TemplateView):
         else:
             raise Http404  # Case where user gets to this view anonymously for non-existent user
 
-        if self.request.user != user and user.visible:
-            raise Http404  # Case where user set to be private
+        # ``visible=True`` means public (see model help_text); private profiles
+        # are hidden from everyone except the owner.
+        if self.request.user != user and not user.visible:
+            raise Http404
 
         return {
             "user": user,
@@ -391,6 +401,7 @@ class DeleteSocialProfileView(DeleteView):
     """
 
     model = SocialProfile
+    template_name = "socialprofile/sp_delete_account_modal.html"
     success_url = reverse_lazy("sp_logout_page")
 
     def get_object(self, queryset=None):
