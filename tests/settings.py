@@ -69,7 +69,6 @@ MIDDLEWARE = (
     # 'django.contrib.sessions.middleware.SessionMiddleware',    # Need Commente-Out By user_sessions
     "user_sessions.middleware.SessionMiddleware",  # Need By SocialProfile
     "django.middleware.cache.UpdateCacheMiddleware",
-    "htmlmin.middleware.HtmlMinifyMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -80,7 +79,6 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
-    "htmlmin.middleware.MarkRequestMiddleware",
     "social_django.middleware.SocialAuthExceptionMiddleware",
     "axes.middleware.AxesMiddleware",
 )

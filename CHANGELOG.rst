@@ -1,3 +1,10 @@
+socialprofile 1.23.36 (2026-09-15)
+==================================
+
+- Drop optional ``htmlmin`` middleware from test settings so CI Client tests
+  for POST social:begin run without an undeclared dependency.
+
+
 socialprofile 1.23.35 (2026-09-15)
 ==================================
 
