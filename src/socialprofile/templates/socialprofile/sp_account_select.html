@@ -33,27 +33,17 @@
 							   data-role="button">{% trans "Add Social Connection" %}</a></li>
 					{% else %}
 							{% for user_social_auth in user.social_auth.all %}
-								<a href="{% url 'social:disconnect' user_social_auth.provider %}"
-								   data-role="button">{% trans "Disconnect" %} {{ user_social_auth.provider|social_provider_name }}</a>
+								<form method="post" action="{% url 'social:disconnect' user_social_auth.provider %}" class="d-inline sp_disconnectForm">
+								  {% csrf_token %}
+								  <button type="submit" data-role="button">{% trans "Disconnect" %} {{ user_social_auth.provider|social_provider_name }}</button>
+								</form>
 							{% endfor %}
 							<li><a href="{% url 'sp_select_page' %}" data-theme="a" data-rel="dialog"
 								   data-role="button">{% trans "Add Social Connection" %}</a></li>
 					{% endif %}
 					</ul>
-				  {% else %}
-					{% if name == "google-plus" %}
-					  <div class="col-md-2 btn btn-default" id="{{ name }}-button" name="{{ backend|backend_class }}">
-						<i class="fa fa-{{ name|icon_name }}"></i>
-						{% trans 'Continue with' %} {{ backend|backend_name }}
-					  </div>
 					{% else %}
-					  <a class="col-md-2 btn btn-default" id="{{ name }}-button" name="{{ backend|backend_class }}"
-						 href="{% url 'social:begin' backend=name %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"
-					  	 title="{% trans 'Connect with' %} {{ name|social_provider_name }}">
-						<i class="fa fa-{{ name|icon_name }}"></i>
-						{% trans 'Continue with' %} {{ backend|backend_name }}
-					  </a>
-					{% endif %}
+					  {% include "socialprofile/includes/social_begin_form.html" with name=name backend=backend button_class="col-md-2 btn btn-default" next_url=next_url next_param=next_param only %}
 				  {% endif %}
 				{% endfor %}
 			  </div>
@@ -66,12 +56,12 @@
 				{% trans "We will never know and store your password anywhere!" %}
 			</p>
 			<p>
-				<a href="{% url 'social:begin' 'facebook' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Facebook"><img src="{% static 'images/social-icon/social-icon1.png' %}" alt="social media" /></button></a>
-				<a href="{% url 'social:begin' 'twitter' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Twitter"><img src="{% static 'images/social-icon/social-icon2.png' %}" alt="social media" /></button></a>
-				<a href="{% url 'social:begin' 'google-oauth2' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Google"><img src="{% static 'images/social-icon/social-icon3.png' %}" alt="social media" /></button></a>
-				<a href="{% url 'social:begin' 'vimeo' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Vimeo"><img src="{% static 'images/social-icon/social-icon5.png' %}" alt="social media" /></button></a>
-				<a href="{% url 'social:begin' 'instagram' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Instagram"><img src="{% static 'images/social-icon/social-icon6.png' %}" alt="social media" /></button></a>
-				<a href="{% url 'social:begin' 'flickr' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"><button id="button-with-icon3-fa" class="btn btn-danger" title="{% trans 'Sign In with'%} Flickr"><img src="{% static 'images/social-icon/social-icon7.png' %}" alt="social media" /></button></a>
+				<form method="post" action="{% url 'social:begin' 'facebook' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Facebook"><img src="{% static 'images/social-icon/social-icon1.png' %}" alt="social media" /></button></form>
+				<form method="post" action="{% url 'social:begin' 'twitter' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Twitter"><img src="{% static 'images/social-icon/social-icon2.png' %}" alt="social media" /></button></form>
+				<form method="post" action="{% url 'social:begin' 'google-oauth2' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Google"><img src="{% static 'images/social-icon/social-icon3.png' %}" alt="social media" /></button></form>
+				<form method="post" action="{% url 'social:begin' 'vimeo' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Vimeo"><img src="{% static 'images/social-icon/social-icon5.png' %}" alt="social media" /></button></form>
+				<form method="post" action="{% url 'social:begin' 'instagram' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Instagram"><img src="{% static 'images/social-icon/social-icon6.png' %}" alt="social media" /></button></form>
+				<form method="post" action="{% url 'social:begin' 'flickr' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Flickr"><img src="{% static 'images/social-icon/social-icon7.png' %}" alt="social media" /></button></form>
 			</p>
 		{% endif %}
     </div>

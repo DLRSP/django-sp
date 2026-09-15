@@ -33,7 +33,7 @@ LOGIN_URL = "/select/"
 LOGIN_REDIRECT_URL = "/"
 LOGIN_ERROR_URL = "/select/"
 
-SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+SESSION_SERIALIZER = "django.contrib.sessions.serializers.JSONSerializer"
 
 AUTHENTICATION_BACKENDS = (
     # 'django.contrib.auth.backends.ModelBackend',  # Comment if you want DISABLE Login Form (Password)

@@ -174,6 +174,45 @@ We **highly recommend** and only officially support the latest patch release of 
     SOCIAL_AUTH_TWITTER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     ```
 
+13. **Recommended:** call ``apply_sp_defaults`` at the **end** of ``settings.py`` (after
+    ``DEBUG``, HTTPS headers, and ``APP_CONFIG``). It fills in redirect URLs, pipeline,
+    Axes proxy defaults, and production OAuth HTTPS flags without overwriting explicit
+    project values.
+
+    ``` python title="settings.py"
+    APP_CONFIG = {
+        "socialprofile": {
+            # optional — only if you do not set CSRF_TRUSTED_ORIGINS yourself
+            "csrf_trusted_origins": [
+                "https://www.example.com",
+                "https://example.com",
+            ],
+        },
+    }
+
+    # ... your existing DEBUG / SECURE_PROXY_SSL_HEADER / SOCIAL_AUTH_* keys ...
+
+    from socialprofile.conf import apply_sp_defaults
+    apply_sp_defaults(globals())
+    ```
+
+    Keep **provider secrets** (``SOCIAL_AUTH_*_KEY`` / ``_SECRET``) in the project or
+    env repo — the helper never invents credentials.
+
+### Production / reverse proxy (required since ``social-auth-app-django`` 6.0.0)
+
+| Setting | When |
+|---------|------|
+| ``SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')`` | nginx/gunicorn terminates TLS |
+| ``SOCIAL_AUTH_REDIRECT_IS_HTTPS = True`` | production OAuth callback URLs (set automatically by ``apply_sp_defaults`` when ``DEBUG`` is false and the proxy header is https) |
+| ``USE_X_FORWARDED_HOST = True`` | multi-host or canonical public hostname differs from internal |
+| ``CSRF_TRUSTED_ORIGINS`` | Django 4+ CSRF on HTTPS login forms |
+
+**Social login buttons must POST.** Version 6.0.0 of ``social-auth-app-django`` removed
+GET on ``social:begin`` (and ``SOCIAL_AUTH_REQUIRE_POST``). Use the packaged templates
+(``socialprofile/includes/social_begin_form.html``) or equivalent CSRF-protected
+``<form method="post">`` — never ``<a href="{% url 'social:begin' ... %}">``.
+
 
 ## Example
 
