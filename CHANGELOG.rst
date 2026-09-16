@@ -1,3 +1,17 @@
+socialprofile 1.23.37 (2026-09-16)
+==================================
+
+Bug Fixes
+---------
+
+- Drop ``{% include … only %}`` on select (Python 3.14 ``BaseContext.__copy__``)
+  and coerce ``SESSION_COOKIE_SAMESITE`` to ``Lax`` in ``apply_sp_defaults`` so
+  OAuth complete keeps the session cookie after IdP redirect.
+- Fix social login for ``social-auth-app-django`` 6.0+ by rendering CSRF-protected POST
+  forms for ``social:begin`` (and POST disconnect links). Add
+  ``socialprofile.conf.apply_sp_defaults`` for production HTTPS OAuth redirect settings.
+
+
 socialprofile 1.23.36 (2026-09-15)
 ==================================
 

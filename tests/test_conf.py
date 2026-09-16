@@ -45,3 +45,22 @@ def test_apply_sp_defaults_app_config_csrf_origins():
     }
     apply_sp_defaults(settings)
     assert settings["CSRF_TRUSTED_ORIGINS"] == ["https://example.com"]
+
+
+def test_apply_sp_defaults_session_samesite_lax_when_unset():
+    settings = {}
+    apply_sp_defaults(settings)
+    assert settings["SESSION_COOKIE_SAMESITE"] == "Lax"
+
+
+def test_apply_sp_defaults_coerces_strict_and_none_to_lax():
+    for raw in ("strict", "Strict", "STRICT", None):
+        settings = {"SESSION_COOKIE_SAMESITE": raw}
+        apply_sp_defaults(settings)
+        assert settings["SESSION_COOKIE_SAMESITE"] == "Lax"
+
+
+def test_apply_sp_defaults_preserves_explicit_lax():
+    settings = {"SESSION_COOKIE_SAMESITE": "Lax"}
+    apply_sp_defaults(settings)
+    assert settings["SESSION_COOKIE_SAMESITE"] == "Lax"

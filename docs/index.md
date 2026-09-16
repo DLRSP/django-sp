@@ -206,6 +206,7 @@ We **highly recommend** and only officially support the latest patch release of 
 | ``SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')`` | nginx/gunicorn terminates TLS |
 | ``SOCIAL_AUTH_REDIRECT_IS_HTTPS = True`` | production OAuth callback URLs (set automatically by ``apply_sp_defaults`` when ``DEBUG`` is false and the proxy header is https) |
 | ``USE_X_FORWARDED_HOST = True`` | multi-host or canonical public hostname differs from internal |
+| ``SESSION_COOKIE_SAMESITE = 'Lax'`` | **required for OAuth** — ``Strict`` drops the session on return from the IdP (``AuthStateMissing`` / 500). ``apply_sp_defaults`` sets/coerces ``Lax`` when unset, ``None``, or ``Strict``. ``CSRF_COOKIE_SAMESITE`` may stay ``Strict`` (same-site POST begin). |
 | ``CSRF_TRUSTED_ORIGINS`` | Django 4+ CSRF on HTTPS login forms |
 
 **Social login buttons must POST.** Version 6.0.0 of ``social-auth-app-django`` removed
