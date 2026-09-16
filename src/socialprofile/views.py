@@ -130,7 +130,9 @@ class SelectAuthView(TemplateView):
     @staticmethod
     def _safe_next_url(raw: str | None) -> str:
         """Allow only same-site relative paths (block open redirects)."""
-        candidate = (raw or DEFAULT_RETURNTO_PATH).strip() or DEFAULT_RETURNTO_PATH
+        candidate = (
+            raw or DEFAULT_RETURNTO_PATH
+        ).strip() or DEFAULT_RETURNTO_PATH
         if candidate.startswith("/") and not candidate.startswith("//"):
             return candidate
         return DEFAULT_RETURNTO_PATH
