@@ -125,6 +125,24 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
         _setdefault(settings, "USE_X_FORWARDED_HOST", True)
         _setdefault(settings, "SOCIAL_AUTH_REDIRECT_IS_HTTPS", True)
 
+    # OAuth complete is a top-level GET from the IdP. SameSite=Strict drops the
+    # session cookie on return (AuthStateMissing / 500). None diverges fleet-wide.
+    # Canonical shared value: Lax (CSRF may remain Strict for same-site POST begin).
+    _ensure_session_samesite_lax(settings)
+
     trusted = app_cfg.get("csrf_trusted_origins")
     if trusted and not _has(settings, "CSRF_TRUSTED_ORIGINS"):
         settings["CSRF_TRUSTED_ORIGINS"] = list(trusted)
+
+
+def _ensure_session_samesite_lax(settings: MutableMapping[str, Any]) -> None:
+    """Force SESSION_COOKIE_SAMESITE=Lax when unset, None, or Strict."""
+    if not _has(settings, "SESSION_COOKIE_SAMESITE"):
+        settings["SESSION_COOKIE_SAMESITE"] = "Lax"
+        return
+    current = settings["SESSION_COOKIE_SAMESITE"]
+    if current is None:
+        settings["SESSION_COOKIE_SAMESITE"] = "Lax"
+        return
+    if isinstance(current, str) and current.lower() == "strict":
+        settings["SESSION_COOKIE_SAMESITE"] = "Lax"
