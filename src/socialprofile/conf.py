@@ -68,7 +68,9 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     _setdefault(settings, "DEFAULT_RETURNTO_PATH", f"{sp_prefix}/")
 
     _setdefault(settings, "SOCIAL_AUTH_LOGIN_REDIRECT_URL", f"{sp_prefix}/")
-    _setdefault(settings, "SOCIAL_AUTH_LOGIN_ERROR_URL", f"{sp_prefix}/login-error/")
+    _setdefault(
+        settings, "SOCIAL_AUTH_LOGIN_ERROR_URL", f"{sp_prefix}/login-error/"
+    )
     _setdefault(settings, "SOCIAL_AUTH_LOGIN_URL", f"{sp_prefix}/select/")
     _setdefault(
         settings,
@@ -82,15 +84,21 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     )
 
     _setdefault(settings, "AUTH_USER_MODEL", "socialprofile.socialprofile")
-    _setdefault(settings, "SOCIAL_AUTH_USER_MODEL", "socialprofile.socialprofile")
+    _setdefault(
+        settings, "SOCIAL_AUTH_USER_MODEL", "socialprofile.socialprofile"
+    )
     _setdefault(settings, "SOCIAL_AUTH_RAISE_EXCEPTIONS", True)
     _setdefault(
         settings,
         "SOCIAL_AUTH_STRATEGY",
         "social_django.strategy.DjangoStrategy",
     )
-    _setdefault(settings, "SOCIAL_AUTH_STORAGE", "social_django.models.DjangoStorage")
-    _setdefault(settings, "SOCIAL_AUTH_ACTIVE_USERS_FILTER", {"is_active": True})
+    _setdefault(
+        settings, "SOCIAL_AUTH_STORAGE", "social_django.models.DjangoStorage"
+    )
+    _setdefault(
+        settings, "SOCIAL_AUTH_ACTIVE_USERS_FILTER", {"is_active": True}
+    )
     _setdefault(settings, "SOCIAL_AUTH_ALWAYS_ASSOCIATE", True)
     _setdefault(
         settings,
@@ -100,7 +108,9 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     _setdefault(settings, "SOCIAL_AUTH_REVOKE_TOKENS_ON_DISCONNECT", True)
     _setdefault(settings, "SP_SET_USERNAME", True)
 
-    _setdefault(settings, "SOCIAL_AUTH_PIPELINE", defaults.DEFAULT_SOCIAL_AUTH_PIPELINE)
+    _setdefault(
+        settings, "SOCIAL_AUTH_PIPELINE", defaults.DEFAULT_SOCIAL_AUTH_PIPELINE
+    )
     _setdefault(
         settings,
         "AUTHENTICATION_BACKENDS",
