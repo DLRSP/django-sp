@@ -590,9 +590,9 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.10 \
-    --hash=sha256:2c8e1409f8c767ee3b1ac0a36be7dabd8e47391e698865fb7b9b56c4baa92e2c \
-    --hash=sha256:77c9d04145af4d4fb6cb4f07854393effa59bc5eca6f43672debc07fedd981f0
+django-model-mixin==0.3.11 \
+    --hash=sha256:a32cae97904e551d04cd49454adc7496b6e1df90c512efa1b88ba83a4b9dbfea \
+    --hash=sha256:d759efff3e8dfe9efcfa79460e92d34867672b4c1468785a1268bd8ddc16c58e
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.4.1 \
     --hash=sha256:c47f2a70e83bade0a47a5e9b20e86030d8ed9c0a8f10ec4ed30446cad7291f2d \
@@ -618,9 +618,9 @@ django-user-sessions==2.0.0 \
     --hash=sha256:0965554279f556b47062965609fa08b3ae45bbc581001dbe84b2ea599cc67748 \
     --hash=sha256:41b8b1ebeb4736065efbc96437c9cfbf491c39e10fd547a76b98f2312e11fa3e
     # via -r requirements/runtime.in
-djangorestframework==3.18.1 \
-    --hash=sha256:605d79fa2ec2f02905492e5ea13d903c2d842d0b4c915a57f7bf02ab9f3c91dd \
-    --hash=sha256:f1409d698967aaf82d5d98d76b549c8fba8bd92ebd0d83d24454508f72168dc2
+djangorestframework==3.18.3 \
+    --hash=sha256:446a9b352e7eff630421ab3f2328bd2401b109a9470afa4a31189994911ed030 \
+    --hash=sha256:8544bb674846731b1e3c9b309236ee1dc412905a0aa725be2ec193ca950a7d12
     # via -r requirements/runtime.in
 docutils==0.23 \
     --hash=sha256:25d013af9bf23bc1c7b2b093dff4208166c53a94786c9e447808335ef1185fea \
