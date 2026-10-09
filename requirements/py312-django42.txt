@@ -589,17 +589,17 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.11 \
-    --hash=sha256:a32cae97904e551d04cd49454adc7496b6e1df90c512efa1b88ba83a4b9dbfea \
-    --hash=sha256:d759efff3e8dfe9efcfa79460e92d34867672b4c1468785a1268bd8ddc16c58e
+django-model-mixin==0.3.12 \
+    --hash=sha256:093e087631fbe26ff323d75311302360011b17cec31ee19cbfe6c07189c3874a \
+    --hash=sha256:92a411ccbe27c1f0a23896c41cb08a5564fb4e141dc73bab2e37fd0b9dcc0be2
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.4.1 \
     --hash=sha256:c47f2a70e83bade0a47a5e9b20e86030d8ed9c0a8f10ec4ed30446cad7291f2d \
     --hash=sha256:c4de73c0765eed55a99ea0fa8433b20664dcc1f43930149cff569abed166c5c2
     # via -r requirements/runtime.in
-django-otp==1.7.3 \
-    --hash=sha256:3ce501173bf1b936146ffe5ff0cfdae1a0c7eb46cce1e9e3fdddd984d993c74f \
-    --hash=sha256:7d52fb0f76c4c1c86cbc71c196d3f79941b0b84aff980e45193bef89a70a7a12
+django-otp==1.7.4 \
+    --hash=sha256:2fa56711167db887bf80ebdc35820355e756a3fdc0b9af0e34494b737312bc16 \
+    --hash=sha256:f3a970be59ca407d90fd278de3253979417364f91e9edcfcd7a9f05235859b27
     # via
     #   -r requirements/runtime.in
     #   django-two-factor-auth
@@ -1307,9 +1307,9 @@ propcache==0.5.4 \
     # via
     #   aiohttp
     #   yarl
-pycparser==3.1 \
-    --hash=sha256:b3fc6dec06a8b2fefa0ed4ff92285306a5e3be9987bc5603c9edbdc4e492418f \
-    --hash=sha256:f09d358c840bd147b79e55f2bc494f18ea869dc897f5852a8f5766b74f787882
+pycparser==3.11 \
+    --hash=sha256:51d5a8ba2be0bbe440b99d2112604c95bbbc3c2748a64260186c541e1729cd80 \
+    --hash=sha256:d875f09c3507d00e1aba0eecc6dcadc1352f30fff09dc6bff2f1c2935e97c2bc
     # via cffi
 pycryptodomex==3.24.0 \
     --hash=sha256:0428f19f13452c6b89bbaf2c530f84f369873811dfa77f0cee0da4f40fb0474f \
