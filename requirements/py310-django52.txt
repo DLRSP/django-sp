@@ -594,9 +594,9 @@ django-image-cropping==1.7 \
     --hash=sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b \
     --hash=sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232
     # via -r requirements/runtime.in
-django-model-mixin==0.3.12 \
-    --hash=sha256:093e087631fbe26ff323d75311302360011b17cec31ee19cbfe6c07189c3874a \
-    --hash=sha256:92a411ccbe27c1f0a23896c41cb08a5564fb4e141dc73bab2e37fd0b9dcc0be2
+django-model-mixin==0.3.13 \
+    --hash=sha256:32b291f2fd210c447ff7258435221b57c2daf2c83d9c34a153cbb889cb907604 \
+    --hash=sha256:7b232cc887a85732c2f5fdef66822ac20abd7b315703e249b17da45a3126745b
     # via -r requirements/runtime.in
 django-oauth-toolkit==3.4.1 \
     --hash=sha256:c47f2a70e83bade0a47a5e9b20e86030d8ed9c0a8f10ec4ed30446cad7291f2d \
@@ -1405,9 +1405,9 @@ social-auth-app-django==7.1.0 \
     --hash=sha256:77058a2717d537899d9fe92039e06f9567d9cf5574f6bcb1345649d2fd670b09 \
     --hash=sha256:a6e51eb905c81da15548b156315690f608867d68552daadcdb5aa180500f8ff4
     # via -r requirements/runtime.in
-social-auth-core==6.1.0 \
-    --hash=sha256:c876e4984a88102be0b6c26a98ec9d974970a75b7c3f9b30f2ade7516f67c001 \
-    --hash=sha256:df3b11764977ce3a1582566b331df270e4310b07052b8a42b52985f9af497bd0
+social-auth-core==6.1.1 \
+    --hash=sha256:674c285e75b04aaaf438fbbb6b2376b343f7b932d5dce1726e61cd23b17b6cff \
+    --hash=sha256:f5ab36e843c7ea20bce96ecab95e716ab1c8afe85d3d3c322446246aaffadd13
     # via
     #   python-social-auth
     #   social-auth-app-django
