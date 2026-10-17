@@ -602,9 +602,9 @@ django-oauth-toolkit==3.4.1 \
     --hash=sha256:c47f2a70e83bade0a47a5e9b20e86030d8ed9c0a8f10ec4ed30446cad7291f2d \
     --hash=sha256:c4de73c0765eed55a99ea0fa8433b20664dcc1f43930149cff569abed166c5c2
     # via -r requirements/runtime.in
-django-otp==1.7.4 \
-    --hash=sha256:2fa56711167db887bf80ebdc35820355e756a3fdc0b9af0e34494b737312bc16 \
-    --hash=sha256:f3a970be59ca407d90fd278de3253979417364f91e9edcfcd7a9f05235859b27
+django-otp==1.7.5 \
+    --hash=sha256:475d4111e07d61616996f098d08d29884da6397273a11f53c1b8e8c75d27e1dc \
+    --hash=sha256:7f554d21dcd035550c3b8e3f154b1f422fee71fdc75c8a3bf96e42a2ea6dafcc
     # via
     #   -r requirements/runtime.in
     #   django-two-factor-auth
