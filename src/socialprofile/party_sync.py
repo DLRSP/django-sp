@@ -40,21 +40,23 @@ def sync_party_from_profile(
 
 
 def _sync_user(user) -> None:
+    from django.db import transaction
     from django.utils import timezone as dj_timezone
     from party.services import upsert_external_identity
 
-    now = dj_timezone.now()
-    party = _ensure_party_for_user(user, now)
-    upsert_external_identity(
-        party,
-        namespace=EXTID_NAMESPACE,
-        scheme="user",
-        value=str(user.pk),
-        trust=80,
-    )
-    _sync_provider_uids(user, party)
-    _sync_anagrafica(user, party, now)
-    _sync_facts(user, party, now)
+    with transaction.atomic():
+        now = dj_timezone.now()
+        party = _ensure_party_for_user(user, now)
+        upsert_external_identity(
+            party,
+            namespace=EXTID_NAMESPACE,
+            scheme="user",
+            value=str(user.pk),
+            trust=80,
+        )
+        _sync_provider_uids(user, party)
+        _sync_anagrafica(user, party, now)
+        _sync_facts(user, party, now)
 
 
 def _ensure_party_for_user(user, now):
