@@ -72,6 +72,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+party = [
+    "django-party>=0.3.0",
+]
 testing = [
     "coverage",
     "codecov",

@@ -107,6 +107,10 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     )
     _setdefault(settings, "SOCIAL_AUTH_REVOKE_TOKENS_ON_DISCONNECT", True)
     _setdefault(settings, "SP_SET_USERNAME", True)
+    # Party CRM dual-write (requires django-sp[party] + party installed). Default off.
+    _setdefault(settings, "SP_PARTY_SYNC", False)
+    _setdefault(settings, "SP_PARTY_ADMIN_THIN", False)
+    _setdefault(settings, "SP_PARTY_MIRROR_LOGIN_EMAIL", False)
 
     _setdefault(
         settings, "SOCIAL_AUTH_PIPELINE", defaults.DEFAULT_SOCIAL_AUTH_PIPELINE
