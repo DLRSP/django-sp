@@ -41,8 +41,13 @@ from socialprofile.models import SocialProfile
 
 @admin.register(SocialProfile)
 class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
-    """Sets up the custom user admin display"""
+    """Sets up the custom user admin display.
 
+    When ``SP_PARTY_ADMIN_THIN`` is True, CRM/provider fieldsets are omitted
+    (Authentication chrome only). Independent of ``SP_PARTY_SYNC``.
+    """
+
+    # Full fieldsets kept as class attribute for thin-mode toggle via get_fieldsets.
     fieldsets = (
         (None, {"fields": ("email", "username", "password")}),
         (
@@ -177,6 +182,64 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
             },
         ),
     )
+
+    THIN_FIELDSETS = (
+        (None, {"fields": ("email", "username", "password")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+        (
+            _("Important dates"),
+            {"fields": ("last_login", "date_joined")},
+        ),
+        (
+            _("Avatar"),
+            {
+                "fields": (
+                    "image",
+                    "cropping",
+                    "cropping_free",
+                )
+            },
+        ),
+        (
+            _("Staff"),
+            {
+                "fields": (
+                    "sort",
+                    "visible",
+                    "title",
+                    "role",
+                    "function_01",
+                    "function_02",
+                    "function_03",
+                    "function_04",
+                    "function_05",
+                    "function_06",
+                    "function_07",
+                    "function_08",
+                    "function_09",
+                    "function_10",
+                )
+            },
+        ),
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        from django.conf import settings as dj_settings
+
+        if getattr(dj_settings, "SP_PARTY_ADMIN_THIN", False):
+            return self.THIN_FIELDSETS
+        return super().get_fieldsets(request, obj)
     add_fieldsets = (
         (
             None,

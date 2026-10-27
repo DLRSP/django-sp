@@ -15,6 +15,17 @@ DEFAULT_SOCIAL_AUTH_PIPELINE = (
     "socialprofile.pipeline.socialprofile_extra_values",
 )
 
+# Not appended by apply_sp_defaults. Consumers set SP_PARTY_SYNC=True and append:
+# "socialprofile.party_sync.sync_party_from_profile"
+PARTY_SYNC_PIPELINE_STEP = "socialprofile.party_sync.sync_party_from_profile"
+
+# Opt-in IdP backends (append to AUTHENTICATION_BACKENDS). No fat SocialProfile columns.
+OPTIONAL_SOCIAL_AUTH_BACKENDS = (
+    "social_core.backends.linkedin.LinkedinOAuth2",
+    "social_core.backends.discord.DiscordOAuth2",
+    "social_core.backends.github.GithubOAuth2",
+)
+
 DEFAULT_AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GoogleOAuth2",
     "social_core.backends.email.EmailAuth",
