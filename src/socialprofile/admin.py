@@ -234,12 +234,28 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         ),
     )
 
+    THIN_LIST_DISPLAY = (
+        "email",
+        "username",
+        "is_active",
+        "is_staff",
+        "date_joined",
+        "last_login",
+    )
+
     def get_fieldsets(self, request, obj=None):
         from django.conf import settings as dj_settings
 
         if getattr(dj_settings, "SP_PARTY_ADMIN_THIN", False):
             return self.THIN_FIELDSETS
         return super().get_fieldsets(request, obj)
+
+    def get_list_display(self, request):
+        from django.conf import settings as dj_settings
+
+        if getattr(dj_settings, "SP_PARTY_ADMIN_THIN", False):
+            return self.THIN_LIST_DISPLAY
+        return super().get_list_display(request)
     add_fieldsets = (
         (
             None,
