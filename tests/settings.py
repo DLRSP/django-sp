@@ -61,6 +61,14 @@ INSTALLED_APPS = [
     "socialprofile",
 ]
 
+# Opt-in party extra: enable dual-write tests when django-party is importable.
+try:
+    import party  # noqa: F401
+
+    INSTALLED_APPS = [*INSTALLED_APPS, "party"]
+except ImportError:
+    pass
+
 # Social Profile
 # Custom Social Profile User
 
