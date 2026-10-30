@@ -1,0 +1,68 @@
+site_name: Django-SP
+site_url: https://github.com/DLRSP/django-sp/
+site_description: Django application for social authentication and other security integrations.
+
+repo_name: DLRSP/django-sp
+repo_url: https://github.com/DLRSP/django-sp/
+
+theme:
+    name: 'material'
+    palette:
+#      - primary: 'black'
+#      - accent: 'indigo'
+      - scheme: default
+        toggle:
+          icon: material/weather-sunny
+          name: Switch to dark mode
+      - scheme: slate #
+        toggle:
+          icon: material/weather-night
+          name: Switch to light mode
+    features:
+      - navigation.instant
+      - navigation.top
+      - content.code.annotate
+      - content.tabs.link
+      - search.suggest
+      - search.highlight
+    icon:
+        repo: fontawesome/brands/github-alt
+
+plugins:
+  - search
+  - git-revision-date
+#  - tags
+
+extra:
+  analytics:
+    provider: google
+    property: G-5LLVGG5PP6
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/DlrspTwits
+      name: DLRSP on Twitter
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:dlrsp.dev@gmail.com
+    - icon: fontawesome/brands/github
+      link: https://github.com/DLRSP
+
+markdown_extensions:
+ - toc:
+    anchorlink: True
+ - pymdownx.tabbed:
+    alternate_style: true
+ - pymdownx.highlight:
+ - pymdownx.inlinehilite:
+ - pymdownx.superfences:
+ - pymdownx.snippets:
+
+nav:
+ - Quickstart: 'index.md'
+ - Tutorials:
+    - 'Example': 'tutorial/example.md'
+ - Community:
+    - 'References': 'community/references.md'
+    - 'Contributing': 'community/contributing.md'
+    - 'Third-Party-Packages': 'community/third-party-packages.md'
+
+copyright: Copyright &copy; 2010-present DLRSP
