@@ -17,6 +17,34 @@ logger = logging.getLogger(__name__)
 
 EXTID_NAMESPACE = "socialprofile"
 
+# Reserved for the SocialProfile→Party primary link (scheme=user, value=pk).
+# Never accept IdP provider names that normalize into these schemes.
+_RESERVED_EXTID_SCHEMES = frozenset({"user"})
+
+# Provider schemes written as ExtId after normalizing ``*-oauth2`` suffixes.
+_PROVIDER_EXTID_SCHEMES = frozenset(
+    {
+        "google",
+        "facebook",
+        "twitter",
+        "instagram",
+        "live",
+        "linkedin",
+        "discord",
+        "github",
+        "microsoft",
+        "microsoft-graph",
+        "apple",
+        "gitlab",
+        "bitbucket",
+        "yahoo",
+        "amazon",
+        "vk",
+        "odnoklassniki",
+        "openid",
+    }
+)
+
 
 def party_sync_enabled() -> bool:
     return bool(
@@ -56,7 +84,7 @@ def _sync_user(user) -> None:
             trust=80,
         )
         _sync_provider_uids(user, party)
-        _sync_anagrafica(user, party, now)
+        _sync_contact_fields(user, party, now)
         _sync_facts(user, party, now)
 
 
@@ -102,6 +130,19 @@ def _ensure_party_for_user(user, now):
     return party
 
 
+def _provider_extid_scheme(provider: str) -> str | None:
+    """Map PSA provider name → ExtId scheme, or None if reserved/unknown."""
+    raw = (provider or "").strip().lower()
+    if not raw:
+        return None
+    scheme = raw.replace("-oauth2", "").replace("_oauth2", "")
+    if not scheme or scheme in _RESERVED_EXTID_SCHEMES:
+        return None
+    if scheme not in _PROVIDER_EXTID_SCHEMES:
+        return None
+    return scheme[:64]
+
+
 def _sync_provider_uids(user, party) -> None:
     from party.services import upsert_external_identity
 
@@ -110,17 +151,22 @@ def _sync_provider_uids(user, party) -> None:
     except ImportError:
         return
     for usa in UserSocialAuth.objects.filter(user=user):
-        provider = (usa.provider or "").strip()
         uid = (usa.uid or "").strip()
-        if not provider or not uid:
+        if not uid:
             continue
-        # Normalize linkedin-oauth2 → linkedin, etc.
-        scheme = provider.replace("-oauth2", "").replace("_oauth2", "")
+        scheme = _provider_extid_scheme(usa.provider or "")
+        if scheme is None:
+            logger.info(
+                "skip ExtId for provider=%r user=%s (reserved or unknown)",
+                usa.provider,
+                user.pk,
+            )
+            continue
         try:
             upsert_external_identity(
                 party,
                 namespace=EXTID_NAMESPACE,
-                scheme=scheme[:64],
+                scheme=scheme,
                 value=uid[:255],
                 trust=70,
             )
@@ -133,7 +179,7 @@ def _sync_provider_uids(user, party) -> None:
             )
 
 
-def _sync_anagrafica(user, party, now) -> None:
+def _sync_contact_fields(user, party, now) -> None:
     from party.services import upsert_contact_point, upsert_postal_address
 
     phone = (getattr(user, "phone_number", None) or "").strip()
