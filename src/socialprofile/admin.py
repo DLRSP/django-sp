@@ -256,6 +256,7 @@ class CustomUserAdmin(ImageCroppingMixin, BaseUserAdmin):
         if getattr(dj_settings, "SP_PARTY_ADMIN_THIN", False):
             return self.THIN_LIST_DISPLAY
         return super().get_list_display(request)
+
     add_fieldsets = (
         (
             None,
