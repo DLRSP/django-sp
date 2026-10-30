@@ -1,0 +1,1 @@
+Refuse reserved ExtId scheme ``user`` (and ``user-oauth2``) in Party provider sync so a crafted IdP row cannot bind another account's primary link.

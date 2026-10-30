@@ -397,3 +397,81 @@ def test_optional_providers_have_no_fat_socialprofile_columns():
         "github_email",
     ):
         assert name not in field_names
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+@pytest.mark.parametrize(
+    "evil_provider", ("user", "user-oauth2", "USER-OAuth2")
+)
+def test_reserved_user_provider_cannot_hijack_victim_extid(evil_provider):
+    """IdP names that normalize to scheme ``user`` must never mint user ExtIds."""
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ExternalIdentity, Party
+    from social_django.models import UserSocialAuth
+
+    User = get_user_model()
+    suffix = evil_provider.lower().replace("-", "")[:12]
+    # SocialProfileManager.create_user ignores username; set after save.
+    attacker = User.objects.create_user(f"attacker-{suffix}@example.com", "x")
+    attacker.username = f"attacker_{suffix}"
+    attacker.save(update_fields=["username"])
+    victim = User.objects.create_user(f"victim-{suffix}@example.com", "x")
+    victim.username = f"victim_{suffix}"
+    victim.save(update_fields=["username"])
+    UserSocialAuth.objects.create(
+        user=attacker,
+        provider=evil_provider,
+        uid=str(victim.pk),
+    )
+    sync_party_from_profile(None, {}, user=attacker)
+
+    assert not ExternalIdentity.objects.filter(
+        namespace="socialprofile",
+        scheme="user",
+        value=str(victim.pk),
+        valid_to__isnull=True,
+    ).exists()
+    attacker_party = (
+        ExternalIdentity.objects.filter(
+            namespace="socialprofile",
+            scheme="user",
+            value=str(attacker.pk),
+            valid_to__isnull=True,
+        )
+        .select_related("party")
+        .get()
+        .party
+    )
+    assert attacker_party.kind == Party.Kind.PERSON
+
+    sync_party_from_profile(None, {}, user=victim)
+    victim_ext = ExternalIdentity.objects.get(
+        namespace="socialprofile",
+        scheme="user",
+        value=str(victim.pk),
+        valid_to__isnull=True,
+    )
+    assert victim_ext.party_id != attacker_party.pk
+    assert (
+        ExternalIdentity.objects.filter(
+            namespace="socialprofile",
+            scheme="user",
+            value=str(victim.pk),
+            valid_to__isnull=True,
+        ).count()
+        == 1
+    )
+
+
+def test_provider_extid_scheme_rejects_reserved_and_unknown():
+    from socialprofile.party_sync import _provider_extid_scheme
+
+    assert _provider_extid_scheme("user") is None
+    assert _provider_extid_scheme("user-oauth2") is None
+    assert _provider_extid_scheme("") is None
+    assert _provider_extid_scheme("totally-unknown-idp") is None
+    assert _provider_extid_scheme("google-oauth2") == "google"
+    assert _provider_extid_scheme("linkedin-oauth2") == "linkedin"
