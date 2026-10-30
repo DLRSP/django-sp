@@ -475,3 +475,191 @@ def test_provider_extid_scheme_rejects_reserved_and_unknown():
     assert _provider_extid_scheme("totally-unknown-idp") is None
     assert _provider_extid_scheme("google-oauth2") == "google"
     assert _provider_extid_scheme("linkedin-oauth2") == "linkedin"
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+def test_ensure_party_recovers_from_extid_integrity_error():
+    """Concurrent-style: miss ExtId, create races, IntegrityError → re-fetch winner."""
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from django.db import IntegrityError, transaction
+    from django.utils import timezone as dj_timezone
+    from party.models import ExternalIdentity, Party
+
+    from socialprofile.party_sync import (
+        _ensure_party_for_user,
+        _get_open_user_extid,
+    )
+
+    User = get_user_model()
+    user = User.objects.create_user(
+        username="raceuser",
+        email="race@example.com",
+        password="x",
+        first_name="Race",
+    )
+    winner = Party.objects.create(
+        kind=Party.Kind.PERSON, given_name="Winner", family_name="Existing"
+    )
+    ExternalIdentity.objects.create(
+        party=winner,
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        trust=80,
+        valid_from=dj_timezone.now(),
+    )
+    before_count = Party.objects.count()
+    lookups = {"n": 0}
+    real_get = _get_open_user_extid
+
+    def miss_once_then_real(user_pk):
+        lookups["n"] += 1
+        if lookups["n"] == 1:
+            return None
+        return real_get(user_pk)
+
+    with transaction.atomic():
+        with (
+            patch(
+                "socialprofile.party_sync._get_open_user_extid",
+                side_effect=miss_once_then_real,
+            ),
+            patch(
+                "party.models.ExternalIdentity.objects.create",
+                side_effect=IntegrityError("party_extid_open_unique"),
+            ),
+        ):
+            party = _ensure_party_for_user(user, dj_timezone.now())
+
+    assert party.pk == winner.pk
+    assert Party.objects.count() == before_count
+    assert (
+        ExternalIdentity.objects.filter(
+            namespace="socialprofile",
+            scheme="user",
+            value=str(user.pk),
+            valid_to__isnull=True,
+        ).count()
+        == 1
+    )
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+def test_profile_save_sync_updates_given_name_when_not_user_edited():
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ExternalIdentity
+
+    from socialprofile.forms import SocialProfileForm
+    from socialprofile.party_sync import sync_party_after_profile_save
+
+    User = get_user_model()
+    user = User.objects.create_user(
+        "namesync@example.com",
+        "x",
+        first_name="Before",
+        last_name="Name",
+    )
+    user.username = "namesync"
+    user.edited_by_user = False
+    user.save(update_fields=["username", "edited_by_user"])
+    sync_party_after_profile_save(user)
+    ext = ExternalIdentity.objects.get(
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        valid_to__isnull=True,
+    )
+    assert ext.party.given_name == "Before"
+
+    user.first_name = "After"
+    user.edited_by_user = False
+    user.save(update_fields=["first_name", "edited_by_user"])
+    sync_party_after_profile_save(user)
+    ext.party.refresh_from_db()
+    assert ext.party.given_name == "After"
+
+    with patch(
+        "socialprofile.party_sync.sync_party_after_profile_save"
+    ) as mocked_sync:
+        form = SocialProfileForm(
+            instance=user,
+            data={
+                "username": user.username,
+                "first_name": "FormName",
+                "last_name": user.last_name or "",
+                "email": user.email,
+                "gender": user.gender or "unknown",
+                "visible": user.visible,
+                "phone_number": "",
+                "url": "",
+                "description": "",
+                "city": "",
+                "postalcode": "",
+                "address": "",
+                "returnTo": "/",
+                "edited_by_user": False,
+            },
+        )
+        assert form.is_valid(), form.errors
+        form.save()
+        mocked_sync.assert_called_once()
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+def test_profile_form_save_syncs_contact_phone():
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ContactPoint, ExternalIdentity
+
+    from socialprofile.forms import SocialProfileForm
+    from socialprofile.party_sync import sync_party_after_profile_save
+
+    User = get_user_model()
+    user = User.objects.create_user(
+        "phonesync@example.com",
+        "x",
+        first_name="Phone",
+    )
+    user.username = "phonesync"
+    user.edited_by_user = True
+    user.save(update_fields=["username", "edited_by_user"])
+    sync_party_after_profile_save(user)
+    party = ExternalIdentity.objects.get(
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        valid_to__isnull=True,
+    ).party
+
+    form = SocialProfileForm(
+        instance=user,
+        data={
+            "username": user.username,
+            "first_name": user.first_name or "",
+            "last_name": user.last_name or "",
+            "email": user.email,
+            "gender": user.gender or "unknown",
+            "visible": user.visible,
+            "phone_number": "+390123456789",
+            "url": "",
+            "description": "",
+            "city": "",
+            "postalcode": "",
+            "address": "",
+            "returnTo": "/",
+            "edited_by_user": True,
+        },
+    )
+    assert form.is_valid(), form.errors
+    form.save()
+    assert ContactPoint.objects.filter(
+        party=party, channel="phone", value="+390123456789"
+    ).exists()
