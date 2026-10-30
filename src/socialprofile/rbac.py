@@ -1,4 +1,5 @@
 """AUTH-plane feature-group seeds (Django Group). Independent of party."""
+
 from __future__ import annotations
 
 import logging

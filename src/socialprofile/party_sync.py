@@ -4,6 +4,7 @@ Gated by ``SP_PARTY_SYNC`` (default False). Never import party at module top.
 Never invent ConsentRecord. Never write beddy/fiscal ExtIds. Failures are logged
 and swallowed so login still commits.
 """
+
 from __future__ import annotations
 
 import logging
@@ -18,14 +19,14 @@ EXTID_NAMESPACE = "socialprofile"
 
 
 def party_sync_enabled() -> bool:
-    return bool(getattr(settings, "SP_PARTY_SYNC", False)) and apps.is_installed(
-        "party"
-    )
+    return bool(
+        getattr(settings, "SP_PARTY_SYNC", False)
+    ) and apps.is_installed("party")
 
 
 def sync_party_from_profile(
     strategy, details, user=None, *args, **kwargs
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any] | None:
     """PSA pipeline step — append only when SP_PARTY_SYNC is on."""
     if user is None or not party_sync_enabled():
         return None
@@ -62,12 +63,16 @@ def _sync_user(user) -> None:
 def _ensure_party_for_user(user, now):
     from party.models import ExternalIdentity, Party
 
-    ext = ExternalIdentity.objects.filter(
-        namespace=EXTID_NAMESPACE,
-        scheme="user",
-        value=str(user.pk),
-        valid_to__isnull=True,
-    ).select_related("party").first()
+    ext = (
+        ExternalIdentity.objects.filter(
+            namespace=EXTID_NAMESPACE,
+            scheme="user",
+            value=str(user.pk),
+            valid_to__isnull=True,
+        )
+        .select_related("party")
+        .first()
+    )
     if ext:
         party = ext.party
     else:
