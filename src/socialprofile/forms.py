@@ -299,3 +299,16 @@ class SocialProfileForm(forms.ModelForm):
 
         if self.changed_data:
             self.cleaned_data["edited_by_user"] = True
+
+    def save(self, commit=True):
+        """Persist profile, then optionally dual-write Party (fail-open).
+
+        Hook lives on the form (not a global SocialProfile post_save) so the
+        PSA login pipeline and unrelated bulk saves do not double-write Party.
+        """
+        user = super().save(commit=commit)
+        if commit:
+            from socialprofile.party_sync import sync_party_after_profile_save
+
+            sync_party_after_profile_save(user)
+        return user
