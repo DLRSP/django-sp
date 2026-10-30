@@ -30,24 +30,24 @@ We **highly recommend** and only officially support the latest patch release of 
 
     ``` python title="settings.py"
     INSTALLED_APPS = [
-        ...
-        "django_errors",                       # Needed by Wrap Errors
-        "axes",                                # Needed by SocialProfile [Monitor Logins]
-        "user_sessions",                       # Needed by SocialProfile [One-Time-Password]
-        "django_otp",                          # Needed by SocialProfile [One-Time-Password]
-        "django_otp.plugins.otp_static",       # Needed by SocialProfile [One-Time-Password]
-        "django_otp.plugins.otp_totp",         # Needed by SocialProfile [One-Time-Password]
-        "two_factor",                          # Needed by SocialProfile [One-Time-Password]
-        "social_django",                       # Needed by SocialProfile [OAuth]
-        "rest_framework.authtoken",            # Needed by SocialProfile [Token]
-        "rest_framework",                      # Needed by SocialProfile
-        "oauth2_provider",                     # Needed by SocialProfile [OAuth2 Token]
-        "corsheaders",                         # Needed by SocialProfile [OAuth2 Token]
-        "crispy_forms",                        # Needed by SocialProfile [Edit Form]
-        "django_countries",                    # Needed by SocialProfile [Edit Form]
-        "sweetify",                            # Needed by SocialProfile [Edit Form]
+        # ...other apps
+        "django_errors",  # Needed by Wrap Errors
+        "axes",  # Needed by SocialProfile [Monitor Logins]
+        "user_sessions",  # Needed by SocialProfile [One-Time-Password]
+        "django_otp",  # Needed by SocialProfile [One-Time-Password]
+        "django_otp.plugins.otp_static",  # Needed by SocialProfile [One-Time-Password]
+        "django_otp.plugins.otp_totp",  # Needed by SocialProfile [One-Time-Password]
+        "two_factor",  # Needed by SocialProfile [One-Time-Password]
+        "social_django",  # Needed by SocialProfile [OAuth]
+        "rest_framework.authtoken",  # Needed by SocialProfile [Token]
+        "rest_framework",  # Needed by SocialProfile
+        "oauth2_provider",  # Needed by SocialProfile [OAuth2 Token]
+        "corsheaders",  # Needed by SocialProfile [OAuth2 Token]
+        "crispy_forms",  # Needed by SocialProfile [Edit Form]
+        "django_countries",  # Needed by SocialProfile [Edit Form]
+        "sweetify",  # Needed by SocialProfile [Edit Form]
         "socialprofile",
-        ...
+        # ...other apps
     ]
     ```
 
@@ -58,7 +58,7 @@ We **highly recommend** and only officially support the latest patch release of 
     from django.conf.urls import url, include
 
     urlpatterns = [
-        url(r'^sp/', include('socialprofile.urls')),
+        url(r"^sp/", include("socialprofile.urls")),
         # ...other urls...
     ]
     ```
@@ -69,47 +69,47 @@ We **highly recommend** and only officially support the latest patch release of 
     MIDDLEWARE = (
         "django.middleware.security.SecurityMiddleware",
         # "django.contrib.sessions.middleware.SessionMiddleware",           # Need Commente-Out By user_sessions
-        "user_sessions.middleware.SessionMiddleware",                       # Need By SocialProfile
+        "user_sessions.middleware.SessionMiddleware",  # Need By SocialProfile
         "django.middleware.cache.UpdateCacheMiddleware",
         "django.middleware.common.CommonMiddleware",
         "django.middleware.csrf.CsrfViewMiddleware",
         "django.contrib.auth.middleware.AuthenticationMiddleware",
-        "oauth2_provider.middleware.OAuth2TokenMiddleware",                 # Need By SocialProfile
+        "oauth2_provider.middleware.OAuth2TokenMiddleware",  # Need By SocialProfile
         "django.middleware.locale.LocaleMiddleware",
-        "django_otp.middleware.OTPMiddleware",                              # Need By SocialProfile
-        "corsheaders.middleware.CorsMiddleware",                            # Need By SocialProfile
+        "django_otp.middleware.OTPMiddleware",  # Need By SocialProfile
+        "corsheaders.middleware.CorsMiddleware",  # Need By SocialProfile
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
         "django.middleware.cache.FetchFromCacheMiddleware",
-        "social_django.middleware.SocialAuthExceptionMiddleware",           # Need By SocialProfile
-        "axes.middleware.AxesMiddleware",                                   # Need By SocialProfile
+        "social_django.middleware.SocialAuthExceptionMiddleware",  # Need By SocialProfile
+        "axes.middleware.AxesMiddleware",  # Need By SocialProfile
     )
     ```
 
 5. Add the following admin error inside your `SILENCED_SYSTEM_CHECKS` setting.
 
     ``` python title="settings.py"
-    SILENCED_SYSTEM_CHECKS = ['admin.E410']  # Need By SocialProfile
+    SILENCED_SYSTEM_CHECKS = ["admin.E410"]  # Need By SocialProfile
     ```
 
 6. Add the following context processor inside your `TEMPLATES` setting.
 
     ``` python title="settings.py"
     TEMPLATES = [
-       {
-           ...
-           'OPTIONS': {
-               'context_processors': [
-                   'django.template.context_processors.debug',
-                   'django.template.context_processors.request',
-                   'django.contrib.auth.context_processors.auth',
-                   'django.contrib.messages.context_processors.messages',
-                   'django.template.context_processors.media',
-                   'social_django.context_processors.backends',             # Need By SocialProfile
-                   'social_django.context_processors.login_redirect',       # Need By SocialProfile
-               ],
-           },
-       },
+        {
+            # ...other template options
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.debug",
+                    "django.template.context_processors.request",
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
+                    "django.template.context_processors.media",
+                    "social_django.context_processors.backends",  # Need By SocialProfile
+                    "social_django.context_processors.login_redirect",  # Need By SocialProfile
+                ],
+            },
+        },
     ]
     ```
 
@@ -117,25 +117,25 @@ We **highly recommend** and only officially support the latest patch release of 
 
     ``` python title="settings.py"
     # Need by Social Profile / user_sessions
-    GEOIP_PATH = '/home/sh/SH_CusData/intf/in/geoip2'
-    SESSION_ENGINE = 'user_sessions.backends.db'
+    GEOIP_PATH = "/home/sh/SH_CusData/intf/in/geoip2"
+    SESSION_ENGINE = "user_sessions.backends.db"
     ```
 
 8. Add the following .... `XxX` setting.
 
     ``` python title="settings.py"
     # Core Authentication Settings
-    LOGIN_URL = '/sp/select/'
-    LOGIN_ERROR_URL = '/sp/select/'
-    LOGIN_REDIRECT_URL = '/sp/'
-    DEFAULT_RETURNTO_PATH = '/sp/'
+    LOGIN_URL = "/sp/select/"
+    LOGIN_ERROR_URL = "/sp/select/"
+    LOGIN_REDIRECT_URL = "/sp/"
+    DEFAULT_RETURNTO_PATH = "/sp/"
 
     # Social Auth Redirects Settings
-    SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/sp/'
-    SOCIAL_AUTH_LOGIN_ERROR_URL = '/sp/login-error/'
-    SOCIAL_AUTH_LOGIN_URL = '/sp/select/'
-    SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/sp/new-profile/'
-    SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/sp/new-association/'
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/sp/"
+    SOCIAL_AUTH_LOGIN_ERROR_URL = "/sp/login-error/"
+    SOCIAL_AUTH_LOGIN_URL = "/sp/select/"
+    SOCIAL_AUTH_NEW_USER_REDIRECT_URL = "/sp/new-profile/"
+    SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = "/sp/new-association/"
     ```
 
 9. Add the following .... `XxX` setting.
@@ -143,35 +143,42 @@ We **highly recommend** and only officially support the latest patch release of 
     ``` python title="settings.py"
     # Custom Social Profile User
     AUTH_USER_MODEL = "socialprofile.socialprofile"
-    SOCIAL_AUTH_USER_MODEL = 'socialprofile.socialprofile'
+    SOCIAL_AUTH_USER_MODEL = "socialprofile.socialprofile"
     ```
 
 10. Add the following .... `XxX` setting.
 
     ``` python title="settings.py"
     SOCIAL_AUTH_ALWAYS_ASSOCIATE = True
-    SOCIAL_AUTH_PROTECTED_USER_FIELDS = ["username", "email", "first_name", "last_name", ]
+    SOCIAL_AUTH_PROTECTED_USER_FIELDS = [
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+    ]
     ```
 
 11. Add the following .... `XxX` setting.
 
     ``` python title="settings.py"
     AUTHENTICATION_BACKENDS = (
-       'social_core.backends.google.GoogleOAuth2',
-       'social_core.backends.twitter.TwitterOAuth',
-       'social_core.backends.email.EmailAuth',
-       'axes.backends.AxesBackend',
-       'django.contrib.auth.backends.ModelBackend',
+        "social_core.backends.google.GoogleOAuth2",
+        "social_core.backends.twitter.TwitterOAuth",
+        "social_core.backends.email.EmailAuth",
+        "axes.backends.AxesBackend",
+        "django.contrib.auth.backends.ModelBackend",
     )
     ```
 
 12. Add the following .... `XxX` setting.
 
     ``` python title="settings.py"
-    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'aaaaaaaaaaaa-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.apps.googleusercontent.com'
-    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxx'
-    SOCIAL_AUTH_TWITTER_KEY = 'aaaaaaaaaaaaaaaaaaaaaaaaa'
-    SOCIAL_AUTH_TWITTER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
+        "aaaaaaaaaaaa-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.apps.googleusercontent.com"
+    )
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxx"
+    SOCIAL_AUTH_TWITTER_KEY = "aaaaaaaaaaaaaaaaaaaaaaaaa"
+    SOCIAL_AUTH_TWITTER_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     ```
 
 13. **Recommended:** call ``apply_sp_defaults`` at the **end** of ``settings.py`` (after
@@ -193,6 +200,7 @@ We **highly recommend** and only officially support the latest patch release of 
     # ... your existing DEBUG / SECURE_PROXY_SSL_HEADER / SOCIAL_AUTH_* keys ...
 
     from socialprofile.conf import apply_sp_defaults
+
     apply_sp_defaults(globals())
     ```
 

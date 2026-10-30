@@ -8,7 +8,7 @@ and swallowed so login still commits.
 from __future__ import annotations
 
 import logging
-from typing import Any, Optional
+from typing import Any
 
 from django.apps import apps
 from django.conf import settings

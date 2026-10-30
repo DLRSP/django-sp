@@ -13,4 +13,5 @@ recursive-include requirements *.in *.txt
 recursive-exclude requirements *.py
 recursive-include src *.py *.html *.css *.js *.po *.mo *.gif *.png
 recursive-include tests *.py
-recursive-include docs *.md
+recursive-include docs *.md *.rst *.py *.bat Makefile
+recursive-include news *.rst
