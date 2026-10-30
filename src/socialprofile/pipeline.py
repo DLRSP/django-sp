@@ -2,8 +2,18 @@
 
 from social_core.backends.facebook import FacebookOAuth2
 from social_core.backends.google import GoogleOAuth2
-from social_core.backends.live import LiveOAuth2
 from social_core.backends.twitter import TwitterOAuth
+
+# social-auth-core 6 removed LiveOAuth2; Microsoft Graph is the successor.
+try:
+    from social_core.backends.live import LiveOAuth2
+except ImportError:  # pragma: no cover - absent on social-auth-core>=5
+    LiveOAuth2 = None
+
+try:
+    from social_core.backends.microsoft import MicrosoftOAuth2
+except ImportError:  # pragma: no cover
+    MicrosoftOAuth2 = None
 
 # def create_profile(user, is_new=False, *args, **kwargs):
 #     """Create a profile instance for the given user"""
@@ -42,7 +52,14 @@ def socialprofile_extra_values(
             )
         }
 
-    if type(backend) is LiveOAuth2:
+    if LiveOAuth2 is not None and type(backend) is LiveOAuth2:
+        return {
+            "user": live_extra_values(
+                backend, details, response, uid, user, *args, **kwargs
+            )
+        }
+
+    if MicrosoftOAuth2 is not None and type(backend) is MicrosoftOAuth2:
         return {
             "user": live_extra_values(
                 backend, details, response, uid, user, *args, **kwargs

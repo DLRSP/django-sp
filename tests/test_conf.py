@@ -10,6 +10,17 @@ def test_apply_sp_defaults_sets_core_urls():
     assert settings["SOCIAL_AUTH_LOGIN_REDIRECT_URL"] == "/sp/"
 
 
+def test_apply_sp_defaults_party_flags_off():
+    settings = {}
+    apply_sp_defaults(settings)
+    assert settings["SP_PARTY_SYNC"] is False
+    assert settings["SP_PARTY_ADMIN_THIN"] is False
+    assert settings["SP_PARTY_MIRROR_LOGIN_EMAIL"] is False
+    assert "socialprofile.party_sync" not in "".join(
+        settings.get("SOCIAL_AUTH_PIPELINE", ())
+    )
+
+
 def test_apply_sp_defaults_does_not_overwrite_explicit():
     settings = {"LOGIN_URL": "/custom/login/"}
     apply_sp_defaults(settings)
