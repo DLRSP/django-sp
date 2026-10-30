@@ -1,4 +1,5 @@
 """Backfill Party ExtIds from SocialProfile / UserSocialAuth (opt-in party extra)."""
+
 from __future__ import annotations
 
 from django.contrib.auth import get_user_model
