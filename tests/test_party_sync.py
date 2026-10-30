@@ -220,3 +220,180 @@ def test_admin_thin_fieldsets_omit_provider_blocks():
     assert "Personal info" not in labels
     assert "gender" not in admin.get_list_display(request=None)
     assert "edited_by_google" not in admin.get_list_display(request=None)
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True, SP_PARTY_ADMIN_THIN=False)
+def test_admin_full_fieldsets_when_thin_off_even_if_sync_on():
+    """Sync alone must not demote AUTH fieldsets; thin flag is independent."""
+    from django.contrib.admin.sites import AdminSite
+    from django.contrib.auth import get_user_model
+
+    from socialprofile.admin import CustomUserAdmin
+    from socialprofile.models import SocialProfile
+
+    User = get_user_model()
+    existing = User.objects.create_user(
+        username="fulladmin", email="fulladmin@example.com", password="x"
+    )
+    admin = CustomUserAdmin(SocialProfile, AdminSite())
+    # UserAdmin returns add_fieldsets when obj is None; pass an existing user.
+    labels = [fs[0] for fs in admin.get_fieldsets(request=None, obj=existing)]
+    assert "Google" in labels
+    assert "Personal info" in labels
+    display = admin.get_list_display(request=None)
+    assert "gender" in display
+    assert "edited_by_google" in display
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=False, SP_PARTY_ADMIN_THIN=True)
+def test_admin_thin_works_without_party_sync():
+    from django.contrib.admin.sites import AdminSite
+    from django.contrib.auth import get_user_model
+
+    from socialprofile.admin import CustomUserAdmin
+    from socialprofile.models import SocialProfile
+
+    User = get_user_model()
+    existing = User.objects.create_user(
+        username="thinadmin", email="thinadmin@example.com", password="x"
+    )
+    admin = CustomUserAdmin(SocialProfile, AdminSite())
+    assert (
+        admin.get_list_display(request=None)
+        == CustomUserAdmin.THIN_LIST_DISPLAY
+    )
+    labels = [fs[0] for fs in admin.get_fieldsets(request=None, obj=existing)]
+    assert "Google" not in labels
+    assert "Providers" not in labels
+    # AUTH chrome must never advertise Contatti as a section title.
+    flat = " ".join(str(x) for x in labels if x)
+    assert "Contatti" not in flat
+    assert "Contatti" not in " ".join(
+        str(c) for c in admin.get_list_display(request=None)
+    )
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+@pytest.mark.parametrize(
+    "provider,uid,scheme",
+    [
+        ("google-oauth2", "g-uid-1", "google"),
+        ("facebook", "fb-uid-1", "facebook"),
+        ("twitter", "tw-uid-1", "twitter"),
+        ("live", "live-uid-1", "live"),
+        ("instagram", "ig-uid-1", "instagram"),
+        ("linkedin-oauth2", "li-uid-1", "linkedin"),
+        ("discord", "dc-uid-1", "discord"),
+        ("github", "gh-uid-1", "github"),
+    ],
+)
+def test_provider_uid_extid_matrix(provider, uid, scheme):
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ExternalIdentity
+    from social_django.models import UserSocialAuth
+
+    User = get_user_model()
+    safe = scheme.replace("-", "")
+    user = User.objects.create_user(
+        username=f"prov_{safe}_{uid[:6]}",
+        email=f"{safe}@example.com",
+        password="x",
+    )
+    UserSocialAuth.objects.create(
+        user=user,
+        provider=provider,
+        uid=uid,
+        extra_data={
+            "access_token": "secret-token-never-extid",
+            "refresh_token": "r",
+        },
+    )
+    sync_party_from_profile(None, {}, user=user)
+    assert ExternalIdentity.objects.filter(
+        namespace="socialprofile",
+        scheme=scheme,
+        value=uid,
+        valid_to__isnull=True,
+    ).exists()
+    assert not ExternalIdentity.objects.filter(
+        value="secret-token-never-extid"
+    ).exists()
+    assert not ExternalIdentity.objects.filter(value="r").exists()
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+def test_provider_extids_idempotent_across_core_providers():
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ExternalIdentity
+    from social_django.models import UserSocialAuth
+
+    User = get_user_model()
+    user = User.objects.create_user(
+        username="multiprov", email="multi@example.com", password="x"
+    )
+    for provider, uid in (
+        ("google-oauth2", "g-multi"),
+        ("facebook", "fb-multi"),
+        ("twitter", "tw-multi"),
+        ("live", "live-multi"),
+    ):
+        UserSocialAuth.objects.create(user=user, provider=provider, uid=uid)
+    sync_party_from_profile(None, {}, user=user)
+    sync_party_from_profile(None, {}, user=user)
+    for scheme, uid in (
+        ("google", "g-multi"),
+        ("facebook", "fb-multi"),
+        ("twitter", "tw-multi"),
+        ("live", "live-multi"),
+    ):
+        assert (
+            ExternalIdentity.objects.filter(
+                namespace="socialprofile",
+                scheme=scheme,
+                value=uid,
+                valid_to__isnull=True,
+            ).count()
+            == 1
+        )
+
+
+@pytest.mark.django_db
+@override_settings(SP_PARTY_SYNC=True)
+def test_unlinked_optional_provider_leaves_no_extid():
+    if not apps.is_installed("party"):
+        pytest.skip("django-party not installed")
+    from django.contrib.auth import get_user_model
+    from party.models import ExternalIdentity
+
+    User = get_user_model()
+    user = User.objects.create_user(
+        username="noprov", email="noprov@example.com", password="x"
+    )
+    sync_party_from_profile(None, {}, user=user)
+    for scheme in ("linkedin", "discord", "github", "instagram"):
+        assert not ExternalIdentity.objects.filter(
+            namespace="socialprofile", scheme=scheme, valid_to__isnull=True
+        ).exists()
+
+
+def test_optional_providers_have_no_fat_socialprofile_columns():
+    from socialprofile.models import SocialProfile
+
+    field_names = {f.name for f in SocialProfile._meta.get_fields()}
+    for name in (
+        "linkedin_username",
+        "linkedin_email",
+        "discord_username",
+        "discord_email",
+        "github_username",
+        "github_email",
+    ):
+        assert name not in field_names
