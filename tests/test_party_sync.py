@@ -1,4 +1,5 @@
 """Party dual-write pipeline — default off; opt-in when party installed."""
+
 from unittest.mock import patch
 
 import pytest
@@ -6,7 +7,10 @@ from django.apps import apps
 from django.conf import settings
 from django.test import override_settings
 
-from socialprofile.defaults import OPTIONAL_SOCIAL_AUTH_BACKENDS, PARTY_SYNC_PIPELINE_STEP
+from socialprofile.defaults import (
+    OPTIONAL_SOCIAL_AUTH_BACKENDS,
+    PARTY_SYNC_PIPELINE_STEP,
+)
 from socialprofile.party_sync import party_sync_enabled, sync_party_from_profile
 
 
@@ -23,7 +27,10 @@ def test_party_sync_pipeline_step_constant():
 
 @pytest.mark.django_db
 def test_party_sync_disabled_by_default():
-    assert getattr(settings, "SP_PARTY_SYNC", False) is False or not party_sync_enabled()
+    assert (
+        getattr(settings, "SP_PARTY_SYNC", False) is False
+        or not party_sync_enabled()
+    )
     assert sync_party_from_profile(None, {}, user=None) is None
 
 
@@ -53,7 +60,10 @@ def test_party_sync_writes_extid_when_party_installed():
     )
     sync_party_from_profile(None, {}, user=user)
     ext = ExternalIdentity.objects.filter(
-        namespace="socialprofile", scheme="user", value=str(user.pk), valid_to__isnull=True
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        valid_to__isnull=True,
     ).first()
     assert ext is not None
     assert Party.objects.filter(pk=ext.party_id).exists()
@@ -70,13 +80,19 @@ def test_party_sync_idempotent_second_pass():
 
     User = get_user_model()
     user = User.objects.create_user(
-        username="idemuser", email="idem@example.com", password="x", first_name="Ida"
+        username="idemuser",
+        email="idem@example.com",
+        password="x",
+        first_name="Ida",
     )
     sync_party_from_profile(None, {}, user=user)
     sync_party_from_profile(None, {}, user=user)
     assert (
         ExternalIdentity.objects.filter(
-            namespace="socialprofile", scheme="user", value=str(user.pk), valid_to__isnull=True
+            namespace="socialprofile",
+            scheme="user",
+            value=str(user.pk),
+            valid_to__isnull=True,
         ).count()
         == 1
     )
@@ -101,7 +117,10 @@ def test_edited_by_user_blocks_party_name_overwrite():
     )
     sync_party_from_profile(None, {}, user=user)
     ext = ExternalIdentity.objects.get(
-        namespace="socialprofile", scheme="user", value=str(user.pk), valid_to__isnull=True
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        valid_to__isnull=True,
     )
     party = ext.party
     party.given_name = "CRM"
@@ -130,11 +149,16 @@ def test_provider_uid_extid_and_no_consent():
     user = User.objects.create_user(
         username="provuser", email="prov@example.com", password="x"
     )
-    UserSocialAuth.objects.create(user=user, provider="google-oauth2", uid="g-uid-99")
+    UserSocialAuth.objects.create(
+        user=user, provider="google-oauth2", uid="g-uid-99"
+    )
     before = ConsentRecord.objects.count()
     sync_party_from_profile(None, {}, user=user)
     assert ExternalIdentity.objects.filter(
-        namespace="socialprofile", scheme="google", value="g-uid-99", valid_to__isnull=True
+        namespace="socialprofile",
+        scheme="google",
+        value="g-uid-99",
+        valid_to__isnull=True,
     ).exists()
     assert ConsentRecord.objects.count() == before
 
@@ -153,9 +177,14 @@ def test_login_email_not_mirrored_as_contact_point():
     )
     sync_party_from_profile(None, {}, user=user)
     party = ExternalIdentity.objects.get(
-        namespace="socialprofile", scheme="user", value=str(user.pk), valid_to__isnull=True
+        namespace="socialprofile",
+        scheme="user",
+        value=str(user.pk),
+        valid_to__isnull=True,
     ).party
-    assert not ContactPoint.objects.filter(party=party, channel="email").exists()
+    assert not ContactPoint.objects.filter(
+        party=party, channel="email"
+    ).exists()
 
 
 @pytest.mark.django_db
@@ -178,9 +207,10 @@ def test_sync_swallows_inner_errors():
 @pytest.mark.django_db
 @override_settings(SP_PARTY_ADMIN_THIN=True)
 def test_admin_thin_fieldsets_omit_provider_blocks():
+    from django.contrib.admin.sites import AdminSite
+
     from socialprofile.admin import CustomUserAdmin
     from socialprofile.models import SocialProfile
-    from django.contrib.admin.sites import AdminSite
 
     admin = CustomUserAdmin(SocialProfile, AdminSite())
     fieldsets = admin.get_fieldsets(request=None)
