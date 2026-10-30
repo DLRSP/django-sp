@@ -68,6 +68,24 @@ def sync_party_from_profile(
     return None
 
 
+def sync_party_after_profile_save(user) -> None:
+    """Dual-write Party after SocialProfileForm.save when SP_PARTY_SYNC is on.
+
+    Fail-open: exceptions are logged; the profile row is already saved.
+    Prefer the form/view hook over a global SocialProfile post_save so login
+    pipeline, admin bulk edits, and unrelated saves do not storm Party writes.
+    """
+    if user is None or not party_sync_enabled():
+        return
+    try:
+        _sync_user(user)
+    except Exception:
+        logger.exception(
+            "party sync after profile save failed for user pk=%s",
+            getattr(user, "pk", None),
+        )
+
+
 def _sync_user(user) -> None:
     from django.db import transaction
     from django.utils import timezone as dj_timezone
@@ -76,6 +94,7 @@ def _sync_user(user) -> None:
     with transaction.atomic():
         now = dj_timezone.now()
         party = _ensure_party_for_user(user, now)
+        # Idempotent when _ensure_party_for_user already created the link.
         upsert_external_identity(
             party,
             namespace=EXTID_NAMESPACE,
@@ -88,28 +107,60 @@ def _sync_user(user) -> None:
         _sync_facts(user, party, now)
 
 
-def _ensure_party_for_user(user, now):
-    from party.models import ExternalIdentity, Party
+def _get_open_user_extid(user_pk: str):
+    """Return the open socialprofile/user ExtId for this pk, or None."""
+    from party.models import ExternalIdentity
 
-    ext = (
+    return (
         ExternalIdentity.objects.filter(
             namespace=EXTID_NAMESPACE,
             scheme="user",
-            value=str(user.pk),
+            value=str(user_pk),
             valid_to__isnull=True,
         )
         .select_related("party")
         .first()
     )
-    if ext:
+
+
+def _ensure_party_for_user(user, now):
+    """Resolve or create Party with a primary user ExtId in the same atomic unit.
+
+    Prefer ExtId lookup first. When missing, create Party and the open
+    socialprofile/user ExtId inside one savepoint so a concurrent winner's
+    unique violation rolls back both rows (no orphan Party). On IntegrityError,
+    re-fetch the ExtId that won and use that Party.
+    """
+    from django.db import IntegrityError, transaction
+    from party.models import ExternalIdentity, Party
+
+    user_pk = str(user.pk)
+    ext = _get_open_user_extid(user_pk)
+    if ext is not None:
         party = ext.party
     else:
-        party = Party.objects.create(
-            kind=Party.Kind.PERSON,
-            given_name=(getattr(user, "first_name", None) or "")[:128],
-            family_name=(getattr(user, "last_name", None) or "")[:128],
-            birth_date=getattr(user, "date_of_birth", None),
-        )
+        try:
+            with transaction.atomic():
+                party = Party.objects.create(
+                    kind=Party.Kind.PERSON,
+                    given_name=(getattr(user, "first_name", None) or "")[:128],
+                    family_name=(getattr(user, "last_name", None) or "")[:128],
+                    birth_date=getattr(user, "date_of_birth", None),
+                )
+                ExternalIdentity.objects.create(
+                    party=party,
+                    namespace=EXTID_NAMESPACE,
+                    scheme="user",
+                    value=user_pk,
+                    trust=80,
+                    valid_from=now,
+                )
+        except IntegrityError:
+            ext = _get_open_user_extid(user_pk)
+            if ext is None:
+                raise
+            party = ext.party
+
     edited = bool(getattr(user, "edited_by_user", False))
     if not edited:
         changed = False
@@ -191,7 +242,8 @@ def _sync_contact_fields(user, party, now) -> None:
             use="other",
             valid_from=now,
         )
-    # Login email stays on SP; optional Contatti mirror use=other only.
+    # Login email stays on SocialProfile; optional email ContactPoint
+    # (use=other) only when SP_PARTY_MIRROR_LOGIN_EMAIL is enabled.
     email = (getattr(user, "email", None) or "").strip()
     if email and getattr(settings, "SP_PARTY_MIRROR_LOGIN_EMAIL", False):
         upsert_contact_point(

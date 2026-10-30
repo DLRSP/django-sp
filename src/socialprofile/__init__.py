@@ -12,7 +12,7 @@ Release logic:
 
 import django
 
-__version__ = "1.24.1"
+__version__ = "1.24.2"
 __license__ = "MIT"
 __title__ = "django-errors"
 
