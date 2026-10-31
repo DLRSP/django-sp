@@ -1404,9 +1404,9 @@ social-auth-app-django==5.4.3 \
     --hash=sha256:d1f4286d5ca1e512c9b2f686e7ecb2a0128148f1a33d853b69dc07b58508362e \
     --hash=sha256:db70b972faeb10ee1ec83d0dc7dbd0558d5f5830417bba317b712b10ff58d031
     # via -r requirements/runtime.in
-social-auth-core==4.9.1 \
-    --hash=sha256:2eca8a6ae678bae7e24e5aa3c72f99c77983012a09b8916ce9791dcfccade725 \
-    --hash=sha256:34ee16bddc10b8bf5d6a90c3a033f6e5bb1300197984ad66a4d363783f23bcd8
+social-auth-core==6.2.0 \
+    --hash=sha256:385771345372b9e87b448fe23b1ca4909fcbb0b752d1206600ab3c18342cd321 \
+    --hash=sha256:93daa49e5cb11e7ac06838690679fc6e2901d9add2ba8316651ee19aca26a340
     # via
     #   python-social-auth
     #   social-auth-app-django
