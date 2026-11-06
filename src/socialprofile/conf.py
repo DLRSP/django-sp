@@ -111,6 +111,10 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     _setdefault(settings, "SP_PARTY_SYNC", False)
     _setdefault(settings, "SP_PARTY_ADMIN_THIN", False)
     _setdefault(settings, "SP_PARTY_MIRROR_LOGIN_EMAIL", False)
+    # Email password / OTP / trusted device — opt-in; overlays harden Axes when on.
+    _setdefault(settings, "SP_EMAIL_PASSWORD_LOGIN", False)
+    _setdefault(settings, "SP_EMAIL_OTP_LOGIN", False)
+    _setdefault(settings, "SP_TRUSTED_DEVICE", False)
 
     _setdefault(
         settings, "SOCIAL_AUTH_PIPELINE", defaults.DEFAULT_SOCIAL_AUTH_PIPELINE
@@ -147,6 +151,10 @@ def apply_sp_defaults(settings: MutableMapping[str, Any]) -> None:
     trusted = app_cfg.get("csrf_trusted_origins")
     if trusted and not _has(settings, "CSRF_TRUSTED_ORIGINS"):
         settings["CSRF_TRUSTED_ORIGINS"] = list(trusted)
+
+    from .email_auth import apply_email_auth_security_overlays
+
+    apply_email_auth_security_overlays(settings)
 
 
 def _ensure_session_samesite_lax(settings: MutableMapping[str, Any]) -> None:

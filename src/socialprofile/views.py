@@ -24,6 +24,7 @@ from social_core.backends.utils import load_backends
 from social_django.utils import psa
 
 from .decorators import render_to
+from .email_auth import email_auth_template_context
 from .forms import SocialProfileForm
 from .models import SocialProfile
 
@@ -71,17 +72,15 @@ def logout(request):
     return redirect("sp_select_page")
 
 
-def context(**extra):
-    return dict(
-        {
-            # "plus_id": getattr(settings, "SOCIAL_AUTH_GOOGLE_PLUS_KEY", None),
-            # "plus_scope": " ".join(GooglePlusAuth.DEFAULT_SCOPE),
-            "available_backends": load_backends(
-                settings.AUTHENTICATION_BACKENDS
-            ),
-        },
-        **extra,
-    )
+def context(request=None, **extra):
+    payload = {
+        # "plus_id": getattr(settings, "SOCIAL_AUTH_GOOGLE_PLUS_KEY", None),
+        # "plus_scope": " ".join(GooglePlusAuth.DEFAULT_SCOPE),
+        "available_backends": load_backends(settings.AUTHENTICATION_BACKENDS),
+    }
+    payload.update(email_auth_template_context(request))
+    payload.update(extra)
+    return payload
 
 
 @render_to("socialprofile/sp_account_select.html")
@@ -89,7 +88,7 @@ def home(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated:
         return redirect("done")
-    return context()
+    return context(request)
 
 
 @login_required
@@ -97,7 +96,7 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     if request.user.is_authenticated:
-        return context()
+        return context(request)
     return redirect("sp_select_page")
 
 
@@ -153,6 +152,7 @@ class SelectAuthView(TemplateView):
         context["available_backends"] = load_backends(
             settings.AUTHENTICATION_BACKENDS
         )
+        context.update(email_auth_template_context(self.request))
         return context
 
 

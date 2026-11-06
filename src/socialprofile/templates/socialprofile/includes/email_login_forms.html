@@ -1,0 +1,163 @@
+{% load i18n %}
+{% if sp_email_password_login or sp_email_otp_login %}
+<section
+  class="sp-email-auth"
+  data-sp-email-wizard
+  data-sp-mode="{{ sp_email_flash_panel|default:'choose' }}"
+  data-msg-email-required="{% trans 'Enter your email.' %}"
+  data-msg-email-invalid="{% trans 'Enter a valid email address.' %}"
+  data-msg-network="{% trans 'Network error. Please try again.' %}"
+  data-msg-password-mismatch="{% trans 'Passwords do not match.' %}"
+  aria-label="{% trans 'Sign in with email' %}"
+>
+  <div class="sp-email-panel{% if sp_email_flash_panel|default:'choose' == 'choose' %} is-active{% endif %}" data-sp-panel="choose"{% if sp_email_flash_panel and sp_email_flash_panel != 'choose' %} hidden{% endif %}>
+    <p class="sp-email-field">
+      <label for="sp-email-primary">{% trans "Email" %}</label>
+      <input id="sp-email-primary" class="form-control sp-email-input" type="email" name="email" autocomplete="username" required data-sp-email-primary data-sp-field="email" value="{{ sp_email_flash_email }}" placeholder="name@example.com">
+    </p>
+    <p class="sp-email-error" data-sp-email-error data-sp-field-error="email" hidden role="alert"></p>
+    <div class="sp-email-actions sp-email-actions--choose">
+      {% if sp_email_password_login %}
+      <button type="button" class="btn btn-lg btn-block" data-sp-goto="login">{% trans "Sign in" %}</button>
+      <button type="button" class="btn btn-border btn-lg btn-block" data-sp-goto="register">{% trans "Create account" %}</button>
+      {% endif %}
+      {% if sp_email_otp_login %}
+      <button type="button" class="sp-email-text-action" data-sp-goto="otp">{% trans "Use a verification code" %}</button>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if sp_email_password_login %}
+  <div class="sp-email-panel{% if sp_email_flash_panel == 'login' %} is-active{% endif %}" data-sp-panel="login"{% if sp_email_flash_panel != 'login' %} hidden{% endif %}>
+    <form method="post" action="{% url 'sp_email_login' %}" class="sp-email-login-form" data-sp-ajax>
+      {% csrf_token %}
+      {% if next_url %}<input type="hidden" name="next" value="{{ next_url }}">{% endif %}
+      <p class="sp-email-field">
+        <label for="sp-email-login-email">{% trans "Email" %}</label>
+        <input id="sp-email-login-email" class="form-control sp-email-input" type="email" name="email" autocomplete="username" required data-sp-email-mirror data-sp-field="email" value="{{ sp_email_flash_email }}">
+      </p>
+      <p class="sp-email-field">
+        <label for="sp-email-login-password">{% trans "Password" %}</label>
+        <input id="sp-email-login-password" class="form-control sp-email-input" type="password" name="password" autocomplete="current-password" required data-sp-login-password data-sp-field="password">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="password" hidden role="alert"></p>
+      {% if sp_trusted_device %}
+      <p class="sp-email-trust">
+        <label><input type="checkbox" name="remember_device" value="1"> {% trans "Remember this device" %}</label>
+        <small>{% trans "Do not use on shared devices." %}</small>
+      </p>
+      {% endif %}
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-lg">{% trans "Sign in" %}</button>
+        <button type="button" class="sp-email-text-action" data-sp-goto="choose">{% trans "Back" %}</button>
+        <button type="button" class="sp-email-text-action" data-sp-goto="reset">{% trans "Forgot password?" %}</button>
+        {% if sp_email_otp_login %}
+        <button type="button" class="sp-email-text-action" data-sp-goto="otp">{% trans "Prefer a code?" %}</button>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+  <div class="sp-email-panel{% if sp_email_flash_panel == 'register' %} is-active{% endif %}" data-sp-panel="register"{% if sp_email_flash_panel != 'register' %} hidden{% endif %}>
+    <form method="post" action="{% url 'sp_email_register' %}" class="sp-email-register-form" data-sp-ajax>
+      {% csrf_token %}
+      {# Honeypot: leave empty. Bots that fill it get a silent generic success. #}
+      <p class="sp-email-hp" aria-hidden="true">
+        <label for="sp-email-reg-company">{% trans "Company" %}</label>
+        <input id="sp-email-reg-company" type="text" name="company" value="" tabindex="-1" autocomplete="off">
+      </p>
+      <p class="sp-email-field">
+        <label for="sp-email-reg-email">{% trans "Email" %}</label>
+        <input id="sp-email-reg-email" class="form-control sp-email-input" type="email" name="email" autocomplete="email" required data-sp-email-mirror data-sp-field="email" value="{{ sp_email_flash_email }}">
+      </p>
+      <p class="sp-email-field">
+        <label for="sp-email-reg-password">{% trans "Password" %}</label>
+        <input id="sp-email-reg-password" class="form-control sp-email-input" type="password" name="password" autocomplete="new-password" required data-sp-register-password data-sp-field="password">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="password" hidden role="alert"></p>
+      <p class="sp-email-field">
+        <label for="sp-email-reg-password2">{% trans "Confirm password" %}</label>
+        <input id="sp-email-reg-password2" class="form-control sp-email-input" type="password" name="password_confirm" autocomplete="new-password" required data-sp-field="password_confirm">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="password_confirm" hidden role="alert"></p>
+      <p class="sp-email-hint">{% trans "We will send a verification code to activate your account." %}</p>
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-lg">{% trans "Create account" %}</button>
+        <button type="button" class="sp-email-text-action" data-sp-goto="choose">{% trans "Back" %}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="sp-email-panel{% if sp_email_flash_panel == 'reset' %} is-active{% endif %}" data-sp-panel="reset"{% if sp_email_flash_panel != 'reset' %} hidden{% endif %}>
+    <form method="post" action="{% url 'sp_email_password_reset' %}" class="sp-email-reset-form" data-sp-ajax>
+      {% csrf_token %}
+      <p class="sp-email-field">
+        <label for="sp-email-reset-email">{% trans "Email" %}</label>
+        <input id="sp-email-reset-email" class="form-control sp-email-input" type="email" name="email" required data-sp-email-mirror data-sp-reset-email data-sp-field="email" value="{{ sp_email_flash_email }}">
+      </p>
+      <p class="sp-email-hint">{% trans "If an account exists, you will receive a code to set a new password." %}</p>
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-lg">{% trans "Send code" %}</button>
+        <button type="button" class="sp-email-text-action" data-sp-goto="login">{% trans "Back" %}</button>
+      </div>
+    </form>
+    <form method="post" action="{% url 'sp_email_password_reset_confirm' %}" class="sp-email-reset-confirm-form" data-sp-ajax>
+      {% csrf_token %}
+      <input type="hidden" name="email" value="{{ sp_email_flash_email }}" data-sp-email-mirror>
+      <p class="sp-email-field">
+        <label for="sp-email-reset-code">{% trans "Verification code" %}</label>
+        <input id="sp-email-reset-code" class="form-control sp-email-input" type="text" name="code" inputmode="numeric" autocomplete="one-time-code" required data-sp-field="code">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="code" hidden role="alert"></p>
+      <p class="sp-email-field">
+        <label for="sp-email-reset-password">{% trans "New password" %}</label>
+        <input id="sp-email-reset-password" class="form-control sp-email-input" type="password" name="password" autocomplete="new-password" required data-sp-field="password">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="password" hidden role="alert"></p>
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-lg">{% trans "Update password" %}</button>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+
+  {% if sp_email_otp_login or sp_email_password_login %}
+  <div class="sp-email-panel{% if sp_email_flash_panel == 'otp' %} is-active{% endif %}" data-sp-panel="otp"{% if sp_email_flash_panel != 'otp' %} hidden{% endif %}>
+    <p class="sp-email-panel-title">{% trans "Verification code" %}</p>
+    {% if sp_email_otp_login %}
+    <form method="post" action="{% url 'sp_email_otp_request' %}" class="sp-email-otp-request-form" data-sp-ajax>
+      {% csrf_token %}
+      <p class="sp-email-field">
+        <label for="sp-email-otp-email">{% trans "Email" %}</label>
+        <input id="sp-email-otp-email" class="form-control sp-email-input" type="email" name="email" required data-sp-email-mirror data-sp-field="email" value="{{ sp_email_flash_email }}">
+      </p>
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-border btn-lg">{% trans "Send code" %}</button>
+      </div>
+    </form>
+    {% endif %}
+    <form method="post" action="{% url 'sp_email_otp_verify' %}" class="sp-email-otp-verify-form" data-sp-ajax>
+      {% csrf_token %}
+      {% if next_url %}<input type="hidden" name="next" value="{{ next_url }}">{% endif %}
+      <input type="hidden" name="purpose" value="{{ sp_email_flash_purpose|default:'login_otp' }}" data-sp-otp-purpose>
+      <input type="hidden" name="email" value="{{ sp_email_flash_email }}" data-sp-email-mirror>
+      <p class="sp-email-field">
+        <label for="sp-email-otp-code">{% trans "Enter the code" %}</label>
+        <input id="sp-email-otp-code" class="form-control sp-email-input" type="text" name="code" inputmode="numeric" autocomplete="one-time-code" required data-sp-otp-code data-sp-field="code">
+      </p>
+      <p class="sp-email-error" data-sp-field-error="code" hidden role="alert"></p>
+      {% if sp_trusted_device %}
+      <p class="sp-email-trust">
+        <label><input type="checkbox" name="remember_device" value="1"> {% trans "Remember this device" %}</label>
+      </p>
+      {% endif %}
+      <div class="sp-email-actions">
+        <button type="submit" class="btn btn-lg">{% trans "Verify code" %}</button>
+        <button type="button" class="sp-email-text-action" data-sp-goto="choose">{% trans "Back" %}</button>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+

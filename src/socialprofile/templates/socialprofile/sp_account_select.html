@@ -52,8 +52,10 @@
 		{% else %}
 			<p>
 				{% trans "Third-party identity providers enable you to rely on a trusted external service to authenticate your identity!" %}
+				{% if not sp_email_password_login %}
 				</br>
 				{% trans "We will never know and store your password anywhere!" %}
+				{% endif %}
 			</p>
 			<p>
 				<form method="post" action="{% url 'social:begin' 'facebook' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Facebook"><img src="{% static 'images/social-icon/social-icon1.png' %}" alt="social media" /></button></form>
@@ -64,12 +66,18 @@
 				<form method="post" action="{% url 'social:begin' 'flickr' %}" class="sp_socialForm d-inline">{% csrf_token %}{% if next_url and next_param %}<input type="hidden" name="{{ next_param }}" value="{{ next_url }}">{% endif %}<button type="submit" class="btn btn-danger" title="{% trans 'Sign In with'%} Flickr"><img src="{% static 'images/social-icon/social-icon7.png' %}" alt="social media" /></button></form>
 			</p>
 		{% endif %}
+		{% if sp_email_password_login or sp_email_otp_login %}
+			{% include "socialprofile/includes/email_login_forms.html" %}
+		{% endif %}
     </div>
 {% endblock %}
 
 
 {% block javascript %}
 	<script src="{% static 'static/js/select.js'%}" type="text/javascript"></script>
+	{% if sp_email_password_login or sp_email_otp_login %}
+	<script src="{% static 'socialprofile/js/email-login.js' %}" type="text/javascript"></script>
+	{% endif %}
     <script type="text/javascript">
         {% if validation_sent %}
           $validationModal.modal('show');

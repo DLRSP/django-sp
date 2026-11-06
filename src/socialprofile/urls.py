@@ -9,7 +9,7 @@ from django.urls import path, re_path
 from django.views.decorators.cache import never_cache
 
 # from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
-from . import views
+from . import email_auth_views, views
 
 urlpatterns = [
     # Profile Self View
@@ -76,6 +76,42 @@ urlpatterns = [
         "select/",
         never_cache(views.SelectAuthView.as_view()),
         name="sp_select_page",
+    ),
+    # Email password / OTP (404 when feature flags are off)
+    path(
+        "email/register/",
+        never_cache(email_auth_views.email_register),
+        name="sp_email_register",
+    ),
+    path(
+        "email/login/",
+        never_cache(email_auth_views.email_login),
+        name="sp_email_login",
+    ),
+    path(
+        "email/otp/request/",
+        never_cache(email_auth_views.email_otp_request),
+        name="sp_email_otp_request",
+    ),
+    path(
+        "email/otp/verify/",
+        never_cache(email_auth_views.email_otp_verify),
+        name="sp_email_otp_verify",
+    ),
+    path(
+        "email/password-reset/",
+        never_cache(email_auth_views.email_password_reset),
+        name="sp_email_password_reset",
+    ),
+    path(
+        "email/password-reset/confirm/",
+        never_cache(email_auth_views.email_password_reset_confirm),
+        name="sp_email_password_reset_confirm",
+    ),
+    path(
+        "email/status/",
+        never_cache(email_auth_views.email_auth_status),
+        name="sp_email_auth_status",
     ),
     # Delete
     path(

@@ -228,6 +228,12 @@ class AbstractSocialProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name=_("Email Address"), max_length=254, null=False, blank=False
     )
+    email_verified_at = models.DateTimeField(
+        verbose_name=_("Email verified at"),
+        blank=True,
+        null=True,
+        help_text=_("Set when email ownership is proven (email OTP)."),
+    )
     is_staff = models.BooleanField(
         verbose_name=_("Staff"),
         default=False,
@@ -625,6 +631,66 @@ class SocialProfile(AbstractSocialProfile):
 
     class Meta(AbstractSocialProfile.Meta):  # noqa: D101
         swappable = "AUTH_USER_MODEL"
+
+
+class EmailLoginChallenge(models.Model):
+    """One-time email code for login / register verify / password reset."""
+
+    PURPOSE_LOGIN = "login_otp"
+    PURPOSE_REGISTER = "register_verify"
+    PURPOSE_RESET = "password_reset"
+    PURPOSE_CHOICES = (
+        (PURPOSE_LOGIN, _("Login OTP")),
+        (PURPOSE_REGISTER, _("Register verify")),
+        (PURPOSE_RESET, _("Password reset")),
+    )
+
+    email = models.EmailField(db_index=True)
+    purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
+    code_hash = models.CharField(max_length=64)
+    salt = models.CharField(max_length=32)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    consumed_at = models.DateTimeField(blank=True, null=True)
+    attempt_count = models.PositiveSmallIntegerField(default=0)
+    request_ip = models.CharField(max_length=64, blank=True, default="")
+
+    class Meta:
+        verbose_name = _("Email login challenge")
+        verbose_name_plural = _("Email login challenges")
+        indexes = [
+            models.Index(
+                fields=["email", "purpose", "consumed_at"],
+                name="socialprofi_email_p_idx",
+            ),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.email}:{self.purpose}"
+
+
+class TrustedDevice(models.Model):
+    """Remember-this-device cookie binding for email auth."""
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="trusted_devices",
+    )
+    selector = models.CharField(max_length=64, unique=True, db_index=True)
+    token_hash = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    last_used_at = models.DateTimeField(blank=True, null=True)
+    revoked_at = models.DateTimeField(blank=True, null=True)
+    user_agent = models.CharField(max_length=256, blank=True, default="")
+
+    class Meta:
+        verbose_name = _("Trusted device")
+        verbose_name_plural = _("Trusted devices")
+
+    def __str__(self) -> str:
+        return self.selector
 
 
 # def __str__(self):
