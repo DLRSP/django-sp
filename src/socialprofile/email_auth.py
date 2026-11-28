@@ -53,7 +53,9 @@ def trusted_device_enabled() -> bool:
     return bool(getattr(settings, "SP_TRUSTED_DEVICE", False))
 
 
-def email_auth_template_context(request: HttpRequest | None = None) -> dict[str, Any]:
+def email_auth_template_context(
+    request: HttpRequest | None = None,
+) -> dict[str, Any]:
     """Flags + one-shot flash panel/email for the select / login templates."""
     ctx: dict[str, Any] = {
         "sp_email_password_login": password_login_enabled(),
@@ -115,7 +117,7 @@ def _pepper() -> bytes:
 
 
 def hash_secret(raw: str, *, salt: str = "") -> str:
-    msg = f"{salt}:{raw}".encode("utf-8")
+    msg = f"{salt}:{raw}".encode()
     return hmac.new(_pepper(), msg, hashlib.sha256).hexdigest()
 
 
